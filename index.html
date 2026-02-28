@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eduardo Velazquez Quezada | Portafolio</title>
+    <style>
+        /* === VARIABLES & RESET === */
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #3b82f6;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* === HEADER & NAVEGACIÓN (PESTAÑAS) === */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--accent-color);
+        }
+
+        .tab-btn.active {
+            color: var(--accent-color);
+        }
+
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .tab-btn.active::after {
+            width: 100%;
+        }
+
+        /* === CONTENIDO PRINCIPAL & ANIMACIONES === */
+        main {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            min-height: 60vh;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === SECCIÓN: INICIO === */
+        .hero {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text h1 span {
+            color: var(--accent-color);
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        /* CAMBIA EL ENLACE DE ESTA IMAGEN POR UNA TUYA */
+        .hero-image img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.1);
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        /* === SECCIÓN: SOBRE MÍ === */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+        }
+
+        /* === SECCIÓN: HABILIDADES === */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .skill-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 10px;
+            transition: width 1.5s ease-in-out;
+        }
+
+        /* === SECCIÓN: PORTAFOLIO === */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column-reverse; text-align: center; }
+            .hero-image img { width: 250px; height: 250px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .tabs { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Eduardo V.Q.</div>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('inicio', this)">Inicio</button>
+                <button class="tab-btn" onclick="openTab('sobre-mi', this)">Sobre Mí</button>
+                <button class="tab-btn" onclick="openTab('habilidades', this)">Habilidades</button>
+                <button class="tab-btn" onclick="openTab('portafolio', this)">Portafolio</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="inicio" class="tab-content active">
+            <div class="hero">
+                <div class="hero-text">
+                    <h1>Hola, soy <br><span>Eduardo Velazquez</span></h1>
+                    <p>Estudiante de Ingeniería en Sistemas Computacionales. Apasionado por la programación, bases de datos y en crear soluciones eficientes.</p>
+                    <button class="tab-btn" onclick="openTab('sobre-mi', document.querySelectorAll('.tab-btn')[1])" style="background: var(--accent-color); color: white; padding: 0.8rem 2rem; border-radius: 30px; border: none; font-size: 1rem; cursor: pointer; margin-top: 1rem;">Conóceme más</button>
+                </div>
+                <div class="hero-image">
+                    <img src="yo.jfif" alt="Eduardo Velazquez">
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre-mi" class="tab-content">
+            <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Perfil Profesional</h2>
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="yo y panchote.jpg" alt="Trabajando">
+                </div>
+                <div class="about-text">
+                    <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Ingeniería en Sistemas Computacionales</h3>
+                    <p style="margin-bottom: 1rem;">
+                        Actualmente estoy cursando el <strong>8vo semestre</strong> en el prestigioso <strong>Instituto Tecnológico de Nogales</strong>. A lo largo de mi carrera, he desarrollado un fuerte pensamiento analítico y capacidad para la resolución de problemas lógicos.
+                    </p>
+                    <p style="margin-bottom: 1rem;">
+                        No solo me enfoco en el código puro; también cuento con experiencia previa en <strong>atención al cliente</strong>. Esto me ha dotado de habilidades blandas (soft skills) vitales como la comunicación efectiva, empatía y paciencia, permitiéndome entender realmente las necesidades del usuario final a la hora de desarrollar software.
+                    </p>
+                    <p><strong>Ubicación:</strong> Nogales, Sonora, México</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="habilidades" class="tab-content">
+            <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Mis Habilidades</h2>
+            <div class="skills-container">
+                <div class="skill-item">
+                    <div class="skill-header"><span>C#</span><span>85%</span></div>
+                    <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>F#</span><span>60%</span></div>
+                    <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>HTML / CSS</span><span>90%</span></div>
+                    <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Bases de Datos (Creación & Admin)</span><span>80%</span></div>
+                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-header"><span>Atención al Cliente</span><span>95%</span></div>
+                    <div class="progress-bar"><div class="progress" style="width: 95%;"></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portafolio" class="tab-content">
+            <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Proyectos Destacados</h2>
+            <div class="portfolio-grid">
+                <div class="card">
+                    <img src="https://picsum.photos/seed/proj1/500/300" alt="Proyecto 1">
+                    <div class="card-content">
+                        <h3>Sistema en C#</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Aplicación de escritorio conectada a base de datos para gestión de inventarios.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/seed/proj2/500/300" alt="Proyecto 2">
+                    <div class="card-content">
+                        <h3>Gestión de Base de Datos</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Diseño y administración de un modelo relacional eficiente y seguro.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://picsum.photos/seed/proj3/500/300" alt="Proyecto 3">
+                    <div class="card-content">
+                        <h3>Experimentos en F#</h3>
+                        <p style="color: var(--text-light); font-size: 0.9rem; margin-top: 0.5rem;">Desarrollo de algoritmos utilizando el paradigma funcional.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function openTab(tabId, btnElement) {
+            // Ocultar todos los contenidos
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Quitar clase 'active' de todos los botones
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Mostrar el contenido seleccionado
+            document.getElementById(tabId).classList.add('active');
+            
+            // Si hay un botón clickeado, activarlo (para que se pinte la línea azul)
+            if(btnElement) {
+                btnElement.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

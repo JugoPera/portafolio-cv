@@ -201,20 +201,35 @@
             font-weight: 600;
         }
 
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background-color: var(--bg-color);
-            border-radius: 10px;
-            overflow: hidden;
-        }
+       .progress-bar {
+    position: relative;
+    width: 100%;
+    height: 12px;
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
 
         .progress {
-            height: 100%;
-            background-color: var(--accent-color);
-            border-radius: 10px;
-            transition: width 1.5s ease-in-out;
-        }
+    position: relative;
+    height: 100%;
+    background: var(--accent-color);
+    border-radius: 10px;
+    transition: width 1.5s ease-in-out;
+}
+
+.progress::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: var(--mouse-x, 0%);
+    width: 80px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
 
         /* === SECCIÓN: PORTAFOLIO === */
         .portfolio-grid {
@@ -254,6 +269,66 @@
             .about-grid { grid-template-columns: 1fr; }
             .tabs { flex-wrap: wrap; justify-content: center; }
         }
+/* === Dinamicidad === */
+        .about-collage {
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.about-collage img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-collage img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+        .skill-extra {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+    opacity: 0;
+}
+
+.skill-item.active .skill-extra {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 0.5rem;
+}
+        .modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: fadeInUp 0.3s ease;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -300,46 +375,59 @@
                     </p>
                     <p><strong>Ubicación:</strong> Nogales, Sonora, México</p>
                 </div>
+                <div class="about-collage">
+                  <img src="https://picsum.photos/seed/collage1/400/400" alt="">
+                  <img src="https://picsum.photos/seed/collage2/400/400" alt="">
+                  <img src="https://picsum.photos/seed/collage3/400/400" alt="">
+                  <img src="https://picsum.photos/seed/collage4/400/400" alt="">
+                <div>
             </div>
         </section>
 
-        <section id="habilidades" class="tab-content">
-            <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Mis Habilidades</h2>
-            <div class="skills-container">
-                <div class="skill-item">
-                    <div class="skill-header"><span>C#</span><span>85%</span></div>
-                    <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>F#</span><span>60%</span></div>
-                    <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>HTML / CSS</span><span>90%</span></div>
-                    <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Bases de Datos (Creación & Admin)</span><span>80%</span></div>
-                    <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Atención al Cliente</span><span>95%</span></div>
-                    <div class="progress-bar"><div class="progress" style="width: 95%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Comediante</span><span>67%</span></div>
-                    <div class="progress-bar"><div class="progress" style="width: 67%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Gooner</span><span>100%</span></div>
-                    <div class="progress-bar"><div class="progress" style="width: 100%;"></div></div>
-                </div>
-                <div class="skill-item">
-                    <div class="skill-header"><span>Catador de señoras</span><span>69%</span></div>
-                    <div class="progress-bar"><div class="progress" style="width: 69%;"></div></div>
-                </div>
+       <section id="habilidades" class="tab-content">
+
+    <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Mis Habilidades</h2>
+
+    <div class="skills-container">
+
+        <div class="skill-item" data-skill="csharp" data-percent="85">
+            <div class="skill-header"><span>C#</span><span>85%</span></div>
+            <div class="progress-bar">
+                <div class="progress"></div>
             </div>
-        </section>
+        </div>
+
+        <div class="skill-item" data-skill="fsharp" data-percent="60">
+            <div class="skill-header"><span>F#</span><span>60%</span></div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+
+        <div class="skill-item" data-skill="htmlcss" data-percent="90">
+            <div class="skill-header"><span>HTML / CSS</span><span>90%</span></div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+
+        <div class="skill-item" data-skill="db" data-percent="80">
+            <div class="skill-header"><span>Bases de Datos</span><span>80%</span></div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+
+        <div class="skill-item" data-skill="cliente" data-percent="95">
+            <div class="skill-header"><span>Atención al Cliente</span><span>95%</span></div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+
+    </div>
+
+</section>
 
         <section id="portafolio" class="tab-content">
             <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Proyectos Destacados</h2>
@@ -391,8 +479,79 @@
                 btnElement.classList.add('active');
             }
         }
+        document.querySelectorAll('.progress-bar').forEach(bar => {
+    bar.addEventListener('mousemove', e => {
+        const rect = bar.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const progress = bar.querySelector('.progress');
+        progress.style.setProperty('--mouse-x', x + '%');
+    });
+});
+        // Descripciones automáticas
+const skillDescriptions = {
+    csharp: "Desarrollo de aplicaciones de escritorio con arquitectura en capas y conexión a bases de datos SQL.",
+    fsharp: "Uso de paradigma funcional para resolver problemas matemáticos y lógicos con código limpio.",
+    htmlcss: "Diseño responsive, animaciones modernas y estructura semántica optimizada.",
+    db: "Modelado relacional, normalización, consultas avanzadas y administración.",
+    cliente: "Comunicación efectiva, resolución de conflictos y enfoque en experiencia de usuario."
+};
+
+document.querySelectorAll('.skill-item').forEach(item => {
+
+    const percent = item.dataset.percent;
+    const progress = item.querySelector('.progress');
+    progress.style.width = percent + "%";
+
+    const skillKey = item.dataset.skill;
+
+    // Crear descripción dinámicamente
+    const extra = document.createElement("div");
+    extra.classList.add("skill-extra");
+    extra.textContent = skillDescriptions[skillKey] || "Información próximamente.";
+    item.appendChild(extra);
+
+    // Mostrar / ocultar
+    item.addEventListener('click', () => {
+        item.classList.toggle('active');
+    });
+
+    item.addEventListener('mouseleave', () => {
+        item.classList.remove('active');
+    });
+});
+        const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modal-title');
+const modalText = document.getElementById('modal-text');
+const closeBtn = document.querySelector('.close-btn');
+
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+        modal.style.display = "flex";
+        modalTitle.textContent = card.querySelector('h3').textContent;
+        modalText.textContent = "Aquí puedes colocar una descripción mucho más detallada del proyecto, tecnologías utilizadas, retos y resultados.";
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    modal.style.display = "none";
+});
+
+window.addEventListener('click', e => {
+    if(e.target === modal){
+        modal.style.display = "none";
+    }
+});
     </script>
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3 id="modal-title"></h3>
+        <p id="modal-text"></p>
+    </div>
+</div>
+                    
 </body>
 
 </html>
+
 

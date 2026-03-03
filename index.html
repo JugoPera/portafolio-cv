@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eduardo Velazquez Quezada | Portafolio</title>
     <style>
-        /* === VARIABLES & RESET === */
         :root {
             --primary-color: #0f172a;
             --accent-color: #3b82f6;
@@ -16,7 +14,7 @@
             --text-light: #64748b;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
+        
         * {
             margin: 0;
             padding: 0;
@@ -30,7 +28,6 @@
             line-height: 1.6;
         }
 
-        /* === HEADER & NAVEGACIÓN === */
         header {
             background-color: var(--card-bg);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
@@ -95,7 +92,6 @@
             width: 100%;
         }
 
-        /* === CONTENIDO PRINCIPAL === */
         main {
             max-width: 1000px;
             margin: 3rem auto;
@@ -123,7 +119,6 @@
             }
         }
 
-        /* === SECCIÓN: INICIO === */
         .hero {
             display: flex;
             align-items: center;
@@ -162,7 +157,6 @@
             100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
         }
 
-        /* === SECCIÓN: SOBRE MÍ === */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
@@ -179,7 +173,6 @@
             border-radius: 15px;
         }
 
-        /* === COLLAGE === */
         .collage-section {
             background: var(--card-bg);
             padding: 3rem;
@@ -196,17 +189,20 @@
         .collage-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 200px);
+            grid-template-rows: repeat(2, 180px);
             gap: 1rem;
-            height: 450px;
+            width: 100%;
         }
 
         .collage-item {
             border-radius: 12px;
             overflow: hidden;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             transition: var(--transition);
             cursor: pointer;
+            display: block;
         }
 
         .collage-item:hover {
@@ -214,32 +210,12 @@
             box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
         }
 
-        .collage-item:nth-child(1) {
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-        }
+        .collage-item:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 2; }
+        .collage-item:nth-child(2) { grid-column: 2 / 3; grid-row: 1 / 3; }
+        .collage-item:nth-child(3) { grid-column: 3 / 4; grid-row: 1 / 2; }
+        .collage-item:nth-child(4) { grid-column: 1 / 2; grid-row: 2 / 3; }
+        .collage-item:nth-child(5) { grid-column: 3 / 4; grid-row: 2 / 3; }
 
-        .collage-item:nth-child(2) {
-            grid-column: 2 / 3;
-            grid-row: 1 / 3;
-        }
-
-        .collage-item:nth-child(3) {
-            grid-column: 3 / 4;
-            grid-row: 1 / 2;
-        }
-
-        .collage-item:nth-child(4) {
-            grid-column: 1 / 2;
-            grid-row: 2 / 3;
-        }
-
-        .collage-item:nth-child(5) {
-            grid-column: 3 / 4;
-            grid-row: 2 / 3;
-        }
-
-        /* === SECCIÓN: HABILIDADES === */
         .skills-container {
             display: flex;
             flex-direction: column;
@@ -288,19 +264,6 @@
             transition: width 1.5s ease-in-out;
         }
 
-        .progress::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0), transparent);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-        }
-
         .progress-bar.active .progress::after {
             opacity: 1;
         }
@@ -326,7 +289,6 @@
             line-height: 1.5;
         }
 
-        /* === SECCIÓN: PORTAFOLIO === */
         .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -357,7 +319,6 @@
             padding: 1.5rem;
         }
 
-        /* === MODAL === */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -456,20 +417,73 @@
             font-size: 0.95rem;
         }
 
-        /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .hero { flex-direction: column-reverse; text-align: center; }
             .hero-image img { width: 250px; height: 250px; }
             .about-grid { grid-template-columns: 1fr; }
             .tabs { flex-wrap: wrap; justify-content: center; }
-            .collage-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; height: auto; }
-            .collage-item:nth-child(2) { grid-column: 1 / 3; grid-row: auto; }
-            .collage-item:nth-child(n) { grid-column: auto; grid-row: auto; }
+            
+            .collage-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+                gap: 0.8rem;
+            }
+
+            .collage-item {
+                height: 140px;
+            }
+
+            .collage-item:nth-child(1) { grid-column: 1 / 2; grid-row: auto; }
+            .collage-item:nth-child(2) { grid-column: 2 / 3; grid-row: auto; }
+            .collage-item:nth-child(3) { grid-column: 1 / 2; grid-row: auto; }
+            .collage-item:nth-child(4) { grid-column: 2 / 3; grid-row: auto; }
+            .collage-item:nth-child(5) { grid-column: 1 / 3; grid-row: auto; }
+
             .modal-content { max-width: 90%; }
+        }
+
+        @media (max-width: 480px) {
+            .collage-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+
+            .collage-item {
+                height: 120px;
+            }
+
+            .collage-item:nth-child(1) { grid-column: 1; }
+            .collage-item:nth-child(2) { grid-column: 1; }
+            .collage-item:nth-child(3) { grid-column: 1; }
+            .collage-item:nth-child(4) { grid-column: 1; }
+            .collage-item:nth-child(5) { grid-column: 1; }
+
+            .collage-section {
+                padding: 1.5rem;
+            }
+
+            main {
+                padding: 0 1rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-grid {
+                padding: 1.5rem;
+            }
+
+            .skills-container {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
-
 <body>
     <header>
         <nav>
@@ -484,7 +498,6 @@
     </header>
 
     <main>
-        <!-- SECCIÓN INICIO -->
         <section id="inicio" class="tab-content active">
             <div class="hero">
                 <div class="hero-text">
@@ -498,7 +511,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN SOBRE MÍ -->
         <section id="sobre-mi" class="tab-content">
             <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Perfil Profesional</h2>
             
@@ -518,7 +530,6 @@
                 </div>
             </div>
 
-            <!-- COLLAGE -->
             <div class="collage-section">
                 <h3>Algunos momentos importantes</h3>
                 <div class="collage-grid">
@@ -531,7 +542,6 @@
             </div>
         </section>
 
-        <!-- SECCIÓN HABILIDADES -->
         <section id="habilidades" class="tab-content">
             <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Mis Habilidades</h2>
             <div class="skills-container">
@@ -539,9 +549,7 @@
                     <div class="skill-header"><span>C#</span><span>85%</span></div>
                     <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
                     <div class="skill-info">
-                        <div class="skill-info-content">
-                            Desarrollo de aplicaciones de escritorio y web con C#. Experiencia en .NET Framework, ASP.NET y Windows Forms. Conocimiento en patrones de diseño SOLID.
-                        </div>
+                        <div class="skill-info-content">Desarrollo de aplicaciones de escritorio y web con C#. Experiencia en .NET Framework, ASP.NET y Windows Forms. Conocimiento en patrones de diseño SOLID.</div>
                     </div>
                 </div>
 
@@ -549,9 +557,7 @@
                     <div class="skill-header"><span>F#</span><span>60%</span></div>
                     <div class="progress-bar"><div class="progress" style="width: 60%;"></div></div>
                     <div class="skill-info">
-                        <div class="skill-info-content">
-                            Lenguaje funcional utilizado para resolver problemas complejos. Experiencia en data processing y análisis matemático.
-                        </div>
+                        <div class="skill-info-content">Lenguaje funcional utilizado para resolver problemas complejos. Experiencia en data processing y análisis matemático.</div>
                     </div>
                 </div>
 
@@ -559,9 +565,7 @@
                     <div class="skill-header"><span>HTML / CSS</span><span>90%</span></div>
                     <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
                     <div class="skill-info">
-                        <div class="skill-info-content">
-                            Diseño responsivo, animaciones CSS, flexbox y grid. Experiencia en UX/UI design e implementación de interfaces modernas.
-                        </div>
+                        <div class="skill-info-content">Diseño responsivo, animaciones CSS, flexbox y grid. Experiencia en UX/UI design e implementación de interfaces modernas.</div>
                     </div>
                 </div>
 
@@ -569,9 +573,7 @@
                     <div class="skill-header"><span>Bases de Datos (Creación & Admin)</span><span>80%</span></div>
                     <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
                     <div class="skill-info">
-                        <div class="skill-info-content">
-                            Diseño de esquemas relacionales, optimización de queries, administración de servidores SQL. Experiencia con normalizaciones y backup.
-                        </div>
+                        <div class="skill-info-content">Diseño de esquemas relacionales, optimización de queries, administración de servidores SQL. Experiencia con normalizaciones y backup.</div>
                     </div>
                 </div>
 
@@ -579,9 +581,7 @@
                     <div class="skill-header"><span>Atención al Cliente</span><span>95%</span></div>
                     <div class="progress-bar"><div class="progress" style="width: 95%;"></div></div>
                     <div class="skill-info">
-                        <div class="skill-info-content">
-                            Comunicación efectiva, resolución de problemas, empatía y paciencia. Experiencia en servicio al cliente y gestión de relaciones.
-                        </div>
+                        <div class="skill-info-content">Comunicación efectiva, resolución de problemas, empatía y paciencia. Experiencia en servicio al cliente y gestión de relaciones.</div>
                     </div>
                 </div>
 
@@ -589,9 +589,7 @@
                     <div class="skill-header"><span>Comediante</span><span>67%</span></div>
                     <div class="progress-bar"><div class="progress" style="width: 67%;"></div></div>
                     <div class="skill-info">
-                        <div class="skill-info-content">
-                            Dominio de chistes malos, timing perfecto y capacidad de hacer reír en momentos inoportunos. Especialidad: bromas de programador.
-                        </div>
+                        <div class="skill-info-content">Dominio de chistes malos, timing perfecto y capacidad de hacer reír en momentos inoportunos. Especialidad: bromas de programador.</div>
                     </div>
                 </div>
 
@@ -599,9 +597,7 @@
                     <div class="skill-header"><span>Gooner</span><span>100%</span></div>
                     <div class="progress-bar"><div class="progress" style="width: 100%;"></div></div>
                     <div class="skill-info">
-                        <div class="skill-info-content">
-                            Fanático incondicional del Arsenal FC. Experto en explicar por qué "el próximo año es nuestro". Conocimiento avanzado en paciencia emocional.
-                        </div>
+                        <div class="skill-info-content">Fanático incondicional del Arsenal FC. Experto en explicar por qué "el próximo año es nuestro". Conocimiento avanzado en paciencia emocional.</div>
                     </div>
                 </div>
 
@@ -609,15 +605,12 @@
                     <div class="skill-header"><span>Catador de señoras</span><span>69%</span></div>
                     <div class="progress-bar"><div class="progress" style="width: 69%;"></div></div>
                     <div class="skill-info">
-                        <div class="skill-info-content">
-                            Experiencia notable en apreciar la belleza femenina. Calificaciones justas y honestas. Disponible para consultoría especializada.
-                        </div>
+                        <div class="skill-info-content">Experiencia notable en apreciar la belleza femenina. Calificaciones justas y honestas. Disponible para consultoría especializada.</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN PORTAFOLIO -->
         <section id="portafolio" class="tab-content">
             <h2 style="margin-bottom: 2rem; color: var(--primary-color);">Proyectos Destacados</h2>
             <div class="portfolio-grid">
@@ -648,7 +641,6 @@
         </section>
     </main>
 
-    <!-- MODAL PARA PROYECTOS -->
     <div class="modal-overlay" id="projectModal" onclick="closeModalOnOverlay(event)">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">&times;</button>
@@ -660,7 +652,6 @@
     </div>
 
     <script>
-        // Datos de proyectos expandidos
         const projectsData = [
             {
                 title: 'Sistema en C#',
@@ -682,7 +673,6 @@
             }
         ];
 
-        // Función para abrir modal
         function openModal(index) {
             const project = projectsData[index];
             document.getElementById('modalImg').src = project.image;
@@ -692,31 +682,26 @@
             document.getElementById('projectModal').classList.add('active');
         }
 
-        // Función para cerrar modal
         function closeModal() {
             document.getElementById('projectModal').classList.remove('active');
         }
 
-        // Cerrar modal al clickear el overlay
         function closeModalOnOverlay(event) {
             if (event.target.id === 'projectModal') {
                 closeModal();
             }
         }
 
-        // Cerrar modal con tecla Escape
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeModal();
             }
         });
 
-        // Función para alternar información de habilidades
         function toggleSkillInfo(element) {
             const skillInfo = element.querySelector('.skill-info');
             const progressBar = element.querySelector('.progress-bar');
             
-            // Cerrar otras habilidades abiertas
             document.querySelectorAll('.skill-info.show').forEach(info => {
                 if (info !== skillInfo) {
                     info.classList.remove('show');
@@ -724,28 +709,20 @@
                 }
             });
 
-            // Abrir/cerrar la actual
             skillInfo.classList.toggle('show');
             progressBar.classList.toggle('active');
         }
 
-        // Efecto brillo dinámico en las barras de progreso
         document.querySelectorAll('.progress-bar').forEach(bar => {
             bar.addEventListener('mousemove', function(event) {
                 const rect = this.getBoundingClientRect();
                 const x = event.clientX - rect.left;
                 const percentage = (x / rect.width) * 100;
-
                 const progress = this.querySelector('.progress');
-                const afterElement = progress.querySelector('::after');
-                
-                // Crear un gradiente radial que sigue el mouse
-                const brightWidth = 60; // Ancho del efecto de brillo
-                const leftPos = Math.max(0, percentage - 20);
                 
                 progress.style.backgroundImage = `linear-gradient(90deg, 
                     var(--accent-color) 0%, 
-                    rgba(255,255,255,0.3) ${leftPos}%, 
+                    rgba(255,255,255,0.3) ${Math.max(0, percentage - 20)}%, 
                     rgba(255,255,255,0.5) ${percentage}%, 
                     rgba(255,255,255,0.3) ${percentage + 20}%, 
                     var(--accent-color) 100%)`;
@@ -757,7 +734,6 @@
             });
         });
 
-        // Función para cambiar de pestaña
         function openTab(tabId, btnElement) {
             const contents = document.querySelectorAll('.tab-content');
             contents.forEach(content => {
@@ -776,7 +752,6 @@
             }
         }
 
-        // Cerrar habilidades expandidas al cambiar de pestaña
         function setupTabChange() {
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 const originalOnclick = btn.onclick;
@@ -795,7 +770,4 @@
         setupTabChange();
     </script>
 </body>
-
 </html>
-
-

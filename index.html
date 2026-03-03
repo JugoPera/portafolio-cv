@@ -417,6 +417,75 @@
             font-size: 0.95rem;
         }
 
+        .image-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            animation: fadeIn 0.3s ease;
+            backdrop-filter: blur(6px);
+        }
+
+        .image-modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .image-modal-img {
+            width: 100%;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .image-close-btn {
+            position: absolute;
+            top: -45px;
+            right: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: var(--transition);
+        }
+
+        .image-close-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(90deg);
+        }
+
         @media (max-width: 768px) {
             .hero { flex-direction: column-reverse; text-align: center; }
             .hero-image img { width: 250px; height: 250px; }
@@ -458,28 +527,19 @@
             .collage-item:nth-child(4) { grid-column: 1; }
             .collage-item:nth-child(5) { grid-column: 1; }
 
-            .collage-section {
-                padding: 1.5rem;
-            }
+            .collage-section { padding: 1.5rem; }
+            main { padding: 0 1rem; }
+            nav { padding: 1rem; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .about-grid { padding: 1.5rem; }
+            .skills-container { padding: 1.5rem; }
 
-            main {
-                padding: 0 1rem;
-            }
-
-            nav {
-                padding: 1rem;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-grid {
-                padding: 1.5rem;
-            }
-
-            .skills-container {
-                padding: 1.5rem;
+            .image-close-btn {
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -533,11 +593,11 @@
             <div class="collage-section">
                 <h3>Algunos momentos importantes</h3>
                 <div class="collage-grid">
-                    <img src="folder personal/yo inge.jpeg" alt="Foto 1" class="collage-item">
-                    <img src="folder personal/yo y alfredo.jpeg" alt="Foto 2" class="collage-item">
-                    <img src="folder personal/yo y pancho.png" alt="Foto 3" class="collage-item">
-                    <img src="folder personal/yo y profes.jpeg" alt="Foto 4" class="collage-item">
-                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop" alt="Foto 5" class="collage-item">
+                    <img src="folder personal/yo inge.jpeg" alt="Foto 1" class="collage-item" onclick="openImageModal(this)">
+                    <img src="folder personal/yo y alfredo.jpeg" alt="Foto 2" class="collage-item" onclick="openImageModal(this)">
+                    <img src="folder personal/yo y pancho.png" alt="Foto 3" class="collage-item" onclick="openImageModal(this)">
+                    <img src="folder personal/yo y profes.jpeg" alt="Foto 4" class="collage-item" onclick="openImageModal(this)">
+                    <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop" alt="Foto 5" class="collage-item" onclick="openImageModal(this)">
                 </div>
             </div>
         </section>
@@ -641,6 +701,13 @@
         </section>
     </main>
 
+    <div class="image-modal-overlay" id="imageModal" onclick="closeImageModal(event)">
+        <div class="image-modal-content">
+            <button class="image-close-btn" onclick="closeImageModal()">&times;</button>
+            <img src="" alt="" class="image-modal-img" id="imageModalImg">
+        </div>
+    </div>
+
     <div class="modal-overlay" id="projectModal" onclick="closeModalOnOverlay(event)">
         <div class="modal-content">
             <button class="close-btn" onclick="closeModal()">&times;</button>
@@ -673,6 +740,19 @@
             }
         ];
 
+        function openImageModal(imgElement) {
+            const imageModal = document.getElementById('imageModal');
+            const imageModalImg = document.getElementById('imageModalImg');
+            imageModalImg.src = imgElement.src;
+            imageModal.classList.add('active');
+        }
+
+        function closeImageModal(event) {
+            const imageModal = document.getElementById('imageModal');
+            if (event && event.target.id !== 'imageModal') return;
+            imageModal.classList.remove('active');
+        }
+
         function openModal(index) {
             const project = projectsData[index];
             document.getElementById('modalImg').src = project.image;
@@ -694,7 +774,14 @@
 
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                closeModal();
+                const imageModal = document.getElementById('imageModal');
+                const projectModal = document.getElementById('projectModal');
+                if (imageModal.classList.contains('active')) {
+                    imageModal.classList.remove('active');
+                }
+                if (projectModal.classList.contains('active')) {
+                    projectModal.classList.remove('active');
+                }
             }
         });
 

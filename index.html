@@ -14,7 +14,6 @@
             --accent3: #6ee7b7;
             --accent4: #0ea5e9;
             --bg-color: #f0f6ff;
-            --bg2: #e8f4fd;
             --card-bg: #ffffff;
             --text-main: #1e3a5f;
             --text-light: #4a7fa5;
@@ -32,12 +31,12 @@
             min-height: 100vh;
         }
 
-        /* === HEADER === */
+        /* ===== HEADER ===== */
         header {
             background: linear-gradient(135deg, #0f1f3d 0%, #1a3a6b 100%);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 200;
             box-shadow: 0 4px 24px rgba(15,31,61,0.22);
         }
 
@@ -47,71 +46,122 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.1rem 2rem;
+            padding: 1rem 1.5rem;
         }
 
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            flex-shrink: 0;
         }
 
         .logo-dot {
-            width: 10px; height: 10px;
+            width: 9px; height: 9px;
             background: var(--accent2);
             border-radius: 50%;
             display: inline-block;
             animation: pulse 2s infinite;
+            flex-shrink: 0;
         }
 
         @keyframes pulse {
-            0%,100% { transform: scale(1); opacity:1; }
-            50% { transform: scale(1.4); opacity:0.7; }
+            0%,100% { transform:scale(1); opacity:1; }
+            50% { transform:scale(1.4); opacity:0.7; }
         }
 
-        .tabs { display:flex; gap:0.5rem; }
+        /* Desktop tabs */
+        .tabs {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: nowrap;
+        }
 
         .tab-btn {
             background: rgba(255,255,255,0.08);
             border: 1.5px solid rgba(255,255,255,0.12);
-            font-size: 0.92rem;
+            font-size: 0.88rem;
             font-weight: 500;
             color: rgba(255,255,255,0.7);
             cursor: pointer;
-            padding: 0.45rem 1.1rem;
+            padding: 0.4rem 0.9rem;
             border-radius: 30px;
             transition: var(--transition);
+            white-space: nowrap;
         }
 
         .tab-btn:hover { background: rgba(59,130,246,0.3); color:#fff; border-color: var(--accent-color); }
         .tab-btn.active { background: var(--accent-color); color:#fff; border-color: var(--accent-color); box-shadow: 0 4px 14px rgba(59,130,246,0.45); }
 
-        /* === MAIN === */
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 4px;
+            background: none;
+            border: none;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.open span:nth-child(2) { opacity: 0; }
+        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* Mobile menu */
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: linear-gradient(135deg, #0f1f3d, #1a3a6b);
+            padding: 0.75rem 1.5rem 1.25rem;
+            gap: 0.5rem;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .mobile-menu.open { display: flex; }
+
+        .mobile-menu .tab-btn {
+            text-align: left;
+            border-radius: 12px;
+            padding: 0.7rem 1rem;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+
+        /* ===== MAIN ===== */
         main {
             max-width: 1050px;
-            margin: 3rem auto;
-            padding: 0 2rem;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
             min-height: 65vh;
         }
 
-        .tab-content { display:none; animation: fadeInUp 0.55s ease forwards; }
+        .tab-content { display:none; animation: fadeInUp 0.5s ease forwards; }
         .tab-content.active { display:block; }
 
         @keyframes fadeInUp {
-            from { opacity:0; transform:translateY(24px); }
+            from { opacity:0; transform:translateY(20px); }
             to { opacity:1; transform:translateY(0); }
         }
 
-        /* === SECTION TITLE === */
         .section-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--primary-color);
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -125,16 +175,16 @@
             border-radius:2px;
         }
 
-        /* === HERO === */
+        /* ===== HERO ===== */
         .hero {
             display: flex;
             align-items: center;
-            gap: 4rem;
-            padding: 1rem 0;
+            gap: 3rem;
+            padding: 0.5rem 0;
         }
 
         .hero-text h1 {
-            font-size: 3.2rem;
+            font-size: 2.8rem;
             color: var(--primary-color);
             line-height: 1.2;
             margin-bottom: 1rem;
@@ -149,21 +199,21 @@
         }
 
         .hero-text p {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-light);
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
             max-width: 400px;
         }
 
-        .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; }
+        .hero-btns { display:flex; gap:0.8rem; flex-wrap:wrap; }
 
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-color), var(--accent4));
             color: white;
-            padding: 0.8rem 2rem;
+            padding: 0.75rem 1.75rem;
             border-radius: 30px;
             border: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -175,10 +225,10 @@
         .btn-secondary {
             background: transparent;
             color: var(--accent-color);
-            padding: 0.8rem 2rem;
+            padding: 0.75rem 1.75rem;
             border-radius: 30px;
             border: 2px solid var(--accent-color);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -186,10 +236,10 @@
 
         .btn-secondary:hover { background: rgba(59,130,246,0.08); transform:translateY(-2px); }
 
-        .hero-image { position: relative; flex-shrink:0; }
+        .hero-image { position:relative; flex-shrink:0; }
 
         .hero-image img {
-            width: 300px; height: 300px;
+            width: 280px; height: 280px;
             object-fit: cover;
             border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
             box-shadow: 0 20px 60px rgba(59,130,246,0.22);
@@ -206,9 +256,9 @@
         .floating-badge {
             position: absolute;
             background: white;
-            border-radius: 16px;
-            padding: 0.6rem 1rem;
-            font-size: 0.8rem;
+            border-radius: 14px;
+            padding: 0.5rem 0.9rem;
+            font-size: 0.78rem;
             font-weight: 600;
             box-shadow: 0 8px 24px rgba(0,0,0,0.10);
             display: flex;
@@ -218,27 +268,27 @@
             white-space: nowrap;
         }
 
-        .badge-1 { top: 10px; left: -30px; animation-delay: 0s; color: var(--accent-color); border-left: 3px solid var(--accent-color); }
-        .badge-2 { bottom: 20px; right: -20px; animation-delay: 1s; color: var(--accent4); border-left: 3px solid var(--accent4); }
-        .badge-3 { bottom: 80px; left: -40px; animation-delay: 2s; color: #10b981; border-left: 3px solid #10b981; }
+        .badge-1 { top:10px; left:-20px; animation-delay:0s; color:var(--accent-color); border-left:3px solid var(--accent-color); }
+        .badge-2 { bottom:20px; right:-10px; animation-delay:1s; color:var(--accent4); border-left:3px solid var(--accent4); }
+        .badge-3 { bottom:80px; left:-30px; animation-delay:2s; color:#10b981; border-left:3px solid #10b981; }
 
         @keyframes float {
-            0%,100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
+            0%,100% { transform:translateY(0); }
+            50% { transform:translateY(-8px); }
         }
 
-        /* Stats row */
+        /* Stats */
         .stats-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(3,1fr);
+            gap: 1rem;
+            margin-top: 2.5rem;
         }
 
         .stat-card {
             background: white;
             border-radius: var(--radius);
-            padding: 1.4rem;
+            padding: 1.25rem 1rem;
             text-align: center;
             box-shadow: var(--shadow);
             transition: var(--transition);
@@ -247,71 +297,71 @@
 
         .stat-card:nth-child(2) { border-top-color: var(--accent2); }
         .stat-card:nth-child(3) { border-top-color: var(--accent3); }
-        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(59,130,246,0.15); }
+        .stat-card:hover { transform:translateY(-4px); }
 
-        .stat-num { font-size: 2rem; font-weight: 700; color: var(--primary-color); }
-        .stat-label { font-size: 0.82rem; color: var(--text-light); margin-top: 0.2rem; }
+        .stat-num { font-size: 1.8rem; font-weight:700; color:var(--primary-color); }
+        .stat-label { font-size:0.78rem; color:var(--text-light); margin-top:0.2rem; }
 
-        /* === SOBRE MI === */
+        /* ===== SOBRE MI ===== */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
-            gap: 2.5rem;
+            gap: 2rem;
             background: white;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
         }
 
-        .about-image img { width:100%; border-radius:15px; object-fit:cover; }
+        .about-image img { width:100%; border-radius:14px; object-fit:cover; }
 
         .about-text h3 {
             background: linear-gradient(135deg, var(--accent-color), var(--accent2));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.85rem;
             font-weight: 700;
         }
 
-        .about-text p { color: var(--text-light); margin-bottom: 1rem; font-size: 0.97rem; }
-        .about-text strong { color: var(--text-main); }
+        .about-text p { color:var(--text-light); margin-bottom:0.85rem; font-size:0.93rem; }
+        .about-text strong { color:var(--text-main); }
 
         .info-pill {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            background: linear-gradient(135deg, #e8f0ff, #e0f5ff);
+            background: linear-gradient(135deg,#e8f0ff,#e0f5ff);
             color: var(--accent-color);
             padding: 0.4rem 1rem;
             border-radius: 30px;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
             border: 1.5px solid rgba(59,130,246,0.2);
         }
 
         /* Collage */
         .collage-section {
             background: white;
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: var(--radius);
             box-shadow: var(--shadow);
         }
 
-        .collage-section h3 { color: var(--primary-color); margin-bottom: 1.5rem; font-size: 1.3rem; }
+        .collage-section h3 { color:var(--primary-color); margin-bottom:1.25rem; font-size:1.2rem; }
 
         .collage-grid {
             display: grid;
             grid-template-columns: repeat(3,1fr);
-            grid-template-rows: repeat(2,180px);
-            gap: 1rem;
+            grid-template-rows: repeat(2,170px);
+            gap: 0.75rem;
         }
 
         .collage-item {
-            border-radius: 14px;
+            border-radius: 12px;
             overflow: hidden;
             width:100%; height:100%;
             object-fit: cover;
@@ -327,45 +377,36 @@
         .collage-item:nth-child(4) { grid-column:1/2; grid-row:2/3; }
         .collage-item:nth-child(5) { grid-column:3/4; grid-row:2/3; }
 
-        /* === HABILIDADES === */
-        .skills-container {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
+        /* ===== HABILIDADES ===== */
+        .skills-container { display:flex; flex-direction:column; gap:1rem; }
 
         .skill-item {
             background: white;
             border-radius: var(--radius);
-            padding: 1.4rem 1.6rem;
+            padding: 1.25rem 1.4rem;
             box-shadow: var(--shadow);
             cursor: pointer;
             transition: var(--transition);
             border-left: 4px solid transparent;
         }
 
-        .skill-item:nth-child(1) { --sc: #3b82f6; }
-        .skill-item:nth-child(2) { --sc: #0ea5e9; }
-        .skill-item:nth-child(3) { --sc: #38bdf8; }
-        .skill-item:nth-child(4) { --sc: #1d4ed8; }
-        .skill-item:nth-child(5) { --sc: #6ee7b7; }
-        .skill-item:nth-child(6) { --sc: #fbbf24; }
-        .skill-item:nth-child(7) { --sc: #f87171; }
-        .skill-item:nth-child(8) { --sc: #fb923c; }
+        .skill-item:nth-child(1) { --sc:#3b82f6; }
+        .skill-item:nth-child(2) { --sc:#0ea5e9; }
+        .skill-item:nth-child(3) { --sc:#38bdf8; }
+        .skill-item:nth-child(4) { --sc:#1d4ed8; }
+        .skill-item:nth-child(5) { --sc:#6ee7b7; }
+        .skill-item:nth-child(6) { --sc:#fbbf24; }
+        .skill-item:nth-child(7) { --sc:#f87171; }
+        .skill-item:nth-child(8) { --sc:#fb923c; }
 
-        .skill-item:hover { transform:translateX(6px); border-left-color: var(--sc); box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-        .skill-item.open { border-left-color: var(--sc); }
+        .skill-item:hover { transform:translateX(5px); border-left-color:var(--sc); box-shadow:0 8px 30px rgba(0,0,0,0.08); }
+        .skill-item.open { border-left-color:var(--sc); }
 
-        .skill-header { display:flex; justify-content:space-between; align-items:center; margin-bottom: 0.8rem; }
-        .skill-name { font-weight:600; color:var(--primary-color); font-size:0.97rem; }
-        .skill-pct { font-weight:700; color: var(--sc); font-size: 0.9rem; }
+        .skill-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.7rem; }
+        .skill-name { font-weight:600; color:var(--primary-color); font-size:0.93rem; }
+        .skill-pct { font-weight:700; color:var(--sc); font-size:0.88rem; }
 
-        .progress-bar {
-            width:100%; height:8px;
-            background: #dbeafe;
-            border-radius:10px;
-            overflow:hidden;
-        }
+        .progress-bar { width:100%; height:8px; background:#dbeafe; border-radius:10px; overflow:hidden; }
 
         .progress {
             height:100%;
@@ -377,20 +418,20 @@
         .skill-info {
             max-height:0; overflow:hidden;
             background: linear-gradient(135deg,#f0f6ff,#e8f4fd);
-            border-radius:12px; padding:0;
-            margin-top: 0.8rem;
+            border-radius:10px; padding:0;
+            margin-top:0.7rem;
             transition: all 0.35s ease;
-            font-size: 0.88rem;
-            color: var(--text-light);
+            font-size:0.85rem;
+            color:var(--text-light);
         }
 
-        .skill-info.show { max-height:150px; padding:1rem; }
+        .skill-info.show { max-height:150px; padding:0.85rem; }
 
-        /* === PORTFOLIO === */
+        /* ===== PORTFOLIO ===== */
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(290px,1fr));
-            gap: 1.8rem;
+            grid-template-columns: repeat(auto-fit,minmax(270px,1fr));
+            gap: 1.5rem;
         }
 
         .card {
@@ -403,43 +444,34 @@
             position:relative;
         }
 
-        .card:hover { transform:translateY(-8px); box-shadow:0 20px 50px rgba(59,130,246,0.16); }
+        .card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(59,130,246,0.16); }
 
         .card-badge {
-            position: absolute;
-            top: 12px; right: 12px;
-            background: rgba(255,255,255,0.92);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--accent-color);
-        }
-
-        .card img { width:100%; height:190px; object-fit:cover; }
-        .card-content { padding:1.4rem; }
-        .card-content h3 { color:var(--primary-color); font-size:1.05rem; margin-bottom:0.4rem; }
-        .card-content p { color:var(--text-light); font-size:0.87rem; }
-
-        .card-tags { display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:1rem; }
-
-        .tag {
-            padding: 0.25rem 0.7rem;
+            position:absolute; top:10px; right:10px;
+            background:rgba(255,255,255,0.93);
+            padding:0.25rem 0.7rem;
             border-radius:20px;
-            font-size:0.75rem;
-            font-weight:600;
+            font-size:0.72rem; font-weight:600;
+            color:var(--accent-color);
         }
 
-        .tag-blue   { background:#dbeafe; color:#1d4ed8; }
-        .tag-sky    { background:#e0f2fe; color:#0284c7; }
-        .tag-cyan   { background:#ecfeff; color:#0891b2; }
-        .tag-green  { background:#ecfdf5; color:#10b981; }
+        .card img { width:100%; height:180px; object-fit:cover; }
+        .card-content { padding:1.25rem; }
+        .card-content h3 { color:var(--primary-color); font-size:1rem; margin-bottom:0.35rem; }
+        .card-content p { color:var(--text-light); font-size:0.84rem; }
+        .card-tags { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.85rem; }
 
-        /* === SUSCRIPCION === */
+        .tag { padding:0.22rem 0.65rem; border-radius:20px; font-size:0.72rem; font-weight:600; }
+        .tag-blue  { background:#dbeafe; color:#1d4ed8; }
+        .tag-sky   { background:#e0f2fe; color:#0284c7; }
+        .tag-cyan  { background:#ecfeff; color:#0891b2; }
+        .tag-green { background:#ecfdf5; color:#10b981; }
+
+        /* ===== SUSCRIPCIONES ===== */
         .sub-card {
             background: white;
             border-radius: var(--radius);
-            padding: 2rem 1.8rem;
+            padding: 2rem 1.5rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
             cursor: pointer;
@@ -451,212 +483,136 @@
             text-align: center;
         }
 
-        .sub-card:hover { transform:translateY(-8px); border-color: var(--accent-color); box-shadow:0 20px 50px rgba(59,130,246,0.16); }
-
-        .sub-card-featured {
-            border-color: var(--accent-color);
-            background: linear-gradient(180deg, #f0f6ff 0%, white 60%);
-        }
+        .sub-card:hover { transform:translateY(-6px); border-color:var(--accent-color); box-shadow:0 20px 50px rgba(59,130,246,0.16); }
+        .sub-card-featured { border-color:var(--accent-color); background:linear-gradient(180deg,#f0f6ff 0%,white 60%); }
 
         .sub-popular {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-color);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            white-space: nowrap;
+            position:absolute; top:-13px; left:50%; transform:translateX(-50%);
+            background:var(--accent-color); color:white;
+            font-size:0.72rem; font-weight:700;
+            padding:0.28rem 0.9rem; border-radius:20px; white-space:nowrap;
         }
 
         .sub-badge {
-            background: #dbeafe;
-            color: var(--accent-color);
-            font-size: 0.72rem;
-            font-weight: 700;
-            padding: 0.3rem 0.9rem;
-            border-radius: 20px;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
+            background:#dbeafe; color:var(--accent-color);
+            font-size:0.7rem; font-weight:700;
+            padding:0.28rem 0.85rem; border-radius:20px;
+            letter-spacing:0.05em; margin-bottom:0.9rem;
         }
 
-        .sub-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+        .sub-icon { font-size:2.2rem; margin-bottom:0.65rem; }
 
         .sub-price {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            line-height: 1;
-            margin-bottom: 0.3rem;
+            font-size:2.5rem; font-weight:800;
+            color:var(--primary-color); line-height:1; margin-bottom:0.3rem;
         }
 
-        .sub-price span { font-size: 1rem; font-weight: 400; color: var(--text-light); }
+        .sub-price span { font-size:0.95rem; font-weight:400; color:var(--text-light); }
 
-        .sub-name {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
+        .sub-name { font-size:0.9rem; color:var(--text-light); margin-bottom:1.25rem; font-style:italic; }
 
         .sub-features {
-            list-style: none;
-            width: 100%;
-            margin-bottom: 1.8rem;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
+            list-style:none; width:100%; margin-bottom:1.5rem;
+            text-align:left; display:flex; flex-direction:column; gap:0.5rem;
         }
 
-        .sub-features li { font-size: 0.875rem; color: var(--text-main); }
+        .sub-features li { font-size:0.85rem; color:var(--text-main); }
 
         .sub-btn {
-            width: 100%;
-            padding: 0.85rem;
-            border-radius: 30px;
-            border: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            background: linear-gradient(135deg, var(--accent-color), var(--accent4));
-            color: white;
-            box-shadow: 0 4px 14px rgba(59,130,246,0.3);
-            margin-top: auto;
+            width:100%; padding:0.8rem; border-radius:30px; border:none;
+            font-size:0.92rem; font-weight:600; cursor:pointer;
+            transition:var(--transition);
+            background:linear-gradient(135deg,var(--accent-color),var(--accent4));
+            color:white; box-shadow:0 4px 14px rgba(59,130,246,0.3);
+            margin-top:auto;
         }
 
         .sub-btn:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(59,130,246,0.4); }
-
-        .sub-btn-outline {
-            background: transparent;
-            color: var(--accent-color);
-            border: 2px solid var(--accent-color);
-            box-shadow: none;
-        }
-
-        .sub-btn-outline:hover { background: rgba(59,130,246,0.08); box-shadow: none; }
-
-        .sub-btn-dark {
-            background: linear-gradient(135deg, #0f1f3d, #1a3a6b);
-            box-shadow: 0 4px 14px rgba(15,31,61,0.3);
-        }
-
-        .sub-btn-dark:hover { box-shadow: 0 8px 24px rgba(15,31,61,0.4); }
+        .sub-btn-outline { background:transparent; color:var(--accent-color); border:2px solid var(--accent-color); box-shadow:none; }
+        .sub-btn-outline:hover { background:rgba(59,130,246,0.08); box-shadow:none; }
+        .sub-btn-dark { background:linear-gradient(135deg,#0f1f3d,#1a3a6b); box-shadow:0 4px 14px rgba(15,31,61,0.3); }
 
         /* Métodos de pago */
         .pay-method {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f8faff;
-            border: 1.5px solid #e0ecff;
-            border-radius: 14px;
-            padding: 1rem 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
+            display:flex; align-items:center; justify-content:space-between;
+            background:#f8faff; border:1.5px solid #e0ecff;
+            border-radius:13px; padding:0.9rem 1rem;
+            cursor:pointer; transition:var(--transition);
         }
 
-        .pay-method:hover { border-color: var(--accent-color); background: #f0f6ff; transform: translateX(4px); }
+        .pay-method:hover { border-color:var(--accent-color); background:#f0f6ff; transform:translateX(4px); }
 
-        /* Form inputs */
+        /* Form */
         .checkout-input {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border: 1.5px solid #d1e3ff;
-            border-radius: 12px;
-            font-size: 0.92rem;
-            color: var(--text-main);
-            background: #f8faff;
-            transition: var(--transition);
-            outline: none;
-            font-family: inherit;
+            width:100%; padding:0.7rem 0.9rem;
+            border:1.5px solid #d1e3ff; border-radius:11px;
+            font-size:0.9rem; color:var(--text-main);
+            background:#f8faff; transition:var(--transition);
+            outline:none; font-family:inherit;
         }
 
-        .checkout-input:focus { border-color: var(--accent-color); background: white; box-shadow: 0 0 0 3px rgba(59,130,246,0.12); }
+        .checkout-input:focus { border-color:var(--accent-color); background:white; box-shadow:0 0 0 3px rgba(59,130,246,0.12); }
 
-        .checkout-label {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--text-main);
-            margin-bottom: 0.35rem;
-            display: block;
-        }
+        .checkout-label { font-size:0.8rem; font-weight:600; color:var(--text-main); margin-bottom:0.3rem; display:block; }
+        .checkout-row { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; }
+        .checkout-field { display:flex; flex-direction:column; margin-bottom:0.8rem; }
 
-        .checkout-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-
-        .checkout-field { display: flex; flex-direction: column; margin-bottom: 0.9rem; }
-
-        /* === FOOTER === */
+        /* ===== FOOTER ===== */
         footer {
-            background: linear-gradient(135deg, #0f1f3d 0%, #1a3a6b 100%);
-            color: rgba(255,255,255,0.75);
-            margin-top: 5rem;
-            padding: 3rem 2rem 2rem;
+            background: linear-gradient(135deg,#0f1f3d,#1a3a6b);
+            color:rgba(255,255,255,0.75);
+            margin-top: 4rem;
+            padding: 2.5rem 1.5rem 1.5rem;
         }
 
-        .footer-inner { max-width: 1050px; margin: 0 auto; }
+        .footer-inner { max-width:1050px; margin:0 auto; }
 
         .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 3rem;
-            margin-bottom: 2.5rem;
+            display:grid;
+            grid-template-columns:2fr 1fr 1fr;
+            gap:2.5rem;
+            margin-bottom:2rem;
         }
 
-        .footer-brand .logo { font-size:1.3rem; margin-bottom:0.8rem; display:flex; align-items:center; gap:0.4rem; }
-        .footer-brand p { font-size:0.88rem; color:rgba(255,255,255,0.5); line-height:1.7; }
+        .footer-brand .logo { font-size:1.2rem; margin-bottom:0.7rem; }
+        .footer-brand p { font-size:0.84rem; color:rgba(255,255,255,0.5); line-height:1.7; }
 
-        .footer-col h4 { color:white; font-size:0.95rem; font-weight:600; margin-bottom:1rem; }
+        .footer-col h4 { color:white; font-size:0.9rem; font-weight:600; margin-bottom:0.85rem; }
         .footer-col a, .footer-col span {
-            display:block;
-            font-size:0.85rem;
-            color:rgba(255,255,255,0.5);
-            text-decoration:none;
-            margin-bottom:0.5rem;
-            cursor:pointer;
-            transition: var(--transition);
+            display:block; font-size:0.82rem;
+            color:rgba(255,255,255,0.5); text-decoration:none;
+            margin-bottom:0.45rem; cursor:pointer; transition:var(--transition);
         }
 
-        .footer-col a:hover { color:var(--accent2); }
-        .footer-col span:hover { color:var(--accent2); }
+        .footer-col a:hover, .footer-col span:hover { color:var(--accent2); }
 
-        .footer-social { display:flex; gap:0.8rem; margin-top:1rem; }
+        .footer-social { display:flex; gap:0.7rem; margin-top:0.9rem; }
 
         .social-btn {
-            width:38px; height:38px;
-            background:rgba(255,255,255,0.08);
-            border-radius:50%;
+            width:36px; height:36px;
+            background:rgba(255,255,255,0.08); border-radius:50%;
             display:flex; align-items:center; justify-content:center;
-            font-size:1rem;
-            color:rgba(255,255,255,0.6);
-            cursor:pointer;
-            transition:var(--transition);
-            border:1.5px solid rgba(255,255,255,0.1);
-            text-decoration:none;
+            font-size:0.95rem; color:rgba(255,255,255,0.6);
+            cursor:pointer; transition:var(--transition);
+            border:1.5px solid rgba(255,255,255,0.1); text-decoration:none;
         }
 
         .social-btn:hover { background:var(--accent-color); border-color:var(--accent-color); color:white; transform:translateY(-3px); }
 
-        .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin-bottom:1.5rem; }
+        .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin-bottom:1.25rem; }
 
         .footer-bottom {
             display:flex; justify-content:space-between; align-items:center;
-            font-size: 0.8rem; color: rgba(255,255,255,0.35);
-            flex-wrap:wrap; gap:0.5rem;
+            font-size:0.78rem; color:rgba(255,255,255,0.35); flex-wrap:wrap; gap:0.5rem;
         }
 
-        .footer-bottom span { color: var(--accent2); }
+        .footer-bottom span { color:var(--accent2); }
 
-        /* === MODALS === */
+        /* ===== MODALS ===== */
         .modal-overlay {
             display:none; position:fixed; inset:0;
             background:rgba(15,31,61,0.55);
-            z-index:1000;
-            backdrop-filter:blur(6px);
+            z-index:1000; backdrop-filter:blur(6px);
         }
 
         .modal-overlay.active { display:flex; align-items:center; justify-content:center; animation:fadeIn 0.3s ease; }
@@ -664,9 +620,9 @@
         @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
         .modal-content {
-            background:white; border-radius:24px;
-            padding:2rem; max-width:600px; width:90%;
-            max-height:85vh; overflow-y:auto;
+            background:white; border-radius:22px;
+            padding:1.75rem; max-width:560px; width:92%;
+            max-height:88vh; overflow-y:auto;
             position:relative; animation:slideUp 0.35s ease;
         }
 
@@ -676,72 +632,121 @@
         }
 
         .close-btn {
-            position:absolute; top:1rem; right:1rem;
+            position:absolute; top:0.9rem; right:0.9rem;
             background:var(--bg-color); border:none;
-            width:38px; height:38px; border-radius:50%;
-            font-size:1.3rem; cursor:pointer;
+            width:36px; height:36px; border-radius:50%;
+            font-size:1.2rem; cursor:pointer;
             display:flex; align-items:center; justify-content:center;
             transition:var(--transition); color:var(--text-main);
+            flex-shrink:0;
         }
 
         .close-btn:hover { background:var(--accent-color); color:white; transform:rotate(90deg); }
 
-        .modal-img { width:100%; height:260px; object-fit:cover; border-radius:16px; margin-bottom:1.5rem; }
-        .modal-title { color:var(--primary-color); font-size:1.7rem; margin-bottom:0.75rem; }
-        .modal-description { color:var(--text-light); margin-bottom:1.2rem; line-height:1.8; font-size:0.95rem; }
-        .modal-details { background:var(--bg-color); padding:1rem 1.2rem; border-radius:14px; font-size:0.9rem; color:var(--text-main); line-height:2; }
+        .modal-img { width:100%; height:230px; object-fit:cover; border-radius:14px; margin-bottom:1.25rem; }
+        .modal-title { color:var(--primary-color); font-size:1.5rem; margin-bottom:0.65rem; }
+        .modal-description { color:var(--text-light); margin-bottom:1rem; line-height:1.8; font-size:0.92rem; }
+        .modal-details { background:var(--bg-color); padding:0.9rem 1.1rem; border-radius:12px; font-size:0.88rem; color:var(--text-main); line-height:2; }
 
         .image-modal-overlay {
             display:none; position:fixed; inset:0;
-            background:rgba(0,0,0,0.8);
-            z-index:2000; backdrop-filter:blur(8px);
+            background:rgba(0,0,0,0.85); z-index:2000; backdrop-filter:blur(8px);
         }
 
         .image-modal-overlay.active { display:flex; align-items:center; justify-content:center; animation:fadeIn 0.3s ease; }
 
-        .image-modal-content { position:relative; max-width:90vw; max-height:90vh; animation:zoomIn 0.3s ease; }
+        .image-modal-content { position:relative; max-width:92vw; max-height:92vh; animation:zoomIn 0.3s ease; }
 
         @keyframes zoomIn { from{opacity:0;transform:scale(0.85)} to{opacity:1;transform:scale(1)} }
 
-        .image-modal-img { width:100%; height:auto; max-height:85vh; object-fit:contain; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,0.4); }
+        .image-modal-img { width:100%; height:auto; max-height:85vh; object-fit:contain; border-radius:14px; box-shadow:0 20px 60px rgba(0,0,0,0.4); }
 
         .image-close-btn {
-            position:absolute; top:-45px; right:0;
+            position:absolute; top:-42px; right:0;
             background:rgba(255,255,255,0.15); border:2px solid white;
-            width:44px; height:44px; border-radius:50%;
-            font-size:1.6rem; cursor:pointer;
+            width:40px; height:40px; border-radius:50%;
+            font-size:1.5rem; cursor:pointer;
             display:flex; align-items:center; justify-content:center;
             color:white; transition:var(--transition);
         }
 
         .image-close-btn:hover { background:rgba(255,255,255,0.3); transform:rotate(90deg); }
 
-        /* === RESPONSIVE === */
-        @media(max-width:768px){
-            .hero { flex-direction:column-reverse; text-align:center; gap:2rem; }
-            .hero-text p { max-width:100%; }
+        /* ===== TABLET (max 900px) ===== */
+        @media(max-width:900px){
+            .tabs { display:none; }
+            .hamburger { display:flex; }
+
+            .hero { gap:2rem; }
+            .hero-text h1 { font-size:2.4rem; }
+            .hero-image img { width:240px; height:240px; }
+
+            .about-grid { grid-template-columns:1fr; gap:1.5rem; }
+            .about-image img { max-height:260px; width:100%; object-fit:cover; }
+
+            .footer-grid { grid-template-columns:1fr 1fr; gap:2rem; }
+            .footer-brand { grid-column:1/-1; }
+
+            .stats-row { grid-template-columns:repeat(3,1fr); }
+        }
+
+        /* ===== MOBILE (max 600px) ===== */
+        @media(max-width:600px){
+            main { padding:0 1rem; margin:1.75rem auto; }
+
+            .hero { flex-direction:column-reverse; text-align:center; gap:1.5rem; }
+            .hero-text p { max-width:100%; font-size:0.95rem; }
             .hero-btns { justify-content:center; }
-            .hero-image img { width:220px; height:220px; }
+            .hero-text h1 { font-size:2rem; }
+            .hero-image img { width:200px; height:200px; }
             .floating-badge { display:none; }
-            .about-grid { grid-template-columns:1fr; }
-            .footer-grid { grid-template-columns:1fr; gap:2rem; }
-            .stats-row { grid-template-columns:1fr 1fr; }
-            .collage-grid { grid-template-columns:repeat(2,1fr); grid-template-rows:auto; }
-            .collage-item { height:140px; }
+
+            .section-title { font-size:1.5rem; }
+
+            .stats-row { grid-template-columns:1fr 1fr; gap:0.75rem; }
+            .stat-card:last-child { grid-column:1/-1; }
+            .stat-num { font-size:1.6rem; }
+
+            .collage-grid {
+                grid-template-columns:1fr 1fr;
+                grid-template-rows:auto;
+                gap:0.6rem;
+            }
+
+            .collage-item { height:130px; }
             .collage-item:nth-child(1){grid-column:1/2;grid-row:auto;}
             .collage-item:nth-child(2){grid-column:2/3;grid-row:auto;}
             .collage-item:nth-child(3){grid-column:1/2;grid-row:auto;}
             .collage-item:nth-child(4){grid-column:2/3;grid-row:auto;}
             .collage-item:nth-child(5){grid-column:1/3;grid-row:auto;}
+
+            .about-grid { padding:1.25rem; }
+            .collage-section { padding:1.25rem; }
+            .skills-container { gap:0.75rem; }
+            .skill-item { padding:1.1rem 1.2rem; }
+
+            .portfolio-grid { grid-template-columns:1fr; }
+
+            /* Suscripcion grid - 1 col mobile */
+            .sub-grid { grid-template-columns:1fr !important; }
+
+            .footer-grid { grid-template-columns:1fr; gap:1.5rem; }
+            .footer-bottom { flex-direction:column; text-align:center; }
+            footer { padding:2rem 1.25rem 1.25rem; margin-top:3rem; }
+
+            .modal-content { padding:1.4rem; width:95%; border-radius:18px; }
+            .checkout-row { grid-template-columns:1fr; gap:0; }
+
+            .image-close-btn { top:auto; bottom:-50px; right:50%; transform:translateX(50%); }
         }
 
-        @media(max-width:480px){
-            .hero-text h1 { font-size:2.3rem; }
+        /* ===== SMALL MOBILE (max 380px) ===== */
+        @media(max-width:380px){
+            .hero-text h1 { font-size:1.75rem; }
+            .btn-primary, .btn-secondary { padding:0.65rem 1.3rem; font-size:0.88rem; }
             .stats-row { grid-template-columns:1fr; }
-            .tabs { flex-wrap:wrap; justify-content:center; gap:0.4rem; }
-            main { padding:0 1rem; }
-            nav { padding:0.9rem 1rem; }
-            .footer-bottom { flex-direction:column; text-align:center; }
+            .stat-card:last-child { grid-column:auto; }
+            .sub-price { font-size:2rem; }
         }
     </style>
 </head>
@@ -753,14 +758,27 @@
             <span class="logo-dot"></span>
             Eduardo V.Q.
         </div>
+        <!-- Desktop tabs -->
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab('inicio',this)">Inicio</button>
             <button class="tab-btn" onclick="openTab('sobre-mi',this)">Sobre Mí</button>
             <button class="tab-btn" onclick="openTab('habilidades',this)">Habilidades</button>
             <button class="tab-btn" onclick="openTab('portafolio',this)">Portafolio</button>
-            <button class="tab-btn" onclick="openTab('suscribete',this)">Suscríbete</button>
+            <button class="tab-btn" onclick="openTab('suscribete',this)">💸 Suscríbete</button>
         </div>
+        <!-- Hamburger -->
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú">
+            <span></span><span></span><span></span>
+        </button>
     </nav>
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="tab-btn active" onclick="openTab('inicio',this);closeMenu()">🏠 Inicio</button>
+        <button class="tab-btn" onclick="openTab('sobre-mi',this);closeMenu()">👤 Sobre Mí</button>
+        <button class="tab-btn" onclick="openTab('habilidades',this);closeMenu()">⚡ Habilidades</button>
+        <button class="tab-btn" onclick="openTab('portafolio',this);closeMenu()">💼 Portafolio</button>
+        <button class="tab-btn" onclick="openTab('suscribete',this);closeMenu()">💸 Suscríbete</button>
+    </div>
 </header>
 
 <main>
@@ -770,10 +788,10 @@
         <div class="hero">
             <div class="hero-text">
                 <h1>Hola, soy <br><span>Eduardo Velazquez</span></h1>
-                <p>Estudiante de Ingeniería en Sistemas Computacionales. Apasionado por la programación, bases de datos y crear soluciones eficientes para el cliente.</p>
+                <p>Estudiante de Ingeniería en Sistemas Computacionales. Apasionado por la programación, bases de datos y crear soluciones eficientes.</p>
                 <div class="hero-btns">
-                    <button class="btn-primary" onclick="openTab('sobre-mi', document.querySelectorAll('.tab-btn')[1])">Conóceme más</button>
-                    <button class="btn-secondary" onclick="openTab('portafolio', document.querySelectorAll('.tab-btn')[3])">Ver Proyectos</button>
+                    <button class="btn-primary" onclick="openTab('sobre-mi', getAllTabBtns()[1])">Conóceme más</button>
+                    <button class="btn-secondary" onclick="openTab('portafolio', getAllTabBtns()[3])">Ver Proyectos</button>
                 </div>
             </div>
             <div class="hero-image">
@@ -783,7 +801,6 @@
                 <img src="folder personal/yo.jfif" alt="Eduardo Velazquez">
             </div>
         </div>
-
         <div class="stats-row">
             <div class="stat-card">
                 <div class="stat-num">8vo</div>
@@ -814,7 +831,6 @@
                 <div class="info-pill">📍 Nogales, Sonora, México</div>
             </div>
         </div>
-
         <div class="collage-section">
             <h3>✨ Algunos momentos importantes</h3>
             <div class="collage-grid">
@@ -857,17 +873,17 @@
                 <div class="skill-info"><div>Comunicación efectiva, resolución de problemas, empatía y paciencia. Experiencia en servicio al cliente.</div></div>
             </div>
             <div class="skill-item" onclick="toggleSkillInfo(this)">
-                <div class="skill-header"><span class="skill-name">Comediante</span><span class="skill-pct">67%</span></div>
+                <div class="skill-header"><span class="skill-name">Comediante 😅</span><span class="skill-pct">67%</span></div>
                 <div class="progress-bar"><div class="progress" style="width:67%"></div></div>
                 <div class="skill-info"><div>Dominio de chistes malos, timing perfecto y capacidad de hacer reír en momentos inoportunos. Especialidad: bromas de programador.</div></div>
             </div>
             <div class="skill-item" onclick="toggleSkillInfo(this)">
-                <div class="skill-header"><span class="skill-name">Gooner</span><span class="skill-pct">100%</span></div>
+                <div class="skill-header"><span class="skill-name">Gooner ⚽</span><span class="skill-pct">100%</span></div>
                 <div class="progress-bar"><div class="progress" style="width:100%"></div></div>
-                <div class="skill-info"><div>Fanático incondicional del pre-entreno. Experto en estandar y la palanca de cambios</div></div>
+                <div class="skill-info"><div>Fanático incondicional del pre-entreno. Experto en estándar y la palanca de cambios.</div></div>
             </div>
             <div class="skill-item" onclick="toggleSkillInfo(this)">
-                <div class="skill-header"><span class="skill-name">Catador de señoras</span><span class="skill-pct">69%</span></div>
+                <div class="skill-header"><span class="skill-name">Catador de señoras 👀</span><span class="skill-pct">69%</span></div>
                 <div class="progress-bar"><div class="progress" style="width:69%"></div></div>
                 <div class="skill-info"><div>Experiencia notable en apreciar la belleza femenina. Calificaciones justas y honestas. Disponible para consultoría especializada.</div></div>
             </div>
@@ -922,27 +938,24 @@
 
     <!-- SUSCRIBETE -->
     <section id="suscribete" class="tab-content">
-        <h2 class="section-title">Suscríbete</h2>
-
-        <div style="background:white;border-radius:var(--radius);padding:2.5rem;box-shadow:var(--shadow);margin-bottom:2.5rem;text-align:center;">
-            <div style="font-size:2.5rem;margin-bottom:1rem;">🥺</div>
-            <h3 style="color:var(--primary-color);font-size:1.4rem;margin-bottom:1rem;">Por favor ayúdame, soy un estudiante en apuros</h3>
-            <p style="color:var(--text-light);max-width:620px;margin:0 auto;line-height:1.9;font-size:0.97rem;">
-                Mira, seré honesto contigo. No me gusta chambear y llevo <strong>8 semestres</strong> usando ChatGPT, tengo proyectos robados, ni me gusta mi carrera... y las empresas me piden <code style="background:#dbeafe;color:#1d4ed8;padding:0.1rem 0.5rem;border-radius:6px;">Experiencia</code>. 
+        <h2 class="section-title">💸 Suscríbete</h2>
+        <div style="background:white;border-radius:var(--radius);padding:2rem 1.5rem;box-shadow:var(--shadow);margin-bottom:2rem;text-align:center;">
+            <div style="font-size:2.2rem;margin-bottom:0.85rem;">🥺</div>
+            <h3 style="color:var(--primary-color);font-size:1.25rem;margin-bottom:0.85rem;">Por favor ayúdame, soy un estudiante en apuros</h3>
+            <p style="color:var(--text-light);max-width:620px;margin:0 auto;line-height:1.85;font-size:0.93rem;">
+                Mira, seré honesto contigo. No me gusta chambear y llevo <strong>8 semestres</strong> usando ChatGPT, tengo proyectos robados, ni me gusta mi carrera... y las empresas me piden <code style="background:#dbeafe;color:#1d4ed8;padding:0.1rem 0.45rem;border-radius:6px;">Experiencia</code>.
                 <br><br>
-                Mi mamá ya me pregunta cuándo voy a "chambear de verdad" y que la música no me dará una casa. 
-                Suscríbete a mi existencia y ayúdame a pagar el internet con el que subo mis proyectos que nadie contrata, y activa la campanita de notificaciones <strong>Gracias. Que Dios te lo pague (yo no).</strong>
+                Mi mamá ya me pregunta cuándo voy a "chambear de verdad" y que la música no me dará una casa.
+                Suscríbete y ayúdame a pagar el internet con el que subo mis proyectos que nadie contrata. <strong>Gracias. Que Dios te lo pague (yo no).</strong>
             </p>
-            <div style="display:flex;justify-content:center;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap;">
-                <div style="background:#f0f6ff;border-radius:12px;padding:0.5rem 1.2rem;color:var(--accent-color);font-size:0.85rem;font-weight:600;">🎓 Estudiante certificado en pobreza</div>
-                <div style="background:#f0f6ff;border-radius:12px;padding:0.5rem 1.2rem;color:var(--accent-color);font-size:0.85rem;font-weight:600;">💼 Rechazado por 12+ empresas</div>
-                <div style="background:#f0f6ff;border-radius:12px;padding:0.5rem 1.2rem;color:var(--accent-color);font-size:0.85rem;font-weight:600;">🍜 Mi dieta: ramen y Monster</div>
+            <div style="display:flex;justify-content:center;gap:0.75rem;margin-top:1.25rem;flex-wrap:wrap;">
+                <div style="background:#f0f6ff;border-radius:10px;padding:0.45rem 1rem;color:var(--accent-color);font-size:0.8rem;font-weight:600;">🎓 Certificado en pobreza</div>
+                <div style="background:#f0f6ff;border-radius:10px;padding:0.45rem 1rem;color:var(--accent-color);font-size:0.8rem;font-weight:600;">💼 Rechazado 12+ veces</div>
+                <div style="background:#f0f6ff;border-radius:10px;padding:0.45rem 1rem;color:var(--accent-color);font-size:0.8rem;font-weight:600;">🍜 Dieta: ramen y Monster</div>
             </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.8rem;">
-
-            <!-- PLAN BASICO -->
+        <div class="sub-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;">
             <div class="sub-card" onclick="openPaymentModal('Básico','4.99')">
                 <div class="sub-badge">PLAN BÁSICO</div>
                 <div class="sub-icon">🫰</div>
@@ -951,7 +964,7 @@
                 <ul class="sub-features">
                     <li>✅ Mi eterna gratitud</li>
                     <li>✅ Te menciono en mis oraciones</li>
-                    <li>✅ Acceso a mi portfolio (ya lo tienes, pero cuenta)</li>
+                    <li>✅ Acceso al portfolio (ya lo tienes, pero cuenta)</li>
                     <li>✅ Sticker digital de "buen samaritano"</li>
                     <li>❌ Yo consigo trabajo (todavía no)</li>
                     <li>❌ Soporte técnico 24/7</li>
@@ -959,7 +972,6 @@
                 <button class="sub-btn sub-btn-outline">Suscribirme por $4.99</button>
             </div>
 
-            <!-- PLAN INTERMEDIO -->
             <div class="sub-card sub-card-featured" onclick="openPaymentModal('Pro','12.99')">
                 <div class="sub-popular">⭐ MÁS POPULAR</div>
                 <div class="sub-badge" style="background:var(--accent-color);color:white;">PLAN PRO</div>
@@ -977,7 +989,6 @@
                 <button class="sub-btn">Suscribirme por $12.99</button>
             </div>
 
-            <!-- PLAN PREMIUM -->
             <div class="sub-card" onclick="openPaymentModal('Premium','29.99')">
                 <div class="sub-badge" style="background:#0f1f3d;color:white;">PLAN PREMIUM</div>
                 <div class="sub-icon">👑</div>
@@ -986,18 +997,17 @@
                 <ul class="sub-features">
                     <li>✅ Todo lo de los planes anteriores</li>
                     <li>✅ Apareces en mi portfolio como MVP</li>
-                    <li>✅ Te mando tamales virtuales cada mes</li>
-                    <li>✅ Sesión de consultoría de 1hr (C#, SQL, lo que quieras)</li>
+                    <li>✅ Tamales virtuales cada mes</li>
+                    <li>✅ Consultoría 1hr (C#, SQL, lo que quieras)</li>
                     <li>✅ Derecho a presumirle a tus amigos</li>
-                    <li>✅ Mi mamá te dará las gracias personalmente</li>
+                    <li>✅ Mi mamá te agradece personalmente</li>
                 </ul>
                 <button class="sub-btn sub-btn-dark">Suscribirme por $29.99</button>
             </div>
-
         </div>
 
-        <p style="text-align:center;color:var(--text-light);font-size:0.8rem;margin-top:2rem;">
-            * Ningún pago garantiza que consiga empleo. Resultados pueden variar. No incluye garantía de devolución porque ya me lo gasté en el internet. 🥲
+        <p style="text-align:center;color:var(--text-light);font-size:0.78rem;margin-top:1.5rem;">
+            * Ningún pago garantiza que consiga empleo. No incluye devolución porque ya me lo gasté en el internet. 🥲
         </p>
     </section>
 
@@ -1005,76 +1015,73 @@
 
 <!-- MODAL: MÉTODO DE PAGO -->
 <div class="modal-overlay" id="paymentModal" onclick="closePaymentModalOverlay(event)">
-    <div class="modal-content" style="max-width:480px;">
+    <div class="modal-content" style="max-width:460px;">
         <button class="close-btn" onclick="closePaymentModal()">&times;</button>
-        <div style="text-align:center;margin-bottom:1.5rem;">
-            <div style="font-size:2rem;">💳</div>
-            <h2 class="modal-title" id="paymentModalTitle" style="font-size:1.4rem;margin-top:0.5rem;"></h2>
-            <p style="color:var(--text-light);font-size:0.88rem;" id="paymentModalSub"></p>
+        <div style="text-align:center;margin-bottom:1.25rem;">
+            <div style="font-size:1.8rem;">💳</div>
+            <h2 class="modal-title" id="paymentModalTitle" style="font-size:1.25rem;margin-top:0.4rem;"></h2>
+            <p style="color:var(--text-light);font-size:0.84rem;" id="paymentModalSub"></p>
         </div>
-        <p style="color:var(--text-main);font-weight:600;margin-bottom:1rem;font-size:0.95rem;">Selecciona tu método de pago:</p>
-        <div style="display:flex;flex-direction:column;gap:0.9rem;">
+        <p style="color:var(--text-main);font-weight:600;margin-bottom:0.85rem;font-size:0.92rem;">Selecciona tu método de pago:</p>
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
             <div class="pay-method" onclick="openCheckoutModal('Tarjeta de Crédito / Débito','💳')">
-                <div style="display:flex;align-items:center;gap:1rem;">
-                    <span style="font-size:1.6rem;">💳</span>
-                    <div><strong>Tarjeta de Crédito / Débito</strong><br><span style="font-size:0.8rem;color:var(--text-light);">Visa, Mastercard, American Express</span></div>
+                <div style="display:flex;align-items:center;gap:0.85rem;">
+                    <span style="font-size:1.5rem;">💳</span>
+                    <div><strong style="font-size:0.9rem;">Tarjeta de Crédito / Débito</strong><br><span style="font-size:0.76rem;color:var(--text-light);">Visa, Mastercard, American Express</span></div>
                 </div>
-                <span style="color:var(--accent-color);font-size:1.2rem;">›</span>
+                <span style="color:var(--accent-color);font-size:1.1rem;">›</span>
             </div>
             <div class="pay-method" onclick="openCheckoutModal('PayPal','🅿️')">
-                <div style="display:flex;align-items:center;gap:1rem;">
-                    <span style="font-size:1.6rem;">🅿️</span>
-                    <div><strong>PayPal</strong><br><span style="font-size:0.8rem;color:var(--text-light);">Paga con tu cuenta PayPal</span></div>
+                <div style="display:flex;align-items:center;gap:0.85rem;">
+                    <span style="font-size:1.5rem;">🅿️</span>
+                    <div><strong style="font-size:0.9rem;">PayPal</strong><br><span style="font-size:0.76rem;color:var(--text-light);">Paga con tu cuenta PayPal</span></div>
                 </div>
-                <span style="color:var(--accent-color);font-size:1.2rem;">›</span>
+                <span style="color:var(--accent-color);font-size:1.1rem;">›</span>
             </div>
             <div class="pay-method" onclick="openCheckoutModal('Transferencia Bancaria','🏦')">
-                <div style="display:flex;align-items:center;gap:1rem;">
-                    <span style="font-size:1.6rem;">🏦</span>
-                    <div><strong>Transferencia Bancaria</strong><br><span style="font-size:0.8rem;color:var(--text-light);">SPEI / Transferencia directa</span></div>
+                <div style="display:flex;align-items:center;gap:0.85rem;">
+                    <span style="font-size:1.5rem;">🏦</span>
+                    <div><strong style="font-size:0.9rem;">Transferencia Bancaria</strong><br><span style="font-size:0.76rem;color:var(--text-light);">SPEI / Transferencia directa</span></div>
                 </div>
-                <span style="color:var(--accent-color);font-size:1.2rem;">›</span>
+                <span style="color:var(--accent-color);font-size:1.1rem;">›</span>
             </div>
             <div class="pay-method" onclick="openCheckoutModal('Criptomonedas','🪙')">
-                <div style="display:flex;align-items:center;gap:1rem;">
-                    <span style="font-size:1.6rem;">🪙</span>
-                    <div><strong>Criptomonedas</strong><br><span style="font-size:0.8rem;color:var(--text-light);">Bitcoin, Ethereum, USDT</span></div>
+                <div style="display:flex;align-items:center;gap:0.85rem;">
+                    <span style="font-size:1.5rem;">🪙</span>
+                    <div><strong style="font-size:0.9rem;">Criptomonedas</strong><br><span style="font-size:0.76rem;color:var(--text-light);">Bitcoin, Ethereum, USDT</span></div>
                 </div>
-                <span style="color:var(--accent-color);font-size:1.2rem;">›</span>
+                <span style="color:var(--accent-color);font-size:1.1rem;">›</span>
             </div>
             <div class="pay-method" onclick="openCheckoutModal('Google Pay / Apple Pay','📱')">
-                <div style="display:flex;align-items:center;gap:1rem;">
-                    <span style="font-size:1.6rem;">📱</span>
-                    <div><strong>Google Pay / Apple Pay</strong><br><span style="font-size:0.8rem;color:var(--text-light);">Pago rápido desde tu dispositivo</span></div>
+                <div style="display:flex;align-items:center;gap:0.85rem;">
+                    <span style="font-size:1.5rem;">📱</span>
+                    <div><strong style="font-size:0.9rem;">Google Pay / Apple Pay</strong><br><span style="font-size:0.76rem;color:var(--text-light);">Pago rápido desde tu dispositivo</span></div>
                 </div>
-                <span style="color:var(--accent-color);font-size:1.2rem;">›</span>
+                <span style="color:var(--accent-color);font-size:1.1rem;">›</span>
             </div>
         </div>
-        <div style="display:flex;align-items:center;justify-content:center;gap:0.5rem;margin-top:1.5rem;">
-            <span style="font-size:0.75rem;color:var(--text-light);">🔒 Pago 100% seguro y encriptado</span>
+        <div style="text-align:center;margin-top:1.25rem;">
+            <span style="font-size:0.73rem;color:var(--text-light);">🔒 Pago 100% seguro y encriptado</span>
         </div>
     </div>
 </div>
 
-<!-- MODAL: CHECKOUT (datos de pago) -->
+<!-- MODAL: CHECKOUT -->
 <div class="modal-overlay" id="checkoutModal" onclick="closeCheckoutModalOverlay(event)">
-    <div class="modal-content" style="max-width:480px;" id="checkoutContent">
-        <button class="close-btn" onclick="closeCheckoutModal()">&times;</button>
-        <!-- contenido dinámico -->
-    </div>
+    <div class="modal-content" style="max-width:460px;" id="checkoutContent"></div>
 </div>
 
 <!-- MODAL: ÉXITO -->
 <div class="modal-overlay" id="successModal" onclick="closeSuccessModalOverlay(event)">
-    <div class="modal-content" style="max-width:400px;text-align:center;">
-        <div style="font-size:4rem;margin-bottom:1rem;">🎉</div>
-        <h2 style="color:var(--primary-color);margin-bottom:0.75rem;">¡Pago Exitoso!</h2>
-        <p style="color:var(--text-light);margin-bottom:0.5rem;">Gracias de verdad. Te lo juro que lo voy a usar bien.</p>
-        <p style="color:var(--text-light);font-size:0.88rem;margin-bottom:1.5rem;">Recibirás un correo de confirmación... cuando aprenda a programar emails. 🙃</p>
-        <div style="background:#f0f6ff;border-radius:14px;padding:1rem;margin-bottom:1.5rem;">
-            <p style="font-size:0.85rem;color:var(--accent-color);font-weight:600;" id="successPlanInfo"></p>
+    <div class="modal-content" style="max-width:380px;text-align:center;">
+        <div style="font-size:3.5rem;margin-bottom:0.85rem;">🎉</div>
+        <h2 style="color:var(--primary-color);margin-bottom:0.65rem;">¡Pago Exitoso!</h2>
+        <p style="color:var(--text-light);margin-bottom:0.45rem;font-size:0.93rem;">Gracias de verdad. Te lo juro que lo voy a usar bien.</p>
+        <p style="color:var(--text-light);font-size:0.84rem;margin-bottom:1.25rem;">Recibirás un correo... cuando aprenda a programar emails. 🙃</p>
+        <div style="background:#f0f6ff;border-radius:13px;padding:0.9rem;margin-bottom:1.25rem;">
+            <p style="font-size:0.82rem;color:var(--accent-color);font-weight:600;" id="successPlanInfo"></p>
         </div>
-        <button class="btn-primary" style="width:100%;justify-content:center;" onclick="closeAllModals()">¡Perfecto, gracias! 🙏</button>
+        <button class="btn-primary" style="width:100%;" onclick="closeAllModals()">¡Perfecto, gracias! 🙏</button>
     </div>
 </div>
 
@@ -1093,10 +1100,11 @@
             </div>
             <div class="footer-col">
                 <h4>Navegación</h4>
-                <span onclick="openTab('inicio', document.querySelectorAll('.tab-btn')[0])">Inicio</span>
-                <span onclick="openTab('sobre-mi', document.querySelectorAll('.tab-btn')[1])">Sobre Mí</span>
-                <span onclick="openTab('habilidades', document.querySelectorAll('.tab-btn')[2])">Habilidades</span>
-                <span onclick="openTab('portafolio', document.querySelectorAll('.tab-btn')[3])">Portafolio</span>
+                <span onclick="openTab('inicio', getAllTabBtns()[0])">Inicio</span>
+                <span onclick="openTab('sobre-mi', getAllTabBtns()[1])">Sobre Mí</span>
+                <span onclick="openTab('habilidades', getAllTabBtns()[2])">Habilidades</span>
+                <span onclick="openTab('portafolio', getAllTabBtns()[3])">Portafolio</span>
+                <span onclick="openTab('suscribete', getAllTabBtns()[4])">Suscríbete</span>
             </div>
             <div class="footer-col">
                 <h4>Habilidades</h4>
@@ -1135,35 +1143,43 @@
 
 <script>
     const projectsData = [
-        {
-            title:'Sistema en C#',
-            image:'https://picsum.photos/seed/proj1/500/300',
-            description:'Una completa aplicación de escritorio desarrollada en C# con interfaz Windows Forms, conectada a SQL Server para la gestión eficiente de inventarios.',
-            details:'<strong>Tecnologías:</strong> C#, .NET Framework, SQL Server, Windows Forms<br><strong>Características:</strong> CRUD completo, reportes, validaciones avanzadas, autenticación<br><strong>Duración:</strong> 3 meses<br><strong>Rol:</strong> Desarrollador principal'
-        },
-        {
-            title:'Gestión de Base de Datos',
-            image:'https://picsum.photos/seed/proj2/500/300',
-            description:'Diseño e implementación de un modelo relacional optimizado con normalización hasta 3FN, índices estratégicos y procedimientos almacenados.',
-            details:'<strong>Tecnologías:</strong> SQL Server, MySQL, Database Design<br><strong>Características:</strong> Modelo ER, triggers, vistas parametrizadas, backups<br><strong>Optimización:</strong> Reducción de tiempo de queries en 70%'
-        },
-        {
-            title:'Experimentos en F#',
-            image:'https://picsum.photos/seed/proj3/500/300',
-            description:'Exploración del paradigma funcional mediante implementación de algoritmos complejos de procesamiento de datos y análisis matemático.',
-            details:'<strong>Tecnologías:</strong> F#, .NET, Functional Programming<br><strong>Proyectos:</strong> Análisis estadístico, algoritmos de optimización<br><strong>Enfoque:</strong> Código limpio y mantenible'
-        }
+        { title:'Sistema en C#', image:'https://picsum.photos/seed/proj1/500/300', description:'Una completa aplicación de escritorio desarrollada en C# con interfaz Windows Forms, conectada a SQL Server para la gestión eficiente de inventarios.', details:'<strong>Tecnologías:</strong> C#, .NET Framework, SQL Server, Windows Forms<br><strong>Características:</strong> CRUD completo, reportes, validaciones avanzadas, autenticación<br><strong>Duración:</strong> 3 meses<br><strong>Rol:</strong> Desarrollador principal' },
+        { title:'Gestión de Base de Datos', image:'https://picsum.photos/seed/proj2/500/300', description:'Diseño e implementación de un modelo relacional optimizado con normalización hasta 3FN, índices estratégicos y procedimientos almacenados.', details:'<strong>Tecnologías:</strong> SQL Server, MySQL, Database Design<br><strong>Características:</strong> Modelo ER, triggers, vistas parametrizadas, backups<br><strong>Optimización:</strong> Reducción de tiempo de queries en 70%' },
+        { title:'Experimentos en F#', image:'https://picsum.photos/seed/proj3/500/300', description:'Exploración del paradigma funcional mediante implementación de algoritmos complejos de procesamiento de datos y análisis matemático.', details:'<strong>Tecnologías:</strong> F#, .NET, Functional Programming<br><strong>Proyectos:</strong> Análisis estadístico, algoritmos de optimización<br><strong>Enfoque:</strong> Código limpio y mantenible' }
     ];
+
+    // Returns visible desktop tabs OR mobile tabs depending on screen
+    function getAllTabBtns() {
+        const isMobile = window.innerWidth <= 900;
+        return isMobile
+            ? document.querySelectorAll('.mobile-menu .tab-btn')
+            : document.querySelectorAll('.tabs .tab-btn');
+    }
 
     function openTab(tabId, btnEl) {
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.skill-info.show').forEach(i => i.classList.remove('show'));
-        document.getElementById(tabId).classList.add('active');
+        const el = document.getElementById(tabId);
+        if(el) el.classList.add('active');
         if(btnEl) btnEl.classList.add('active');
         window.scrollTo({top:0, behavior:'smooth'});
     }
 
+    // Hamburger
+    function toggleMenu() {
+        const menu = document.getElementById('mobileMenu');
+        const btn = document.getElementById('hamburger');
+        menu.classList.toggle('open');
+        btn.classList.toggle('open');
+    }
+
+    function closeMenu() {
+        document.getElementById('mobileMenu').classList.remove('open');
+        document.getElementById('hamburger').classList.remove('open');
+    }
+
+    // Image modal
     function openImageModal(img) {
         document.getElementById('imageModalImg').src = img.src;
         document.getElementById('imageModal').classList.add('active');
@@ -1174,6 +1190,7 @@
         document.getElementById('imageModal').classList.remove('active');
     }
 
+    // Project modal
     function openModal(i) {
         const p = projectsData[i];
         document.getElementById('modalImg').src = p.image;
@@ -1187,18 +1204,15 @@
     function closeModalOnOverlay(e) { if(e.target.id==='projectModal') closeModal(); }
 
     document.addEventListener('keydown', e => {
-        if(e.key==='Escape') {
-            document.getElementById('imageModal').classList.remove('active');
-            document.getElementById('projectModal').classList.remove('active');
-        }
+        if(e.key==='Escape') closeAllModals();
     });
 
-    // ===== SUSCRIPCIONES =====
+    // Payment
     let currentPlan = '', currentPrice = '';
 
     function openPaymentModal(plan, price) {
         currentPlan = plan; currentPrice = price;
-        document.getElementById('paymentModalTitle').textContent = `Plan ${plan} — ${price}/mes`;
+        document.getElementById('paymentModalTitle').textContent = `Plan ${plan} — $${price}/mes`;
         document.getElementById('paymentModalSub').textContent = '¿Con qué me vas a salvar la vida hoy?';
         document.getElementById('paymentModal').classList.add('active');
     }
@@ -1213,10 +1227,10 @@
 
         if(method === 'Tarjeta de Crédito / Débito') {
             formHtml = `
-            <div style="text-align:center;margin-bottom:1.5rem;">
-                <div style="font-size:2rem;">💳</div>
-                <h2 style="color:var(--primary-color);font-size:1.3rem;margin-top:0.5rem;">Datos de tu Tarjeta</h2>
-                <p style="color:var(--text-light);font-size:0.85rem;">Plan ${currentPlan} · ${currentPrice}/mes</p>
+            <div style="text-align:center;margin-bottom:1.25rem;">
+                <div style="font-size:1.8rem;">💳</div>
+                <h2 style="color:var(--primary-color);font-size:1.2rem;margin-top:0.4rem;">Datos de tu Tarjeta</h2>
+                <p style="color:var(--text-light);font-size:0.82rem;">Plan ${currentPlan} · $${currentPrice}/mes</p>
             </div>
             <div class="checkout-field"><label class="checkout-label">Nombre en la tarjeta</label><input class="checkout-input" placeholder="Ej. Juan Pérez" maxlength="40"></div>
             <div class="checkout-field"><label class="checkout-label">Número de tarjeta</label><input class="checkout-input" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)"></div>
@@ -1224,63 +1238,63 @@
                 <div class="checkout-field"><label class="checkout-label">Vencimiento</label><input class="checkout-input" placeholder="MM/AA" maxlength="5" oninput="formatExpiry(this)"></div>
                 <div class="checkout-field"><label class="checkout-label">CVV</label><input class="checkout-input" placeholder="123" maxlength="4" type="password"></div>
             </div>
-            <div style="background:#f0f6ff;border-radius:12px;padding:0.8rem 1rem;margin-bottom:1rem;font-size:0.8rem;color:var(--text-light);display:flex;gap:0.5rem;align-items:center;">
-                🔒 Tu información está encriptada con SSL de 256 bits. Eduardo no puede ver tu tarjeta (ni aunque quisiera).
+            <div style="background:#f0f6ff;border-radius:10px;padding:0.75rem;margin-bottom:0.85rem;font-size:0.77rem;color:var(--text-light);">
+                🔒 Tu información está encriptada con SSL 256-bit. Eduardo no puede ver tu tarjeta (ni aunque quisiera).
             </div>`;
         } else if(method === 'PayPal') {
             formHtml = `
-            <div style="text-align:center;margin-bottom:1.5rem;">
-                <div style="font-size:2rem;">🅿️</div>
-                <h2 style="color:var(--primary-color);font-size:1.3rem;margin-top:0.5rem;">Pagar con PayPal</h2>
-                <p style="color:var(--text-light);font-size:0.85rem;">Plan ${currentPlan} · ${currentPrice}/mes</p>
+            <div style="text-align:center;margin-bottom:1.25rem;">
+                <div style="font-size:1.8rem;">🅿️</div>
+                <h2 style="color:var(--primary-color);font-size:1.2rem;margin-top:0.4rem;">Pagar con PayPal</h2>
+                <p style="color:var(--text-light);font-size:0.82rem;">Plan ${currentPlan} · $${currentPrice}/mes</p>
             </div>
             <div class="checkout-field"><label class="checkout-label">Correo electrónico de PayPal</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>
             <div class="checkout-field"><label class="checkout-label">Contraseña de PayPal</label><input class="checkout-input" placeholder="••••••••" type="password"></div>
-            <div style="background:#fff8e1;border-radius:12px;padding:0.8rem 1rem;margin-bottom:1rem;font-size:0.8rem;color:#92400e;display:flex;gap:0.5rem;align-items:center;">
-                ℹ️ Serás redirigido a PayPal para autorizar el pago de forma segura. No te preocupes, es solo para fingir.
+            <div style="background:#fff8e1;border-radius:10px;padding:0.75rem;margin-bottom:0.85rem;font-size:0.77rem;color:#92400e;">
+                ℹ️ Serás redirigido a PayPal para autorizar el pago. No te preocupes, es solo para fingir.
             </div>`;
         } else if(method === 'Transferencia Bancaria') {
             formHtml = `
-            <div style="text-align:center;margin-bottom:1.5rem;">
-                <div style="font-size:2rem;">🏦</div>
-                <h2 style="color:var(--primary-color);font-size:1.3rem;margin-top:0.5rem;">Transferencia Bancaria</h2>
-                <p style="color:var(--text-light);font-size:0.85rem;">Plan ${currentPlan} · ${currentPrice}/mes</p>
+            <div style="text-align:center;margin-bottom:1.25rem;">
+                <div style="font-size:1.8rem;">🏦</div>
+                <h2 style="color:var(--primary-color);font-size:1.2rem;margin-top:0.4rem;">Transferencia Bancaria</h2>
+                <p style="color:var(--text-light);font-size:0.82rem;">Plan ${currentPlan} · $${currentPrice}/mes</p>
             </div>
-            <div style="background:#f0f6ff;border-radius:14px;padding:1.2rem;margin-bottom:1rem;font-size:0.88rem;color:var(--text-main);line-height:2;">
+            <div style="background:#f0f6ff;border-radius:13px;padding:1rem;margin-bottom:0.85rem;font-size:0.85rem;color:var(--text-main);line-height:1.9;">
                 <strong>Datos bancarios:</strong><br>
                 Banco: <strong>BBVA México</strong><br>
                 Titular: <strong>Eduardo Velazquez Quezada</strong><br>
                 CLABE: <strong>012 345 67890123456 7</strong><br>
                 Concepto: <strong>Plan ${currentPlan} - Ayuda al pobre</strong>
             </div>
-            <div class="checkout-field"><label class="checkout-label">Tu nombre completo</label><input class="checkout-input" placeholder="Para confirmar quién me salvó"></div>
+            <div class="checkout-field"><label class="checkout-label">Tu nombre completo</label><input class="checkout-input" placeholder="Para saber quién me salvó"></div>
             <div class="checkout-field"><label class="checkout-label">Correo de confirmación</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
         } else if(method === 'Criptomonedas') {
             formHtml = `
-            <div style="text-align:center;margin-bottom:1.5rem;">
-                <div style="font-size:2rem;">🪙</div>
-                <h2 style="color:var(--primary-color);font-size:1.3rem;margin-top:0.5rem;">Pago con Criptomonedas</h2>
-                <p style="color:var(--text-light);font-size:0.85rem;">Plan ${currentPlan} · ${currentPrice}/mes</p>
+            <div style="text-align:center;margin-bottom:1.25rem;">
+                <div style="font-size:1.8rem;">🪙</div>
+                <h2 style="color:var(--primary-color);font-size:1.2rem;margin-top:0.4rem;">Pago con Criptomonedas</h2>
+                <p style="color:var(--text-light);font-size:0.82rem;">Plan ${currentPlan} · $${currentPrice}/mes</p>
             </div>
             <div class="checkout-field"><label class="checkout-label">Selecciona la criptomoneda</label>
                 <select class="checkout-input"><option>Bitcoin (BTC)</option><option>Ethereum (ETH)</option><option>USDT (Tether)</option><option>Dogecoin (porque por qué no)</option></select>
             </div>
-            <div style="background:#f0f6ff;border-radius:14px;padding:1.2rem;margin-bottom:1rem;font-size:0.82rem;color:var(--text-main);word-break:break-all;line-height:2;">
+            <div style="background:#f0f6ff;border-radius:13px;padding:1rem;margin-bottom:0.85rem;font-size:0.8rem;color:var(--text-main);word-break:break-all;line-height:1.9;">
                 <strong>Wallet Address:</strong><br>
-                <code style="color:var(--accent-color);">0x4E2aB3F9c1D87e60A5b2C3d4E5f6A7b8C9d0E1f2</code>
+                <code style="color:var(--accent-color);font-size:0.75rem;">0x4E2aB3F9c1D87e60A5b2C3d4E5f6A7b8C9d0E1f2</code>
             </div>
             <div class="checkout-field"><label class="checkout-label">Tu correo (para confirmación)</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
         } else {
             formHtml = `
-            <div style="text-align:center;margin-bottom:1.5rem;">
-                <div style="font-size:2rem;">${icon}</div>
-                <h2 style="color:var(--primary-color);font-size:1.3rem;margin-top:0.5rem;">Pago con ${method}</h2>
-                <p style="color:var(--text-light);font-size:0.85rem;">Plan ${currentPlan} · ${currentPrice}/mes</p>
+            <div style="text-align:center;margin-bottom:1.25rem;">
+                <div style="font-size:1.8rem;">${icon}</div>
+                <h2 style="color:var(--primary-color);font-size:1.2rem;margin-top:0.4rem;">Pago con ${method}</h2>
+                <p style="color:var(--text-light);font-size:0.82rem;">Plan ${currentPlan} · $${currentPrice}/mes</p>
             </div>
-            <div style="background:#f0f6ff;border-radius:14px;padding:1.5rem;text-align:center;margin-bottom:1rem;">
-                <p style="font-size:2rem;margin-bottom:0.5rem;">📲</p>
-                <p style="color:var(--text-light);font-size:0.9rem;">Escanea el código QR con tu app de pagos o toca el botón de tu dispositivo para autorizar.</p>
-                <div style="width:120px;height:120px;background:#dbeafe;border-radius:12px;margin:1rem auto;display:flex;align-items:center;justify-content:center;font-size:2.5rem;">📷</div>
+            <div style="background:#f0f6ff;border-radius:13px;padding:1.25rem;text-align:center;margin-bottom:0.85rem;">
+                <p style="font-size:1.8rem;margin-bottom:0.4rem;">📲</p>
+                <p style="color:var(--text-light);font-size:0.87rem;">Escanea el código QR con tu app de pagos o toca el botón de tu dispositivo para autorizar.</p>
+                <div style="width:110px;height:110px;background:#dbeafe;border-radius:12px;margin:0.85rem auto;display:flex;align-items:center;justify-content:center;font-size:2.2rem;">📷</div>
             </div>
             <div class="checkout-field"><label class="checkout-label">Correo de confirmación</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
         }
@@ -1288,10 +1302,10 @@
         box.innerHTML = `
             <button class="close-btn" onclick="closeCheckoutModal()">&times;</button>
             ${formHtml}
-            <button class="btn-primary" style="width:100%;margin-top:0.5rem;justify-content:center;" onclick="processPayment()">
-                🔒 Confirmar pago de ${currentPrice}
+            <button class="btn-primary" style="width:100%;margin-top:0.4rem;" onclick="processPayment()">
+                🔒 Confirmar pago de $${currentPrice}
             </button>
-            <p style="text-align:center;font-size:0.75rem;color:var(--text-light);margin-top:0.75rem;">Al confirmar aceptas los Términos y condiciones de "Eduardo necesita comer".</p>
+            <p style="text-align:center;font-size:0.72rem;color:var(--text-light);margin-top:0.65rem;">Al confirmar aceptas los Términos de "Eduardo necesita comer".</p>
         `;
         document.getElementById('checkoutModal').classList.add('active');
     }
@@ -1301,7 +1315,7 @@
 
     function processPayment() {
         closeCheckoutModal();
-        document.getElementById('successPlanInfo').textContent = `Plan ${currentPlan} activado · ${currentPrice}/mes · Gracias por salvarme 🙏`;
+        document.getElementById('successPlanInfo').textContent = `Plan ${currentPlan} activado · $${currentPrice}/mes · Gracias por salvarme 🙏`;
         document.getElementById('successModal').classList.add('active');
     }
 
@@ -1309,7 +1323,8 @@
 
     function closeAllModals() {
         ['paymentModal','checkoutModal','successModal','projectModal','imageModal'].forEach(id => {
-            document.getElementById(id)?.classList.remove('active');
+            const el = document.getElementById(id);
+            if(el) el.classList.remove('active');
         });
     }
 
@@ -1333,4 +1348,3 @@
 </script>
 </body>
 </html>
-

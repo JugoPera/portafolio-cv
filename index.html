@@ -7,7 +7,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-        /* ===== THEME VARIABLES ===== */
         [data-theme="light"] {
             --primary-color: #0f1f3d;
             --accent-color: #3b82f6;
@@ -16,7 +15,6 @@
             --accent4: #0ea5e9;
             --bg-page: linear-gradient(135deg,#f0f6ff 0%,#e8f4fd 50%,#f0faff 100%);
             --bg-color: #f0f6ff;
-            --bg2: #e8f4fd;
             --card-bg: #ffffff;
             --text-main: #1e3a5f;
             --text-light: #4a7fa5;
@@ -24,9 +22,10 @@
             --input-bg: #f8faff;
             --progress-bg: #dbeafe;
             --skill-info-bg: linear-gradient(135deg,#f0f6ff,#e8f4fd);
-            --pay-method-bg: #f8faff;
-            --pay-method-border: #e0ecff;
+            --pay-bg: #f8faff;
+            --pay-border: #e0ecff;
             --shadow: 0 8px 32px rgba(59,130,246,0.10);
+            --shadow-lg: 0 20px 50px rgba(59,130,246,0.16);
         }
 
         [data-theme="dark"] {
@@ -37,7 +36,6 @@
             --accent4: #0ea5e9;
             --bg-page: linear-gradient(135deg,#0d1b2e 0%,#0f2342 50%,#0a1929 100%);
             --bg-color: #0d1b2e;
-            --bg2: #0f2342;
             --card-bg: #152638;
             --text-main: #cde4ff;
             --text-light: #7ab0d4;
@@ -45,244 +43,116 @@
             --input-bg: #0f2342;
             --progress-bg: #1e3a5f;
             --skill-info-bg: linear-gradient(135deg,#0d1b2e,#0f2342);
-            --pay-method-bg: #0f2342;
-            --pay-method-border: #1e3a5f;
+            --pay-bg: #0f2342;
+            --pay-border: #1e3a5f;
             --shadow: 0 8px 32px rgba(0,0,0,0.35);
+            --shadow-lg: 0 20px 50px rgba(0,0,0,0.4);
         }
 
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter',system-ui,sans-serif; }
+        *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui,sans-serif;}
 
-        body {
-            background: var(--bg-page);
-            color: var(--text-main);
-            line-height: 1.7;
-            min-height: 100vh;
-            transition: background 0.4s, color 0.4s;
-        }
+        body{background:var(--bg-page);color:var(--text-main);line-height:1.7;min-height:100vh;transition:background 0.4s,color 0.4s;}
 
-        /* ===== HEADER ===== */
-        header {
-            background: linear-gradient(135deg,#0f1f3d,#1a3a6b);
-            position: sticky; top:0; z-index:200;
-            box-shadow: 0 4px 24px rgba(15,31,61,0.25);
-        }
+        /* HEADER */
+        header{background:linear-gradient(135deg,#0f1f3d,#1a3a6b);position:sticky;top:0;z-index:200;box-shadow:0 4px 24px rgba(15,31,61,0.25);}
 
-        nav {
-            max-width:1050px; margin:0 auto;
-            display:flex; justify-content:space-between; align-items:center;
-            padding:1rem 1.5rem;
-        }
+        nav{max-width:1050px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:1rem 1.5rem;}
 
-        .logo {
-            font-size:1.2rem; font-weight:700; color:#fff;
-            letter-spacing:-0.5px; display:flex; align-items:center; gap:0.5rem; flex-shrink:0;
-        }
+        .logo{font-size:1.2rem;font-weight:700;color:#fff;letter-spacing:-0.5px;display:flex;align-items:center;gap:0.5rem;flex-shrink:0;cursor:pointer;}
 
-        .logo-dot {
-            width:9px; height:9px; background:var(--accent2);
-            border-radius:50%; display:inline-block; animation:pulse 2s infinite; flex-shrink:0;
-        }
+        .logo-dot{width:9px;height:9px;background:var(--accent2);border-radius:50%;display:inline-block;animation:pulse 2s infinite;flex-shrink:0;}
 
-        @keyframes pulse {
-            0%,100%{transform:scale(1);opacity:1;}
-            50%{transform:scale(1.4);opacity:0.7;}
-        }
+        @keyframes pulse{0%,100%{transform:scale(1);opacity:1;}50%{transform:scale(1.4);opacity:0.7;}}
 
-        .tabs { display:flex; gap:0.4rem; flex-wrap:nowrap; }
+        .tabs{display:flex;gap:0.4rem;flex-wrap:nowrap;}
 
-        .tab-btn {
-            background:rgba(255,255,255,0.08); border:1.5px solid rgba(255,255,255,0.12);
-            font-size:0.85rem; font-weight:500; color:rgba(255,255,255,0.7);
-            cursor:pointer; padding:0.38rem 0.85rem; border-radius:30px; transition:all 0.3s;
-            white-space:nowrap;
-        }
+        .tab-btn{background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.12);font-size:0.83rem;font-weight:500;color:rgba(255,255,255,0.7);cursor:pointer;padding:0.38rem 0.82rem;border-radius:30px;transition:all 0.3s;white-space:nowrap;}
+        .tab-btn:hover{background:rgba(59,130,246,0.3);color:#fff;border-color:var(--accent-color);}
+        .tab-btn.active{background:var(--accent-color);color:#fff;border-color:var(--accent-color);box-shadow:0 4px 14px rgba(59,130,246,0.45);}
 
-        .tab-btn:hover { background:rgba(59,130,246,0.3); color:#fff; border-color:var(--accent-color); }
-        .tab-btn.active { background:var(--accent-color); color:#fff; border-color:var(--accent-color); box-shadow:0 4px 14px rgba(59,130,246,0.45); }
+        .nav-right{display:flex;align-items:center;gap:0.7rem;}
 
-        .nav-right { display:flex; align-items:center; gap:0.75rem; }
+        .btn-auth-header{background:rgba(255,255,255,0.12);border:1.5px solid rgba(255,255,255,0.25);color:white;font-size:0.8rem;font-weight:600;padding:0.38rem 0.9rem;border-radius:30px;cursor:pointer;transition:all 0.3s;white-space:nowrap;flex-shrink:0;}
+        .btn-auth-header:hover{background:rgba(255,255,255,0.22);}
 
-        /* Auth button in header */
-        .btn-auth-header {
-            background: rgba(255,255,255,0.12); border:1.5px solid rgba(255,255,255,0.25);
-            color:white; font-size:0.82rem; font-weight:600;
-            padding:0.38rem 0.9rem; border-radius:30px; cursor:pointer; transition:all 0.3s;
-            white-space:nowrap; flex-shrink:0;
-        }
+        .user-avatar-nav{width:34px;height:34px;border-radius:50%;background:var(--accent-color);color:white;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:700;cursor:pointer;border:2px solid rgba(255,255,255,0.3);transition:all 0.3s;flex-shrink:0;overflow:hidden;}
+        .user-avatar-nav:hover{border-color:white;transform:scale(1.05);}
+        .user-avatar-nav img{width:100%;height:100%;object-fit:cover;}
 
-        .btn-auth-header:hover { background:rgba(255,255,255,0.22); }
-
-        .user-avatar {
-            width:32px; height:32px; border-radius:50%;
-            background:var(--accent-color); color:white;
-            display:flex; align-items:center; justify-content:center;
-            font-size:0.8rem; font-weight:700; cursor:pointer;
-            border:2px solid rgba(255,255,255,0.3); transition:all 0.3s;
-            flex-shrink:0;
-        }
-
-        .user-avatar:hover { border-color:white; transform:scale(1.05); }
-
-        /* Hamburger */
-        .hamburger {
-            display:none; flex-direction:column; gap:5px;
-            cursor:pointer; padding:4px; background:none; border:none;
-        }
-
-        .hamburger span { display:block; width:24px; height:2px; background:white; border-radius:2px; transition:all 0.3s; }
+        .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+        .hamburger span{display:block;width:24px;height:2px;background:white;border-radius:2px;transition:all 0.3s;}
         .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
         .hamburger.open span:nth-child(2){opacity:0;}
         .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
-        .mobile-menu {
-            display:none; flex-direction:column;
-            background:linear-gradient(135deg,#0f1f3d,#1a3a6b);
-            padding:0.75rem 1.5rem 1.25rem; gap:0.45rem;
-            border-top:1px solid rgba(255,255,255,0.08);
-        }
+        .mobile-menu{display:none;flex-direction:column;background:linear-gradient(135deg,#0f1f3d,#1a3a6b);padding:0.75rem 1.5rem 1.25rem;gap:0.45rem;border-top:1px solid rgba(255,255,255,0.08);}
+        .mobile-menu.open{display:flex;}
+        .mobile-menu .tab-btn{text-align:left;border-radius:12px;padding:0.65rem 1rem;font-size:0.92rem;width:100%;}
 
-        .mobile-menu.open { display:flex; }
+        /* TOAST */
+        .toast{position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%) translateY(100px);background:#1e3a5f;color:white;padding:0.75rem 1.5rem;border-radius:30px;font-size:0.88rem;font-weight:500;z-index:9999;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);box-shadow:0 8px 24px rgba(0,0,0,0.2);white-space:nowrap;}
+        .toast.show{transform:translateX(-50%) translateY(0);}
+        .toast.success{background:linear-gradient(135deg,#059669,#10b981);}
+        .toast.error{background:linear-gradient(135deg,#dc2626,#ef4444);}
+        .toast.info{background:linear-gradient(135deg,#1d4ed8,#3b82f6);}
 
-        .mobile-menu .tab-btn {
-            text-align:left; border-radius:12px;
-            padding:0.65rem 1rem; font-size:0.92rem; width:100%;
-        }
+        /* MAIN */
+        main{max-width:1050px;margin:2.5rem auto;padding:0 1.5rem;min-height:65vh;}
 
-        /* ===== MAIN ===== */
-        main { max-width:1050px; margin:2.5rem auto; padding:0 1.5rem; min-height:65vh; }
+        .tab-content{display:none;animation:fadeInUp 0.5s ease forwards;}
+        .tab-content.active{display:block;}
 
-        .tab-content { display:none; animation:fadeInUp 0.5s ease forwards; }
-        .tab-content.active { display:block; }
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-        @keyframes fadeInUp {
-            from{opacity:0;transform:translateY(20px);}
-            to{opacity:1;transform:translateY(0);}
-        }
+        .section-title{font-size:1.8rem;font-weight:700;color:var(--primary-color);margin-bottom:1.75rem;display:flex;align-items:center;gap:0.75rem;}
+        .section-title::after{content:'';flex:1;height:2px;background:linear-gradient(90deg,var(--accent-color),transparent);border-radius:2px;}
 
-        .section-title {
-            font-size:1.8rem; font-weight:700; color:var(--primary-color);
-            margin-bottom:1.75rem; display:flex; align-items:center; gap:0.75rem;
-        }
+        /* HERO */
+        .hero{display:flex;align-items:center;gap:3rem;padding:0.5rem 0;}
+        .hero-text h1{font-size:2.8rem;color:var(--primary-color);line-height:1.2;margin-bottom:1rem;font-weight:700;}
+        .hero-text h1 span{background:linear-gradient(135deg,var(--accent-color),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+        .hero-text p{font-size:1rem;color:var(--text-light);margin-bottom:1.75rem;max-width:400px;}
+        .hero-btns{display:flex;gap:0.8rem;flex-wrap:wrap;}
 
-        .section-title::after {
-            content:''; flex:1; height:2px;
-            background:linear-gradient(90deg,var(--accent-color),transparent); border-radius:2px;
-        }
+        .btn-primary{background:linear-gradient(135deg,var(--accent-color),var(--accent4));color:white;padding:0.75rem 1.75rem;border-radius:30px;border:none;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s;box-shadow:0 4px 18px rgba(59,130,246,0.35);}
+        .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(59,130,246,0.45);}
 
-        /* ===== HERO ===== */
-        .hero { display:flex; align-items:center; gap:3rem; padding:0.5rem 0; }
+        .btn-secondary{background:transparent;color:var(--accent-color);padding:0.75rem 1.75rem;border-radius:30px;border:2px solid var(--accent-color);font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s;}
+        .btn-secondary:hover{background:rgba(59,130,246,0.08);transform:translateY(-2px);}
 
-        .hero-text h1 { font-size:2.8rem; color:var(--primary-color); line-height:1.2; margin-bottom:1rem; font-weight:700; }
+        .hero-image{position:relative;flex-shrink:0;}
+        .hero-image img{width:280px;height:280px;object-fit:cover;border-radius:30% 70% 70% 30%/30% 30% 70% 70%;box-shadow:0 20px 60px rgba(59,130,246,0.22);animation:morph 8s ease-in-out infinite;border:4px solid rgba(59,130,246,0.25);}
 
-        .hero-text h1 span {
-            background:linear-gradient(135deg,var(--accent-color),var(--accent2));
-            -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-        }
+        @keyframes morph{0%{border-radius:30% 70% 70% 30%/30% 30% 70% 70%;}50%{border-radius:70% 30% 30% 70%/70% 70% 30% 30%;}100%{border-radius:30% 70% 70% 30%/30% 30% 70% 70%;}}
 
-        .hero-text p { font-size:1rem; color:var(--text-light); margin-bottom:1.75rem; max-width:400px; }
-        .hero-btns { display:flex; gap:0.8rem; flex-wrap:wrap; }
-
-        .btn-primary {
-            background:linear-gradient(135deg,var(--accent-color),var(--accent4));
-            color:white; padding:0.75rem 1.75rem; border-radius:30px; border:none;
-            font-size:0.95rem; font-weight:600; cursor:pointer; transition:all 0.3s;
-            box-shadow:0 4px 18px rgba(59,130,246,0.35);
-        }
-
-        .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(59,130,246,0.45); }
-
-        .btn-secondary {
-            background:transparent; color:var(--accent-color); padding:0.75rem 1.75rem;
-            border-radius:30px; border:2px solid var(--accent-color);
-            font-size:0.95rem; font-weight:600; cursor:pointer; transition:all 0.3s;
-        }
-
-        .btn-secondary:hover { background:rgba(59,130,246,0.08); transform:translateY(-2px); }
-
-        .hero-image { position:relative; flex-shrink:0; }
-
-        .hero-image img {
-            width:280px; height:280px; object-fit:cover;
-            border-radius:30% 70% 70% 30% / 30% 30% 70% 70%;
-            box-shadow:0 20px 60px rgba(59,130,246,0.22);
-            animation:morph 8s ease-in-out infinite;
-            border:4px solid rgba(59,130,246,0.25);
-        }
-
-        @keyframes morph {
-            0%  {border-radius:30% 70% 70% 30% / 30% 30% 70% 70%;}
-            50% {border-radius:70% 30% 30% 70% / 70% 70% 30% 30%;}
-            100%{border-radius:30% 70% 70% 30% / 30% 30% 70% 70%;}
-        }
-
-        .floating-badge {
-            position:absolute; background:var(--card-bg); border-radius:14px;
-            padding:0.5rem 0.9rem; font-size:0.78rem; font-weight:600;
-            box-shadow:var(--shadow); display:flex; align-items:center; gap:0.4rem;
-            animation:float 3s ease-in-out infinite; white-space:nowrap;
-        }
-
+        .floating-badge{position:absolute;background:var(--card-bg);border-radius:14px;padding:0.5rem 0.9rem;font-size:0.78rem;font-weight:600;box-shadow:var(--shadow);display:flex;align-items:center;gap:0.4rem;animation:float 3s ease-in-out infinite;white-space:nowrap;}
         .badge-1{top:10px;left:-20px;animation-delay:0s;color:var(--accent-color);border-left:3px solid var(--accent-color);}
         .badge-2{bottom:20px;right:-10px;animation-delay:1s;color:var(--accent4);border-left:3px solid var(--accent4);}
         .badge-3{bottom:80px;left:-30px;animation-delay:2s;color:#10b981;border-left:3px solid #10b981;}
 
-        @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+        @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
 
-        .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:2.5rem; }
-
-        .stat-card {
-            background:var(--card-bg); border-radius:20px; padding:1.25rem 1rem;
-            text-align:center; box-shadow:var(--shadow); transition:all 0.3s;
-            border-top:3px solid var(--accent-color);
-        }
-
+        .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem;}
+        .stat-card{background:var(--card-bg);border-radius:20px;padding:1.25rem 1rem;text-align:center;box-shadow:var(--shadow);transition:all 0.3s;border-top:3px solid var(--accent-color);}
         .stat-card:nth-child(2){border-top-color:var(--accent2);}
         .stat-card:nth-child(3){border-top-color:var(--accent3);}
         .stat-card:hover{transform:translateY(-4px);}
         .stat-num{font-size:1.8rem;font-weight:700;color:var(--primary-color);}
         .stat-label{font-size:0.78rem;color:var(--text-light);margin-top:0.2rem;}
 
-        /* ===== SOBRE MI ===== */
-        .about-grid {
-            display:grid; grid-template-columns:1fr 2fr; gap:2rem;
-            background:var(--card-bg); padding:2rem; border-radius:20px;
-            box-shadow:var(--shadow); margin-bottom:2rem;
-        }
-
+        /* SOBRE MI */
+        .about-grid{display:grid;grid-template-columns:1fr 2fr;gap:2rem;background:var(--card-bg);padding:2rem;border-radius:20px;box-shadow:var(--shadow);margin-bottom:2rem;}
         .about-image img{width:100%;border-radius:14px;object-fit:cover;}
-
-        .about-text h3 {
-            background:linear-gradient(135deg,var(--accent-color),var(--accent2));
-            -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-            background-clip:text; font-size:1.1rem; margin-bottom:0.85rem; font-weight:700;
-        }
-
+        .about-text h3{background:linear-gradient(135deg,var(--accent-color),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:1.1rem;margin-bottom:0.85rem;font-weight:700;}
         .about-text p{color:var(--text-light);margin-bottom:0.85rem;font-size:0.93rem;}
         .about-text strong{color:var(--text-main);}
+        .info-pill{display:inline-flex;align-items:center;gap:0.4rem;background:linear-gradient(135deg,#e8f0ff,#e0f5ff);color:var(--accent-color);padding:0.4rem 1rem;border-radius:30px;font-size:0.82rem;font-weight:600;margin-top:0.4rem;border:1.5px solid rgba(59,130,246,0.2);}
+        [data-theme="dark"] .info-pill{background:rgba(59,130,246,0.15);}
 
-        .info-pill {
-            display:inline-flex; align-items:center; gap:0.4rem;
-            background:linear-gradient(135deg,#e8f0ff,#e0f5ff);
-            color:var(--accent-color); padding:0.4rem 1rem; border-radius:30px;
-            font-size:0.82rem; font-weight:600; margin-top:0.4rem;
-            border:1.5px solid rgba(59,130,246,0.2);
-        }
-
-        [data-theme="dark"] .info-pill { background:rgba(59,130,246,0.15); }
-
-        .collage-section { background:var(--card-bg); padding:2rem; border-radius:20px; box-shadow:var(--shadow); }
+        .collage-section{background:var(--card-bg);padding:2rem;border-radius:20px;box-shadow:var(--shadow);}
         .collage-section h3{color:var(--primary-color);margin-bottom:1.25rem;font-size:1.2rem;}
-
-        .collage-grid {
-            display:grid; grid-template-columns:repeat(3,1fr);
-            grid-template-rows:repeat(2,170px); gap:0.75rem;
-        }
-
-        .collage-item {
-            border-radius:12px; overflow:hidden; width:100%; height:100%;
-            object-fit:cover; transition:all 0.3s; cursor:pointer; display:block;
-        }
-
+        .collage-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,170px);gap:0.75rem;}
+        .collage-item{border-radius:12px;overflow:hidden;width:100%;height:100%;object-fit:cover;transition:all 0.3s;cursor:pointer;display:block;}
         .collage-item:hover{transform:scale(1.04);box-shadow:0 10px 30px rgba(59,130,246,0.22);}
         .collage-item:nth-child(1){grid-column:1/2;grid-row:1/2;}
         .collage-item:nth-child(2){grid-column:2/3;grid-row:1/3;}
@@ -290,92 +160,63 @@
         .collage-item:nth-child(4){grid-column:1/2;grid-row:2/3;}
         .collage-item:nth-child(5){grid-column:3/4;grid-row:2/3;}
 
-        /* ===== HABILIDADES ===== */
+        /* HABILIDADES */
         .skills-container{display:flex;flex-direction:column;gap:1rem;}
-
-        .skill-item {
-            background:var(--card-bg); border-radius:20px; padding:1.25rem 1.4rem;
-            box-shadow:var(--shadow); cursor:pointer; transition:all 0.3s;
-            border-left:4px solid transparent;
-        }
-
-        .skill-item:nth-child(1){--sc:#3b82f6;}
-        .skill-item:nth-child(2){--sc:#0ea5e9;}
-        .skill-item:nth-child(3){--sc:#38bdf8;}
-        .skill-item:nth-child(4){--sc:#1d4ed8;}
-        .skill-item:nth-child(5){--sc:#6ee7b7;}
-        .skill-item:nth-child(6){--sc:#fbbf24;}
-        .skill-item:nth-child(7){--sc:#f87171;}
-        .skill-item:nth-child(8){--sc:#fb923c;}
-
+        .skill-item{background:var(--card-bg);border-radius:20px;padding:1.25rem 1.4rem;box-shadow:var(--shadow);cursor:pointer;transition:all 0.3s;border-left:4px solid transparent;}
+        .skill-item:nth-child(1){--sc:#3b82f6;} .skill-item:nth-child(2){--sc:#0ea5e9;} .skill-item:nth-child(3){--sc:#38bdf8;}
+        .skill-item:nth-child(4){--sc:#1d4ed8;} .skill-item:nth-child(5){--sc:#6ee7b7;} .skill-item:nth-child(6){--sc:#fbbf24;}
+        .skill-item:nth-child(7){--sc:#f87171;} .skill-item:nth-child(8){--sc:#fb923c;}
         .skill-item:hover{transform:translateX(5px);border-left-color:var(--sc);box-shadow:0 8px 30px rgba(0,0,0,0.08);}
         .skill-item.open{border-left-color:var(--sc);}
-
         .skill-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.7rem;}
         .skill-name{font-weight:600;color:var(--primary-color);font-size:0.93rem;}
         .skill-pct{font-weight:700;color:var(--sc);font-size:0.88rem;}
         .progress-bar{width:100%;height:8px;background:var(--progress-bg);border-radius:10px;overflow:hidden;}
         .progress{height:100%;background:linear-gradient(90deg,var(--sc),color-mix(in srgb,var(--sc) 60%,white));border-radius:10px;transition:width 1.5s ease;}
-
-        .skill-info {
-            max-height:0;overflow:hidden;background:var(--skill-info-bg);
-            border-radius:10px;padding:0;margin-top:0.7rem;
-            transition:all 0.35s ease;font-size:0.85rem;color:var(--text-light);
-        }
-
+        .skill-info{max-height:0;overflow:hidden;background:var(--skill-info-bg);border-radius:10px;padding:0;margin-top:0.7rem;transition:all 0.35s ease;font-size:0.85rem;color:var(--text-light);}
         .skill-info.show{max-height:150px;padding:0.85rem;}
 
-        /* ===== PORTFOLIO ===== */
+        /* PORTFOLIO */
         .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem;}
-
-        .card {
-            background:var(--card-bg); border-radius:20px; overflow:hidden;
-            box-shadow:var(--shadow); transition:all 0.3s; cursor:pointer; position:relative;
-        }
-
-        .card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(59,130,246,0.16);}
-
-        .card-badge {
-            position:absolute;top:10px;right:10px;background:rgba(255,255,255,0.93);
-            padding:0.25rem 0.7rem;border-radius:20px;font-size:0.72rem;font-weight:600;color:var(--accent-color);
-        }
-
+        .card{background:var(--card-bg);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:all 0.3s;cursor:pointer;position:relative;}
+        .card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);}
+        .card-badge{position:absolute;top:10px;right:10px;background:rgba(255,255,255,0.93);padding:0.25rem 0.7rem;border-radius:20px;font-size:0.72rem;font-weight:600;color:var(--accent-color);}
         [data-theme="dark"] .card-badge{background:rgba(21,38,56,0.93);}
-
         .card img{width:100%;height:180px;object-fit:cover;}
         .card-content{padding:1.25rem;}
         .card-content h3{color:var(--primary-color);font-size:1rem;margin-bottom:0.35rem;}
         .card-content p{color:var(--text-light);font-size:0.84rem;}
         .card-tags{display:flex;gap:0.4rem;flex-wrap:wrap;margin-top:0.85rem;}
-
         .tag{padding:0.22rem 0.65rem;border-radius:20px;font-size:0.72rem;font-weight:600;}
-        .tag-blue{background:#dbeafe;color:#1d4ed8;}
-        .tag-sky{background:#e0f2fe;color:#0284c7;}
-        .tag-cyan{background:#ecfeff;color:#0891b2;}
-        .tag-green{background:#ecfdf5;color:#10b981;}
-
+        .tag-blue{background:#dbeafe;color:#1d4ed8;} .tag-sky{background:#e0f2fe;color:#0284c7;}
+        .tag-cyan{background:#ecfeff;color:#0891b2;} .tag-green{background:#ecfdf5;color:#10b981;}
         [data-theme="dark"] .tag-blue{background:rgba(59,130,246,0.2);color:#93c5fd;}
         [data-theme="dark"] .tag-sky{background:rgba(14,165,233,0.2);color:#7dd3fc;}
         [data-theme="dark"] .tag-cyan{background:rgba(8,145,178,0.2);color:#67e8f9;}
         [data-theme="dark"] .tag-green{background:rgba(16,185,129,0.2);color:#6ee7b7;}
 
-        /* ===== SUSCRIPCIONES ===== */
-        .sub-card {
-            background:var(--card-bg); border-radius:20px; padding:2rem 1.5rem;
-            box-shadow:var(--shadow); transition:all 0.3s; cursor:pointer;
-            position:relative; border:2px solid transparent;
-            display:flex; flex-direction:column; align-items:center; text-align:center;
-        }
+        /* CONTACTO */
+        .contact-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:1.75rem;}
 
-        .sub-card:hover{transform:translateY(-6px);border-color:var(--accent-color);box-shadow:0 20px 50px rgba(59,130,246,0.16);}
+        .contact-info-card{background:var(--card-bg);border-radius:20px;padding:2rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:1.25rem;}
+
+        .contact-info-item{display:flex;align-items:flex-start;gap:1rem;}
+        .contact-icon{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--accent-color),var(--accent4));display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+        .contact-info-text .label{font-size:0.78rem;color:var(--text-light);font-weight:500;margin-bottom:0.15rem;}
+        .contact-info-text .value{font-size:0.92rem;color:var(--primary-color);font-weight:600;}
+
+        .contact-social{display:flex;gap:0.75rem;margin-top:0.5rem;flex-wrap:wrap;}
+        .contact-social-btn{padding:0.5rem 1.1rem;border-radius:30px;border:1.5px solid var(--border);background:var(--bg-color);color:var(--text-main);font-size:0.82rem;font-weight:600;cursor:pointer;transition:all 0.3s;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;}
+        .contact-social-btn:hover{border-color:var(--accent-color);color:var(--accent-color);background:rgba(59,130,246,0.06);}
+
+        .contact-form-card{background:var(--card-bg);border-radius:20px;padding:2rem;box-shadow:var(--shadow);}
+        .contact-form-card h3{color:var(--primary-color);font-size:1.1rem;font-weight:700;margin-bottom:1.5rem;}
+
+        /* SUSCRIPCIONES */
+        .sub-card{background:var(--card-bg);border-radius:20px;padding:2rem 1.5rem;box-shadow:var(--shadow);transition:all 0.3s;cursor:pointer;position:relative;border:2px solid transparent;display:flex;flex-direction:column;align-items:center;text-align:center;}
+        .sub-card:hover{transform:translateY(-6px);border-color:var(--accent-color);box-shadow:var(--shadow-lg);}
         .sub-card-featured{border-color:var(--accent-color);}
-
-        .sub-popular {
-            position:absolute;top:-13px;left:50%;transform:translateX(-50%);
-            background:var(--accent-color);color:white;
-            font-size:0.72rem;font-weight:700;padding:0.28rem 0.9rem;border-radius:20px;white-space:nowrap;
-        }
-
+        .sub-popular{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--accent-color);color:white;font-size:0.72rem;font-weight:700;padding:0.28rem 0.9rem;border-radius:20px;white-space:nowrap;}
         .sub-badge{background:#dbeafe;color:var(--accent-color);font-size:0.7rem;font-weight:700;padding:0.28rem 0.85rem;border-radius:20px;letter-spacing:0.05em;margin-bottom:0.9rem;}
         [data-theme="dark"] .sub-badge{background:rgba(59,130,246,0.2);}
         .sub-icon{font-size:2.2rem;margin-bottom:0.65rem;}
@@ -384,204 +225,113 @@
         .sub-name{font-size:0.9rem;color:var(--text-light);margin-bottom:1.25rem;font-style:italic;}
         .sub-features{list-style:none;width:100%;margin-bottom:1.5rem;text-align:left;display:flex;flex-direction:column;gap:0.5rem;}
         .sub-features li{font-size:0.85rem;color:var(--text-main);}
-
-        .sub-btn {
-            width:100%;padding:0.8rem;border-radius:30px;border:none;
-            font-size:0.92rem;font-weight:600;cursor:pointer;transition:all 0.3s;
-            background:linear-gradient(135deg,var(--accent-color),var(--accent4));
-            color:white;box-shadow:0 4px 14px rgba(59,130,246,0.3);margin-top:auto;
-        }
-
+        .sub-btn{width:100%;padding:0.8rem;border-radius:30px;border:none;font-size:0.92rem;font-weight:600;cursor:pointer;transition:all 0.3s;background:linear-gradient(135deg,var(--accent-color),var(--accent4));color:white;box-shadow:0 4px 14px rgba(59,130,246,0.3);margin-top:auto;}
         .sub-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,0.4);}
         .sub-btn-outline{background:transparent;color:var(--accent-color);border:2px solid var(--accent-color);box-shadow:none;}
         .sub-btn-outline:hover{background:rgba(59,130,246,0.08);box-shadow:none;}
         .sub-btn-dark{background:linear-gradient(135deg,#0f1f3d,#1a3a6b);box-shadow:0 4px 14px rgba(15,31,61,0.3);}
 
-        /* ===== CONFIGURACION ===== */
+        /* CONFIGURACION */
         .config-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
-
-        .config-card {
-            background:var(--card-bg); border-radius:20px; padding:1.75rem;
-            box-shadow:var(--shadow); transition:all 0.3s;
-        }
-
+        .config-card{background:var(--card-bg);border-radius:20px;padding:1.75rem;box-shadow:var(--shadow);transition:all 0.3s;}
         .config-card:hover{box-shadow:0 12px 40px rgba(59,130,246,0.14);}
-
         .config-card h3{color:var(--primary-color);font-size:1.05rem;font-weight:700;margin-bottom:0.4rem;}
         .config-card p{color:var(--text-light);font-size:0.85rem;margin-bottom:1.25rem;}
-
-        /* Toggle switch */
         .toggle-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;}
         .toggle-label{font-size:0.9rem;color:var(--text-main);font-weight:500;}
         .toggle-sub{font-size:0.78rem;color:var(--text-light);margin-top:1px;}
-
-        .toggle {
-            position:relative; width:48px; height:26px;
-            background:var(--progress-bg); border-radius:13px;
-            cursor:pointer; transition:all 0.3s; flex-shrink:0;
-            border:2px solid var(--border);
-        }
-
+        .toggle{position:relative;width:48px;height:26px;background:var(--progress-bg);border-radius:13px;cursor:pointer;transition:all 0.3s;flex-shrink:0;border:2px solid var(--border);}
         .toggle.on{background:var(--accent-color);border-color:var(--accent-color);}
-
-        .toggle::after {
-            content:''; position:absolute; top:2px; left:2px;
-            width:18px; height:18px; background:white; border-radius:50%;
-            transition:all 0.3s; box-shadow:0 2px 4px rgba(0,0,0,0.2);
-        }
-
+        .toggle::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:white;border-radius:50%;transition:all 0.3s;box-shadow:0 2px 4px rgba(0,0,0,0.2);}
         .toggle.on::after{transform:translateX(22px);}
-
-        /* Account card */
         .account-card{grid-column:1/-1;}
-
-        .user-info-box{
-            display:flex;align-items:center;gap:1.25rem;
-            background:var(--bg-color);border-radius:14px;padding:1.25rem;
-            margin-bottom:1.25rem;
-        }
-
+        .user-info-box{display:flex;align-items:center;gap:1.25rem;background:var(--bg-color);border-radius:14px;padding:1.25rem;margin-bottom:1.25rem;}
         [data-theme="dark"] .user-info-box{background:rgba(255,255,255,0.05);}
 
-        .avatar-big{
-            width:52px;height:52px;border-radius:50%;
-            background:linear-gradient(135deg,var(--accent-color),var(--accent4));
-            color:white;display:flex;align-items:center;justify-content:center;
-            font-size:1.2rem;font-weight:700;flex-shrink:0;
-        }
+        /* Avatar upload */
+        .avatar-big-wrap{position:relative;flex-shrink:0;cursor:pointer;}
+        .avatar-big{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--accent-color),var(--accent4));color:white;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:700;overflow:hidden;transition:all 0.3s;}
+        .avatar-big img{width:100%;height:100%;object-fit:cover;}
+        .avatar-overlay{position:absolute;inset:0;border-radius:50%;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;font-size:0.7rem;color:white;font-weight:600;text-align:center;line-height:1.2;}
+        .avatar-big-wrap:hover .avatar-overlay{opacity:1;}
 
         .user-info-text .name{font-weight:700;color:var(--primary-color);font-size:1rem;}
         .user-info-text .email{font-size:0.82rem;color:var(--text-light);}
-        .user-info-text .plan-badge{
-            display:inline-block;background:linear-gradient(135deg,var(--accent-color),var(--accent4));
-            color:white;font-size:0.7rem;font-weight:700;
-            padding:0.18rem 0.65rem;border-radius:20px;margin-top:0.3rem;
-        }
-
+        .user-info-text .plan-badge{display:inline-block;background:linear-gradient(135deg,var(--accent-color),var(--accent4));color:white;font-size:0.7rem;font-weight:700;padding:0.18rem 0.65rem;border-radius:20px;margin-top:0.3rem;}
         .config-btn-row{display:flex;gap:0.75rem;flex-wrap:wrap;}
-
-        .config-btn{
-            padding:0.6rem 1.2rem;border-radius:30px;font-size:0.85rem;font-weight:600;
-            cursor:pointer;transition:all 0.3s;border:none;
-        }
-
+        .config-btn{padding:0.6rem 1.2rem;border-radius:30px;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.3s;border:none;}
         .config-btn-primary{background:var(--accent-color);color:white;}
         .config-btn-primary:hover{background:#2563eb;}
         .config-btn-danger{background:transparent;color:#ef4444;border:2px solid #ef4444;}
         .config-btn-danger:hover{background:#ef4444;color:white;}
         .config-btn-outline{background:transparent;color:var(--accent-color);border:2px solid var(--accent-color);}
         .config-btn-outline:hover{background:rgba(59,130,246,0.08);}
-
-        /* Not logged in state */
         .login-prompt{text-align:center;padding:2rem 1rem;}
         .login-prompt .big-icon{font-size:3rem;margin-bottom:1rem;}
         .login-prompt h3{color:var(--primary-color);margin-bottom:0.5rem;}
         .login-prompt p{color:var(--text-light);font-size:0.9rem;margin-bottom:1.5rem;}
 
-        /* ===== MÉTODOS DE PAGO ===== */
-        .pay-method {
-            display:flex;align-items:center;justify-content:space-between;
-            background:var(--pay-method-bg);border:1.5px solid var(--pay-method-border);
-            border-radius:13px;padding:0.9rem 1rem;cursor:pointer;transition:all 0.3s;
-        }
-
-        .pay-method:hover{border-color:var(--accent-color);background:var(--bg-color);transform:translateX(4px);}
-
-        /* ===== FORM INPUTS ===== */
-        .checkout-input {
-            width:100%;padding:0.7rem 0.9rem;
-            border:1.5px solid var(--border);border-radius:11px;
-            font-size:0.9rem;color:var(--text-main);
-            background:var(--input-bg);transition:all 0.3s;outline:none;font-family:inherit;
-        }
-
+        /* FORM */
+        .checkout-input{width:100%;padding:0.7rem 0.9rem;border:1.5px solid var(--border);border-radius:11px;font-size:0.9rem;color:var(--text-main);background:var(--input-bg);transition:all 0.3s;outline:none;font-family:inherit;}
         .checkout-input:focus{border-color:var(--accent-color);background:var(--card-bg);box-shadow:0 0 0 3px rgba(59,130,246,0.12);}
+        textarea.checkout-input{resize:vertical;min-height:110px;}
         .checkout-label{font-size:0.8rem;font-weight:600;color:var(--text-main);margin-bottom:0.3rem;display:block;}
         .checkout-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;}
         .checkout-field{display:flex;flex-direction:column;margin-bottom:0.8rem;}
-
         .input-error{border-color:#ef4444!important;}
         .error-msg{font-size:0.75rem;color:#ef4444;margin-top:0.25rem;}
-        .success-msg{font-size:0.75rem;color:#10b981;margin-top:0.25rem;}
 
-        /* ===== FOOTER ===== */
-        footer {
-            background:linear-gradient(135deg,#0f1f3d,#1a3a6b);
-            color:rgba(255,255,255,0.75);margin-top:4rem;padding:2.5rem 1.5rem 1.5rem;
-        }
+        /* PAY METHODS */
+        .pay-method{display:flex;align-items:center;justify-content:space-between;background:var(--pay-bg);border:1.5px solid var(--pay-border);border-radius:13px;padding:0.9rem 1rem;cursor:pointer;transition:all 0.3s;}
+        .pay-method:hover{border-color:var(--accent-color);background:var(--bg-color);transform:translateX(4px);}
 
+        /* FOOTER */
+        footer{background:linear-gradient(135deg,#0f1f3d,#1a3a6b);color:rgba(255,255,255,0.75);margin-top:4rem;padding:2.5rem 1.5rem 1.5rem;}
         .footer-inner{max-width:1050px;margin:0 auto;}
-
         .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem;}
-
         .footer-brand .logo{font-size:1.2rem;margin-bottom:0.7rem;}
         .footer-brand p{font-size:0.84rem;color:rgba(255,255,255,0.5);line-height:1.7;}
-
         .footer-col h4{color:white;font-size:0.9rem;font-weight:600;margin-bottom:0.85rem;}
         .footer-col a,.footer-col span{display:block;font-size:0.82rem;color:rgba(255,255,255,0.5);text-decoration:none;margin-bottom:0.45rem;cursor:pointer;transition:all 0.3s;}
         .footer-col a:hover,.footer-col span:hover{color:var(--accent2);}
-
         .footer-social{display:flex;gap:0.7rem;margin-top:0.9rem;}
-
-        .social-btn {
-            width:36px;height:36px;background:rgba(255,255,255,0.08);border-radius:50%;
-            display:flex;align-items:center;justify-content:center;font-size:0.95rem;
-            color:rgba(255,255,255,0.6);cursor:pointer;transition:all 0.3s;
-            border:1.5px solid rgba(255,255,255,0.1);text-decoration:none;
-        }
-
+        .social-btn{width:36px;height:36px;background:rgba(255,255,255,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.82rem;color:rgba(255,255,255,0.6);cursor:pointer;transition:all 0.3s;border:1.5px solid rgba(255,255,255,0.1);text-decoration:none;font-weight:700;}
         .social-btn:hover{background:var(--accent-color);border-color:var(--accent-color);color:white;transform:translateY(-3px);}
-
         .footer-divider{border:none;border-top:1px solid rgba(255,255,255,0.08);margin-bottom:1.25rem;}
-
         .footer-bottom{display:flex;justify-content:space-between;align-items:center;font-size:0.78rem;color:rgba(255,255,255,0.35);flex-wrap:wrap;gap:0.5rem;}
         .footer-bottom span{color:var(--accent2);}
 
-        /* ===== MODALS ===== */
-        .modal-overlay {
-            display:none;position:fixed;inset:0;
-            background:rgba(15,31,61,0.6);z-index:1000;backdrop-filter:blur(6px);
-        }
-
+        /* MODALS */
+        .modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,31,61,0.6);z-index:1000;backdrop-filter:blur(6px);}
         .modal-overlay.active{display:flex;align-items:center;justify-content:center;animation:fadeIn 0.3s ease;}
-
         @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-
-        .modal-content {
-            background:var(--card-bg);border-radius:22px;padding:1.75rem;
-            max-width:520px;width:92%;max-height:90vh;overflow-y:auto;
-            position:relative;animation:slideUp 0.35s ease;
-        }
-
+        .modal-content{background:var(--card-bg);border-radius:22px;padding:1.75rem;max-width:520px;width:92%;max-height:90vh;overflow-y:auto;position:relative;animation:slideUp 0.35s ease;}
         @keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-
-        .close-btn {
-            position:absolute;top:0.9rem;right:0.9rem;background:var(--bg-color);border:none;
-            width:36px;height:36px;border-radius:50%;font-size:1.2rem;cursor:pointer;
-            display:flex;align-items:center;justify-content:center;transition:all 0.3s;color:var(--text-main);
-        }
-
+        .close-btn{position:absolute;top:0.9rem;right:0.9rem;background:var(--bg-color);border:none;width:36px;height:36px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.3s;color:var(--text-main);}
         .close-btn:hover{background:var(--accent-color);color:white;transform:rotate(90deg);}
-
         .modal-img{width:100%;height:230px;object-fit:cover;border-radius:14px;margin-bottom:1.25rem;}
         .modal-title{color:var(--primary-color);font-size:1.5rem;margin-bottom:0.65rem;}
         .modal-description{color:var(--text-light);margin-bottom:1rem;line-height:1.8;font-size:0.92rem;}
         .modal-details{background:var(--bg-color);padding:0.9rem 1.1rem;border-radius:12px;font-size:0.88rem;color:var(--text-main);line-height:2;}
 
-        /* Auth modal tabs */
+        /* Auth tabs */
         .auth-tabs{display:flex;gap:0;margin-bottom:1.5rem;background:var(--bg-color);border-radius:12px;padding:4px;}
-
-        .auth-tab{
-            flex:1;padding:0.55rem;border-radius:9px;border:none;font-size:0.88rem;
-            font-weight:600;cursor:pointer;transition:all 0.3s;
-            background:transparent;color:var(--text-light);
-        }
-
+        .auth-tab{flex:1;padding:0.55rem;border-radius:9px;border:none;font-size:0.88rem;font-weight:600;cursor:pointer;transition:all 0.3s;background:transparent;color:var(--text-light);}
         .auth-tab.active{background:var(--accent-color);color:white;box-shadow:0 4px 12px rgba(59,130,246,0.3);}
-
         .auth-form{display:none;}
         .auth-form.active{display:block;}
 
+        /* Avatar picker modal */
+        .avatar-picker-opts{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+        .avatar-opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;padding:1.5rem 1rem;background:var(--bg-color);border:2px solid var(--border);border-radius:16px;cursor:pointer;transition:all 0.3s;font-size:0.88rem;color:var(--text-light);font-weight:500;}
+        .avatar-opt:hover{border-color:var(--accent-color);color:var(--accent-color);background:rgba(59,130,246,0.05);}
+        .avatar-opt span{font-size:2rem;}
+        #avatarPreviewWrap{text-align:center;margin-bottom:1rem;display:none;}
+        #avatarPreview{width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid var(--accent-color);}
+        #cameraStream{width:100%;border-radius:14px;display:none;margin-bottom:0.75rem;}
+        #cameraCanvas{display:none;}
+
+        /* Image modal */
         .image-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2000;backdrop-filter:blur(8px);}
         .image-modal-overlay.active{display:flex;align-items:center;justify-content:center;animation:fadeIn 0.3s ease;}
         .image-modal-content{position:relative;max-width:92vw;max-height:92vh;animation:zoomIn 0.3s ease;}
@@ -590,7 +340,7 @@
         .image-close-btn{position:absolute;top:-42px;right:0;background:rgba(255,255,255,0.15);border:2px solid white;width:40px;height:40px;border-radius:50%;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:white;transition:all 0.3s;}
         .image-close-btn:hover{background:rgba(255,255,255,0.3);transform:rotate(90deg);}
 
-        /* ===== TABLET ===== */
+        /* RESPONSIVE */
         @media(max-width:900px){
             .tabs{display:none;}
             .hamburger{display:flex;}
@@ -598,14 +348,14 @@
             .hero-text h1{font-size:2.4rem;}
             .hero-image img{width:240px;height:240px;}
             .about-grid{grid-template-columns:1fr;gap:1.5rem;}
-            .about-image img{max-height:260px;width:100%;object-fit:cover;}
+            .about-image img{max-height:260px;object-fit:cover;}
             .footer-grid{grid-template-columns:1fr 1fr;gap:2rem;}
             .footer-brand{grid-column:1/-1;}
             .config-grid{grid-template-columns:1fr;}
             .account-card{grid-column:auto;}
+            .contact-grid{grid-template-columns:1fr;}
         }
 
-        /* ===== MOBILE ===== */
         @media(max-width:600px){
             main{padding:0 1rem;margin:1.75rem auto;}
             .hero{flex-direction:column-reverse;text-align:center;gap:1.5rem;}
@@ -617,16 +367,12 @@
             .section-title{font-size:1.5rem;}
             .stats-row{grid-template-columns:1fr 1fr;gap:0.75rem;}
             .stat-card:last-child{grid-column:1/-1;}
-            .stat-num{font-size:1.6rem;}
             .collage-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:0.6rem;}
             .collage-item{height:130px;}
-            .collage-item:nth-child(1){grid-column:1/2;grid-row:auto;}
-            .collage-item:nth-child(2){grid-column:2/3;grid-row:auto;}
-            .collage-item:nth-child(3){grid-column:1/2;grid-row:auto;}
-            .collage-item:nth-child(4){grid-column:2/3;grid-row:auto;}
+            .collage-item:nth-child(1){grid-column:1/2;grid-row:auto;} .collage-item:nth-child(2){grid-column:2/3;grid-row:auto;}
+            .collage-item:nth-child(3){grid-column:1/2;grid-row:auto;} .collage-item:nth-child(4){grid-column:2/3;grid-row:auto;}
             .collage-item:nth-child(5){grid-column:1/3;grid-row:auto;}
-            .about-grid{padding:1.25rem;}
-            .collage-section{padding:1.25rem;}
+            .about-grid,.collage-section{padding:1.25rem;}
             .portfolio-grid{grid-template-columns:1fr;}
             .sub-grid{grid-template-columns:1fr!important;}
             .footer-grid{grid-template-columns:1fr;gap:1.5rem;}
@@ -636,8 +382,8 @@
             .checkout-row{grid-template-columns:1fr;}
             .image-close-btn{top:auto;bottom:-50px;right:50%;transform:translateX(50%);}
             .config-btn-row{flex-direction:column;}
-            .config-btn{text-align:center;}
             .user-info-box{flex-direction:column;text-align:center;}
+            .avatar-picker-opts{grid-template-columns:1fr 1fr;}
         }
 
         @media(max-width:380px){
@@ -645,27 +391,27 @@
             .btn-primary,.btn-secondary{padding:0.65rem 1.3rem;font-size:0.88rem;}
             .stats-row{grid-template-columns:1fr;}
             .stat-card:last-child{grid-column:auto;}
-            .sub-price{font-size:2rem;}
         }
     </style>
 </head>
 <body>
 
+<div class="toast" id="toast"></div>
+
 <header>
     <nav>
-        <div class="logo"><span class="logo-dot"></span>Eduardo V.Q.</div>
+        <div class="logo" onclick="openTab('inicio',getTabBtn(0))"><span class="logo-dot"></span>Eduardo V.Q.</div>
         <div class="tabs">
             <button class="tab-btn active" onclick="openTab('inicio',this)">Inicio</button>
             <button class="tab-btn" onclick="openTab('sobre-mi',this)">Sobre Mi</button>
             <button class="tab-btn" onclick="openTab('habilidades',this)">Habilidades</button>
             <button class="tab-btn" onclick="openTab('portafolio',this)">Portafolio</button>
+            <button class="tab-btn" onclick="openTab('contacto',this)">Contacto</button>
             <button class="tab-btn" onclick="openTab('suscribete',this)">Suscribete</button>
             <button class="tab-btn" onclick="openTab('config',this)">Configuracion</button>
         </div>
         <div class="nav-right">
-            <div id="headerAuthBtn">
-                <button class="btn-auth-header" onclick="openAuthModal()">Iniciar sesion</button>
-            </div>
+            <div id="headerAuthBtn"></div>
             <button class="hamburger" id="hamburger" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </button>
@@ -676,6 +422,7 @@
         <button class="tab-btn" onclick="openTab('sobre-mi',this);closeMenu()">Sobre Mi</button>
         <button class="tab-btn" onclick="openTab('habilidades',this);closeMenu()">Habilidades</button>
         <button class="tab-btn" onclick="openTab('portafolio',this);closeMenu()">Portafolio</button>
+        <button class="tab-btn" onclick="openTab('contacto',this);closeMenu()">Contacto</button>
         <button class="tab-btn" onclick="openTab('suscribete',this);closeMenu()">Suscribete</button>
         <button class="tab-btn" onclick="openTab('config',this);closeMenu()">Configuracion</button>
     </div>
@@ -691,7 +438,7 @@
                 <p>Estudiante de Ingenieria en Sistemas Computacionales. Apasionado por la programacion, bases de datos y crear soluciones eficientes.</p>
                 <div class="hero-btns">
                     <button class="btn-primary" onclick="openTab('sobre-mi',getTabBtn(1))">Conoceme mas</button>
-                    <button class="btn-secondary" onclick="openTab('portafolio',getTabBtn(3))">Ver Proyectos</button>
+                    <button class="btn-secondary" onclick="openTab('contacto',getTabBtn(4))">Contactame</button>
                 </div>
             </div>
             <div class="hero-image">
@@ -704,7 +451,7 @@
         <div class="stats-row">
             <div class="stat-card"><div class="stat-num">8vo</div><div class="stat-label">Semestre en ISC</div></div>
             <div class="stat-card"><div class="stat-num">3+</div><div class="stat-label">Proyectos Completados</div></div>
-            <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Programador certificado</div></div>
+            <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Comprometido</div></div>
         </div>
     </section>
 
@@ -740,10 +487,10 @@
             <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">F#</span><span class="skill-pct">60%</span></div><div class="progress-bar"><div class="progress" style="width:60%"></div></div><div class="skill-info"><div>Lenguaje funcional para resolver problemas complejos. Experiencia en data processing y analisis matematico.</div></div></div>
             <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">HTML / CSS</span><span class="skill-pct">90%</span></div><div class="progress-bar"><div class="progress" style="width:90%"></div></div><div class="skill-info"><div>Diseno responsivo, animaciones CSS, flexbox y grid. Experiencia en UX/UI e implementacion de interfaces modernas.</div></div></div>
             <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">Bases de Datos</span><span class="skill-pct">80%</span></div><div class="progress-bar"><div class="progress" style="width:80%"></div></div><div class="skill-info"><div>Diseno de esquemas relacionales, optimizacion de queries, administracion de servidores SQL. Normalizaciones y backup.</div></div></div>
-            <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">Atencion al Cliente</span><span class="skill-pct">95%</span></div><div class="progress-bar"><div class="progress" style="width:95%"></div></div><div class="skill-info"><div>Comunicacion efectiva, resolucion de problemas, empatia y paciencia. Experiencia en servicio al cliente.</div></div></div>
-            <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">Comediante</span><span class="skill-pct">67%</span></div><div class="progress-bar"><div class="progress" style="width:67%"></div></div><div class="skill-info"><div>Dominio de chistes malos, timing perfecto y capacidad de hacer reir en momentos inoportunos. Especialidad: bromas de programador.</div></div></div>
+            <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">Atencion al Cliente</span><span class="skill-pct">95%</span></div><div class="progress-bar"><div class="progress" style="width:95%"></div></div><div class="skill-info"><div>Comunicacion efectiva, resolucion de problemas, empatia y paciencia.</div></div></div>
+            <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">Comediante</span><span class="skill-pct">67%</span></div><div class="progress-bar"><div class="progress" style="width:67%"></div></div><div class="skill-info"><div>Dominio de chistes malos, timing perfecto. Especialidad: bromas de programador.</div></div></div>
             <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">Gooner</span><span class="skill-pct">100%</span></div><div class="progress-bar"><div class="progress" style="width:100%"></div></div><div class="skill-info"><div>Fanatico incondicional del pre-entreno. Experto en estandar y la palanca de cambios.</div></div></div>
-            <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">Catador de senoras</span><span class="skill-pct">69%</span></div><div class="progress-bar"><div class="progress" style="width:69%"></div></div><div class="skill-info"><div>Experiencia notable en apreciar la belleza femenina. Calificaciones justas y honestas. Disponible para consultoria especializada.</div></div></div>
+            <div class="skill-item" onclick="toggleSkillInfo(this)"><div class="skill-header"><span class="skill-name">Catador de senoras</span><span class="skill-pct">69%</span></div><div class="progress-bar"><div class="progress" style="width:69%"></div></div><div class="skill-info"><div>Experiencia notable en apreciar la belleza femenina. Disponible para consultoria especializada.</div></div></div>
         </div>
     </section>
 
@@ -751,9 +498,73 @@
     <section id="portafolio" class="tab-content">
         <h2 class="section-title">Proyectos Destacados</h2>
         <div class="portfolio-grid">
-            <div class="card" onclick="openModal(0)"><span class="card-badge">C# / .NET</span><img src="https://picsum.photos/seed/proj1/500/300" alt="Proyecto 1"><div class="card-content"><h3>Sistema en C#</h3><p>Aplicacion de escritorio conectada a base de datos para gestion de inventarios.</p><div class="card-tags"><span class="tag tag-blue">C#</span><span class="tag tag-sky">SQL Server</span><span class="tag tag-cyan">Windows Forms</span></div></div></div>
+            <div class="card" onclick="openModal(0)"><span class="card-badge">C# / .NET</span><img src="https://picsum.photos/seed/proj1/500/300" alt="Proyecto 1"><div class="card-content"><h3>Sistema en C#</h3><p>Aplicacion de escritorio para gestion de inventarios con SQL Server.</p><div class="card-tags"><span class="tag tag-blue">C#</span><span class="tag tag-sky">SQL Server</span><span class="tag tag-cyan">Windows Forms</span></div></div></div>
             <div class="card" onclick="openModal(1)"><span class="card-badge">SQL</span><img src="https://picsum.photos/seed/proj2/500/300" alt="Proyecto 2"><div class="card-content"><h3>Gestion de Base de Datos</h3><p>Diseno y administracion de un modelo relacional eficiente y seguro.</p><div class="card-tags"><span class="tag tag-sky">MySQL</span><span class="tag tag-blue">SQL Server</span><span class="tag tag-cyan">DB Design</span></div></div></div>
-            <div class="card" onclick="openModal(2)"><span class="card-badge">Funcional</span><img src="https://picsum.photos/seed/proj3/500/300" alt="Proyecto 3"><div class="card-content"><h3>Experimentos en F#</h3><p>Desarrollo de algoritmos utilizando el paradigma funcional.</p><div class="card-tags"><span class="tag tag-blue">F#</span><span class="tag tag-green">.NET</span><span class="tag tag-sky">Algoritmos</span></div></div></div>
+            <div class="card" onclick="openModal(2)"><span class="card-badge">Funcional</span><img src="https://picsum.photos/seed/proj3/500/300" alt="Proyecto 3"><div class="card-content"><h3>Experimentos en F#</h3><p>Algoritmos con el paradigma funcional.</p><div class="card-tags"><span class="tag tag-blue">F#</span><span class="tag tag-green">.NET</span><span class="tag tag-sky">Algoritmos</span></div></div></div>
+        </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="tab-content">
+        <h2 class="section-title">Contacto</h2>
+        <div class="contact-grid">
+            <div class="contact-info-card">
+                <div>
+                    <h3 style="color:var(--primary-color);font-size:1.1rem;font-weight:700;margin-bottom:0.4rem;">Hablemos</h3>
+                    <p style="color:var(--text-light);font-size:0.88rem;">Estoy disponible para oportunidades laborales, proyectos freelance o simplemente platicar de tecnologia.</p>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-icon">✉</div>
+                    <div class="contact-info-text"><div class="label">Correo electronico</div><div class="value">eduardo.vq@example.com</div></div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-info-text"><div class="label">Ubicacion</div><div class="value">Nogales, Sonora, Mexico</div></div>
+                </div>
+                <div class="contact-info-item">
+                    <div class="contact-icon">🎓</div>
+                    <div class="contact-info-text"><div class="label">Institucion</div><div class="value">Instituto Tecnologico de Nogales</div></div>
+                </div>
+                <div>
+                    <div style="font-size:0.82rem;color:var(--text-light);margin-bottom:0.65rem;font-weight:500;">Redes sociales</div>
+                    <div class="contact-social">
+                        <a class="contact-social-btn" href="#">GitHub</a>
+                        <a class="contact-social-btn" href="#">LinkedIn</a>
+                        <a class="contact-social-btn" href="#">Instagram</a>
+                    </div>
+                </div>
+                <div style="background:var(--bg-color);border-radius:14px;padding:1rem;font-size:0.84rem;color:var(--text-light);line-height:1.6;">
+                    <strong style="color:var(--primary-color);display:block;margin-bottom:0.3rem;">Disponibilidad</strong>
+                    Abierto a practicas profesionales y primeras oportunidades laborales. Tiempo de respuesta: menos de 24 horas.
+                </div>
+            </div>
+
+            <div class="contact-form-card">
+                <h3>Enviar mensaje</h3>
+                <div class="checkout-row" style="margin-bottom:0;">
+                    <div class="checkout-field">
+                        <label class="checkout-label">Nombre</label>
+                        <input class="checkout-input" id="ctName" placeholder="Tu nombre">
+                        <span class="error-msg" id="ctNameErr"></span>
+                    </div>
+                    <div class="checkout-field">
+                        <label class="checkout-label">Correo</label>
+                        <input class="checkout-input" id="ctEmail" type="email" placeholder="tucorreo@ejemplo.com">
+                        <span class="error-msg" id="ctEmailErr"></span>
+                    </div>
+                </div>
+                <div class="checkout-field">
+                    <label class="checkout-label">Asunto</label>
+                    <input class="checkout-input" id="ctSubject" placeholder="Ej. Propuesta de trabajo, pregunta tecnica...">
+                </div>
+                <div class="checkout-field">
+                    <label class="checkout-label">Mensaje</label>
+                    <textarea class="checkout-input" id="ctMsg" placeholder="Escribeme lo que necesites..."></textarea>
+                    <span class="error-msg" id="ctMsgErr"></span>
+                </div>
+                <button class="btn-primary" style="width:100%;" onclick="sendContact()">Enviar mensaje</button>
+                <p style="text-align:center;font-size:0.78rem;color:var(--text-light);margin-top:0.75rem;">Eduardo responde normalmente en menos de 24 horas (si no se le olvida revisar el correo).</p>
+            </div>
         </div>
     </section>
 
@@ -764,9 +575,8 @@
             <div style="font-size:2rem;margin-bottom:0.85rem;">🥺</div>
             <h3 style="color:var(--primary-color);font-size:1.25rem;margin-bottom:0.85rem;">Por favor ayudame, soy un estudiante en apuros</h3>
             <p style="color:var(--text-light);max-width:620px;margin:0 auto;line-height:1.85;font-size:0.93rem;">
-                Mira, sere honesto contigo. No me gusta chambear y llevo <strong>8 semestres</strong> usando ChatGPT, tengo proyectos robados, ni me gusta mi carrera... y las empresas me piden <code style="background:var(--progress-bg);color:var(--accent-color);padding:0.1rem 0.45rem;border-radius:6px;">Experiencia</code>.
-                <br><br>
-                Mi mama ya me pregunta cuando voy a "chambear de verdad". Suscribete y ayudame a pagar el internet con el que subo mis proyectos que nadie contrata. <strong>Gracias. Que Dios te lo pague (yo no).</strong>
+                Llevo <strong>8 semestres</strong> usando ChatGPT, tengo proyectos robados, ni me gusta mi carrera... y las empresas me piden <code style="background:var(--progress-bg);color:var(--accent-color);padding:0.1rem 0.45rem;border-radius:6px;">Experiencia</code>.
+                Mi mama ya me pregunta cuando voy a chambear de verdad. Suscribete y ayudame a pagar el internet. <strong>Gracias. Que Dios te lo pague (yo no).</strong>
             </p>
             <div style="display:flex;justify-content:center;gap:0.75rem;margin-top:1.25rem;flex-wrap:wrap;">
                 <div style="background:var(--bg-color);border-radius:10px;padding:0.45rem 1rem;color:var(--accent-color);font-size:0.8rem;font-weight:600;">Certificado en pobreza</div>
@@ -776,127 +586,58 @@
         </div>
         <div class="sub-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;">
             <div class="sub-card" onclick="openPaymentModal('Basico','4.99')">
-                <div class="sub-badge">PLAN BASICO</div>
-                <div class="sub-icon">🫰</div>
-                <div class="sub-price">$4.99<span>/mes</span></div>
-                <div class="sub-name">El "Algo es Algo"</div>
-                <ul class="sub-features">
-                    <li>✓ Mi eterna gratitud</li>
-                    <li>✓ Te menciono en mis oraciones</li>
-                    <li>✓ Acceso al portfolio (ya lo tienes, pero cuenta)</li>
-                    <li>✓ Sticker digital de buen samaritano</li>
-                    <li>✗ Yo consigo trabajo (todavia no)</li>
-                    <li>✗ Soporte tecnico 24/7</li>
-                </ul>
+                <div class="sub-badge">PLAN BASICO</div><div class="sub-icon">🫰</div>
+                <div class="sub-price">$4.99<span>/mes</span></div><div class="sub-name">El "Algo es Algo"</div>
+                <ul class="sub-features"><li>✓ Mi eterna gratitud</li><li>✓ Te menciono en mis oraciones</li><li>✓ Acceso al portfolio (ya lo tienes)</li><li>✓ Sticker de buen samaritano</li><li>✗ Yo consigo trabajo</li><li>✗ Soporte tecnico 24/7</li></ul>
                 <button class="sub-btn sub-btn-outline">Suscribirme por $4.99</button>
             </div>
             <div class="sub-card sub-card-featured" onclick="openPaymentModal('Pro','12.99')">
                 <div class="sub-popular">MAS POPULAR</div>
-                <div class="sub-badge" style="background:var(--accent-color);color:white;">PLAN PRO</div>
-                <div class="sub-icon">🤝</div>
-                <div class="sub-price">$12.99<span>/mes</span></div>
-                <div class="sub-name">El "Ya Me Ayudas Mas"</div>
-                <ul class="sub-features">
-                    <li>✓ Todo lo del plan Basico</li>
-                    <li>✓ Te doy creditos en mi LinkedIn</li>
-                    <li>✓ Eres oficialmente mi patrocinador</li>
-                    <li>✓ Prioridad si algun dia tengo empresa</li>
-                    <li>✓ Yo te ayudo con tu Excel</li>
-                    <li>✗ Garantia de que consigo trabajo</li>
-                </ul>
+                <div class="sub-badge" style="background:var(--accent-color);color:white;">PLAN PRO</div><div class="sub-icon">🤝</div>
+                <div class="sub-price">$12.99<span>/mes</span></div><div class="sub-name">El "Ya Me Ayudas Mas"</div>
+                <ul class="sub-features"><li>✓ Todo lo del plan Basico</li><li>✓ Te doy creditos en mi LinkedIn</li><li>✓ Eres mi patrocinador oficial</li><li>✓ Prioridad si tengo empresa algun dia</li><li>✓ Te ayudo con tu Excel</li><li>✗ Garantia de empleo</li></ul>
                 <button class="sub-btn">Suscribirme por $12.99</button>
             </div>
             <div class="sub-card" onclick="openPaymentModal('Premium','29.99')">
-                <div class="sub-badge" style="background:#0f1f3d;color:white;">PLAN PREMIUM</div>
-                <div class="sub-icon">👑</div>
-                <div class="sub-price">$29.99<span>/mes</span></div>
-                <div class="sub-name">El "Eres Mi Heroe"</div>
-                <ul class="sub-features">
-                    <li>✓ Todo lo de los planes anteriores</li>
-                    <li>✓ Apareces en mi portfolio como MVP</li>
-                    <li>✓ Tamales virtuales cada mes</li>
-                    <li>✓ Consultoria 1hr (C#, SQL, lo que quieras)</li>
-                    <li>✓ Derecho a presumirle a tus amigos</li>
-                    <li>✓ Mi mama te agradece personalmente</li>
-                </ul>
+                <div class="sub-badge" style="background:#0f1f3d;color:white;">PLAN PREMIUM</div><div class="sub-icon">👑</div>
+                <div class="sub-price">$29.99<span>/mes</span></div><div class="sub-name">El "Eres Mi Heroe"</div>
+                <ul class="sub-features"><li>✓ Todo lo anterior</li><li>✓ Apareces en el portfolio como MVP</li><li>✓ Tamales virtuales cada mes</li><li>✓ Consultoria 1hr de C# o SQL</li><li>✓ Derecho a presumirle a tus amigos</li><li>✓ Mi mama te agradece personalmente</li></ul>
                 <button class="sub-btn sub-btn-dark">Suscribirme por $29.99</button>
             </div>
         </div>
-        <p style="text-align:center;color:var(--text-light);font-size:0.78rem;margin-top:1.5rem;">* Ningun pago garantiza que consiga empleo. No incluye devolucion porque ya me lo gaste en el internet.</p>
+        <p style="text-align:center;color:var(--text-light);font-size:0.78rem;margin-top:1.5rem;">* Ningun pago garantiza empleo. No incluye devolucion porque ya me lo gaste en internet.</p>
     </section>
 
     <!-- CONFIGURACION -->
     <section id="config" class="tab-content">
         <h2 class="section-title">Configuracion</h2>
         <div class="config-grid">
-
-            <!-- Cuenta -->
             <div class="config-card account-card">
                 <h3>Cuenta</h3>
                 <p>Gestiona tu sesion y perfil de usuario</p>
-                <div id="configAccountContent"><!-- filled by JS --></div>
+                <div id="configAccountContent"></div>
             </div>
-
-            <!-- Apariencia -->
             <div class="config-card">
                 <h3>Apariencia</h3>
-                <p>Personaliza el aspecto visual de la pagina</p>
+                <p>Personaliza el aspecto visual</p>
                 <div class="toggle-row">
-                    <div>
-                        <div class="toggle-label">Modo oscuro</div>
-                        <div class="toggle-sub">Cambia entre tema claro y oscuro</div>
-                    </div>
+                    <div><div class="toggle-label">Modo oscuro</div><div class="toggle-sub">Cambia entre tema claro y oscuro</div></div>
                     <div class="toggle" id="darkToggle" onclick="toggleDark()"></div>
                 </div>
             </div>
-
-            <!-- Notificaciones -->
             <div class="config-card">
                 <h3>Notificaciones</h3>
                 <p>Controla que alertas quieres recibir</p>
-                <div class="toggle-row">
-                    <div>
-                        <div class="toggle-label">Correo electronico</div>
-                        <div class="toggle-sub">Avisos de nuevos proyectos</div>
-                    </div>
-                    <div class="toggle on" id="notifEmail" onclick="this.classList.toggle('on')"></div>
-                </div>
-                <div class="toggle-row">
-                    <div>
-                        <div class="toggle-label">Novedades del portfolio</div>
-                        <div class="toggle-sub">Cuando Eduardo suba algo nuevo</div>
-                    </div>
-                    <div class="toggle" id="notifPortfolio" onclick="this.classList.toggle('on')"></div>
-                </div>
-                <div class="toggle-row">
-                    <div>
-                        <div class="toggle-label">Recordatorios de suscripcion</div>
-                        <div class="toggle-sub">Para que no te olvides de Eduardo</div>
-                    </div>
-                    <div class="toggle on" id="notifSub" onclick="this.classList.toggle('on')"></div>
-                </div>
+                <div class="toggle-row"><div><div class="toggle-label">Correo electronico</div><div class="toggle-sub">Avisos de nuevos proyectos</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                <div class="toggle-row"><div><div class="toggle-label">Novedades del portfolio</div><div class="toggle-sub">Cuando Eduardo suba algo nuevo</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                <div class="toggle-row"><div><div class="toggle-label">Recordatorios de suscripcion</div><div class="toggle-sub">Para que no te olvides de Eduardo</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
             </div>
-
-            <!-- Privacidad -->
             <div class="config-card">
                 <h3>Privacidad</h3>
                 <p>Opciones de datos y visibilidad</p>
-                <div class="toggle-row">
-                    <div>
-                        <div class="toggle-label">Guardar preferencias</div>
-                        <div class="toggle-sub">Recordar configuracion en este dispositivo</div>
-                    </div>
-                    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-                </div>
-                <div class="toggle-row">
-                    <div>
-                        <div class="toggle-label">Analiticas anonimas</div>
-                        <div class="toggle-sub">Ayuda a mejorar la pagina</div>
-                    </div>
-                    <div class="toggle on" onclick="this.classList.toggle('on')"></div>
-                </div>
+                <div class="toggle-row"><div><div class="toggle-label">Guardar preferencias</div><div class="toggle-sub">Recordar configuracion en este dispositivo</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                <div class="toggle-row"><div><div class="toggle-label">Analiticas anonimas</div><div class="toggle-sub">Ayuda a mejorar la pagina</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
             </div>
-
         </div>
     </section>
 
@@ -921,14 +662,12 @@
                 <span onclick="openTab('sobre-mi',getTabBtn(1))">Sobre Mi</span>
                 <span onclick="openTab('habilidades',getTabBtn(2))">Habilidades</span>
                 <span onclick="openTab('portafolio',getTabBtn(3))">Portafolio</span>
-                <span onclick="openTab('suscribete',getTabBtn(4))">Suscribete</span>
+                <span onclick="openTab('contacto',getTabBtn(4))">Contacto</span>
+                <span onclick="openTab('suscribete',getTabBtn(5))">Suscribete</span>
             </div>
             <div class="footer-col">
-                <h4>Habilidades</h4>
-                <span>C# / .NET</span>
-                <span>HTML / CSS</span>
-                <span>Bases de Datos</span>
-                <span>F#</span>
+                <h4>Tecnologias</h4>
+                <span>C# / .NET</span><span>HTML / CSS</span><span>Bases de Datos</span><span>F#</span>
             </div>
         </div>
         <hr class="footer-divider">
@@ -940,64 +679,68 @@
 </footer>
 
 <!-- AUTH MODAL -->
-<div class="modal-overlay" id="authModal" onclick="closeAuthOnOverlay(event)">
+<div class="modal-overlay" id="authModal" onclick="if(event.target.id==='authModal')closeAuthModal()">
     <div class="modal-content" style="max-width:420px;">
         <button class="close-btn" onclick="closeAuthModal()">&times;</button>
         <div style="text-align:center;margin-bottom:1.5rem;">
-            <div style="font-size:2rem;margin-bottom:0.4rem;">👤</div>
+            <div style="font-size:1.8rem;margin-bottom:0.4rem;">👤</div>
             <h2 style="color:var(--primary-color);font-size:1.4rem;">Bienvenido</h2>
         </div>
         <div class="auth-tabs">
             <button class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Iniciar sesion</button>
             <button class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Registrarse</button>
         </div>
-
-        <!-- LOGIN -->
         <div class="auth-form active" id="formLogin">
-            <div class="checkout-field">
-                <label class="checkout-label">Correo electronico</label>
-                <input class="checkout-input" id="loginEmail" type="email" placeholder="tucorreo@ejemplo.com">
-                <span class="error-msg" id="loginEmailErr"></span>
-            </div>
-            <div class="checkout-field">
-                <label class="checkout-label">Contrasena</label>
-                <input class="checkout-input" id="loginPass" type="password" placeholder="••••••••">
-                <span class="error-msg" id="loginPassErr"></span>
-            </div>
+            <div class="checkout-field"><label class="checkout-label">Correo electronico</label><input class="checkout-input" id="loginEmail" type="email" placeholder="tucorreo@ejemplo.com"><span class="error-msg" id="loginEmailErr"></span></div>
+            <div class="checkout-field"><label class="checkout-label">Contrasena</label><input class="checkout-input" id="loginPass" type="password" placeholder="••••••••"><span class="error-msg" id="loginPassErr"></span></div>
             <span class="error-msg" id="loginGeneralErr" style="display:block;margin-bottom:0.75rem;font-size:0.82rem;"></span>
             <button class="btn-primary" style="width:100%;" onclick="doLogin()">Iniciar sesion</button>
-            <p style="text-align:center;font-size:0.8rem;color:var(--text-light);margin-top:1rem;">
-                ¿No tienes cuenta? <span style="color:var(--accent-color);cursor:pointer;font-weight:600;" onclick="switchAuthTab('register')">Registrate aqui</span>
-            </p>
+            <p style="text-align:center;font-size:0.8rem;color:var(--text-light);margin-top:1rem;">¿No tienes cuenta? <span style="color:var(--accent-color);cursor:pointer;font-weight:600;" onclick="switchAuthTab('register')">Registrate aqui</span></p>
         </div>
-
-        <!-- REGISTER -->
         <div class="auth-form" id="formRegister">
-            <div class="checkout-field">
-                <label class="checkout-label">Nombre completo</label>
-                <input class="checkout-input" id="regName" type="text" placeholder="Tu nombre">
-                <span class="error-msg" id="regNameErr"></span>
-            </div>
-            <div class="checkout-field">
-                <label class="checkout-label">Correo electronico</label>
-                <input class="checkout-input" id="regEmail" type="email" placeholder="tucorreo@ejemplo.com">
-                <span class="error-msg" id="regEmailErr"></span>
-            </div>
-            <div class="checkout-field">
-                <label class="checkout-label">Contrasena</label>
-                <input class="checkout-input" id="regPass" type="password" placeholder="Minimo 6 caracteres">
-                <span class="error-msg" id="regPassErr"></span>
-            </div>
-            <div class="checkout-field">
-                <label class="checkout-label">Confirmar contrasena</label>
-                <input class="checkout-input" id="regPass2" type="password" placeholder="Repite tu contrasena">
-                <span class="error-msg" id="regPass2Err"></span>
-            </div>
+            <div class="checkout-field"><label class="checkout-label">Nombre completo</label><input class="checkout-input" id="regName" type="text" placeholder="Tu nombre"><span class="error-msg" id="regNameErr"></span></div>
+            <div class="checkout-field"><label class="checkout-label">Correo electronico</label><input class="checkout-input" id="regEmail" type="email" placeholder="tucorreo@ejemplo.com"><span class="error-msg" id="regEmailErr"></span></div>
+            <div class="checkout-field"><label class="checkout-label">Contrasena</label><input class="checkout-input" id="regPass" type="password" placeholder="Minimo 6 caracteres"><span class="error-msg" id="regPassErr"></span></div>
+            <div class="checkout-field"><label class="checkout-label">Confirmar contrasena</label><input class="checkout-input" id="regPass2" type="password" placeholder="Repite tu contrasena"><span class="error-msg" id="regPass2Err"></span></div>
             <span class="error-msg" id="regGeneralErr" style="display:block;margin-bottom:0.75rem;font-size:0.82rem;"></span>
             <button class="btn-primary" style="width:100%;" onclick="doRegister()">Crear cuenta</button>
-            <p style="text-align:center;font-size:0.8rem;color:var(--text-light);margin-top:1rem;">
-                ¿Ya tienes cuenta? <span style="color:var(--accent-color);cursor:pointer;font-weight:600;" onclick="switchAuthTab('login')">Inicia sesion</span>
-            </p>
+            <p style="text-align:center;font-size:0.8rem;color:var(--text-light);margin-top:1rem;">¿Ya tienes cuenta? <span style="color:var(--accent-color);cursor:pointer;font-weight:600;" onclick="switchAuthTab('login')">Inicia sesion</span></p>
+        </div>
+    </div>
+</div>
+
+<!-- AVATAR PICKER MODAL -->
+<div class="modal-overlay" id="avatarModal" onclick="if(event.target.id==='avatarModal')closeAvatarModal()">
+    <div class="modal-content" style="max-width:400px;">
+        <button class="close-btn" onclick="closeAvatarModal()">&times;</button>
+        <h2 style="color:var(--primary-color);font-size:1.2rem;margin-bottom:1.25rem;">Cambiar foto de perfil</h2>
+
+        <div id="avatarPreviewWrap">
+            <img id="avatarPreview" src="" alt="Preview">
+            <p style="font-size:0.82rem;color:var(--text-light);margin-top:0.5rem;">Vista previa</p>
+        </div>
+
+        <video id="cameraStream" autoplay playsinline></video>
+        <canvas id="cameraCanvas"></canvas>
+
+        <div class="avatar-picker-opts" id="avatarOpts">
+            <div class="avatar-opt" onclick="triggerFileInput()">
+                <span>🖼</span>Subir imagen
+            </div>
+            <div class="avatar-opt" id="cameraOpt" onclick="startCamera()">
+                <span>📷</span>Tomar foto
+            </div>
+        </div>
+
+        <input type="file" id="avatarFileInput" accept="image/*" style="display:none" onchange="handleFileAvatar(event)">
+
+        <div id="cameraControls" style="display:none;gap:0.75rem;flex-direction:column;">
+            <button class="btn-primary" onclick="capturePhoto()">Tomar foto</button>
+            <button class="btn-secondary" onclick="stopCamera()">Cancelar camara</button>
+        </div>
+
+        <div id="avatarSaveRow" style="display:none;margin-top:0.75rem;">
+            <button class="btn-primary" style="width:100%;" onclick="saveAvatar()">Guardar foto</button>
         </div>
     </div>
 </div>
@@ -1013,11 +756,11 @@
         </div>
         <p style="color:var(--text-main);font-weight:600;margin-bottom:0.85rem;font-size:0.92rem;">Selecciona tu metodo de pago:</p>
         <div style="display:flex;flex-direction:column;gap:0.7rem;">
-            <div class="pay-method" onclick="openCheckoutModal('Tarjeta de Credito / Debito','💳')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">💳</span><div><strong style="font-size:0.88rem;">Tarjeta de Credito / Debito</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Visa, Mastercard, American Express</span></div></div><span style="color:var(--accent-color);">›</span></div>
+            <div class="pay-method" onclick="openCheckoutModal('Tarjeta','💳')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">💳</span><div><strong style="font-size:0.88rem;">Tarjeta de Credito / Debito</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Visa, Mastercard, American Express</span></div></div><span style="color:var(--accent-color);">›</span></div>
             <div class="pay-method" onclick="openCheckoutModal('PayPal','🅿️')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">🅿️</span><div><strong style="font-size:0.88rem;">PayPal</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Paga con tu cuenta PayPal</span></div></div><span style="color:var(--accent-color);">›</span></div>
-            <div class="pay-method" onclick="openCheckoutModal('Transferencia Bancaria','🏦')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">🏦</span><div><strong style="font-size:0.88rem;">Transferencia Bancaria</strong><br><span style="font-size:0.75rem;color:var(--text-light);">SPEI / Transferencia directa</span></div></div><span style="color:var(--accent-color);">›</span></div>
-            <div class="pay-method" onclick="openCheckoutModal('Criptomonedas','🪙')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">🪙</span><div><strong style="font-size:0.88rem;">Criptomonedas</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Bitcoin, Ethereum, USDT</span></div></div><span style="color:var(--accent-color);">›</span></div>
-            <div class="pay-method" onclick="openCheckoutModal('Google Pay / Apple Pay','📱')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">📱</span><div><strong style="font-size:0.88rem;">Google Pay / Apple Pay</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Pago rapido desde tu dispositivo</span></div></div><span style="color:var(--accent-color);">›</span></div>
+            <div class="pay-method" onclick="openCheckoutModal('Transferencia','🏦')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">🏦</span><div><strong style="font-size:0.88rem;">Transferencia Bancaria</strong><br><span style="font-size:0.75rem;color:var(--text-light);">SPEI / Transferencia directa</span></div></div><span style="color:var(--accent-color);">›</span></div>
+            <div class="pay-method" onclick="openCheckoutModal('Cripto','🪙')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">🪙</span><div><strong style="font-size:0.88rem;">Criptomonedas</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Bitcoin, Ethereum, USDT</span></div></div><span style="color:var(--accent-color);">›</span></div>
+            <div class="pay-method" onclick="openCheckoutModal('GPay','📱')"><div style="display:flex;align-items:center;gap:0.85rem;"><span style="font-size:1.4rem;">📱</span><div><strong style="font-size:0.88rem;">Google Pay / Apple Pay</strong><br><span style="font-size:0.75rem;color:var(--text-light);">Pago rapido desde tu dispositivo</span></div></div><span style="color:var(--accent-color);">›</span></div>
         </div>
         <div style="text-align:center;margin-top:1.1rem;"><span style="font-size:0.72rem;color:var(--text-light);">Pago 100% seguro y encriptado</span></div>
     </div>
@@ -1035,9 +778,7 @@
         <h2 style="color:var(--primary-color);margin-bottom:0.65rem;">Pago Exitoso!</h2>
         <p style="color:var(--text-light);margin-bottom:0.45rem;font-size:0.93rem;">Gracias de verdad. Te lo juro que lo voy a usar bien.</p>
         <p style="color:var(--text-light);font-size:0.84rem;margin-bottom:1.25rem;">Recibiras un correo... cuando aprenda a programar emails.</p>
-        <div style="background:var(--bg-color);border-radius:13px;padding:0.9rem;margin-bottom:1.25rem;">
-            <p style="font-size:0.82rem;color:var(--accent-color);font-weight:600;" id="successPlanInfo"></p>
-        </div>
+        <div style="background:var(--bg-color);border-radius:13px;padding:0.9rem;margin-bottom:1.25rem;"><p style="font-size:0.82rem;color:var(--accent-color);font-weight:600;" id="successPlanInfo"></p></div>
         <button class="btn-primary" style="width:100%;" onclick="closeAllModals()">Perfecto, gracias!</button>
     </div>
 </div>
@@ -1062,62 +803,68 @@
 </div>
 
 <script>
-// ===== STORAGE HELPERS =====
-const DB_KEY = 'evq_users';
-const SESSION_KEY = 'evq_session';
+// ===== STORAGE =====
+const DB='evq_users', SESS='evq_session', AVA='evq_avatar_';
+const getUsers=()=>{try{return JSON.parse(localStorage.getItem(DB))||{};}catch{return{};}};
+const saveUsers=u=>localStorage.setItem(DB,JSON.stringify(u));
+const getSession=()=>{try{return JSON.parse(localStorage.getItem(SESS));}catch{return null;}};
+const saveSession=s=>localStorage.setItem(SESS,JSON.stringify(s));
+const clearSession=()=>localStorage.removeItem(SESS);
+const getAvatar=email=>{try{return localStorage.getItem(AVA+email)||null;}catch{return null;}};
+const saveAvatarStore=(email,data)=>localStorage.setItem(AVA+email,data);
 
-function getUsers() {
-    try { return JSON.parse(localStorage.getItem(DB_KEY)) || {}; } catch { return {}; }
+let currentUser=getSession();
+let pendingAvatarData=null;
+let cameraStream=null;
+
+// ===== TOAST =====
+function showToast(msg,type='info'){
+    const t=document.getElementById('toast');
+    t.textContent=msg; t.className='toast '+type;
+    void t.offsetWidth;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),3000);
 }
 
-function saveUsers(u) { localStorage.setItem(DB_KEY, JSON.stringify(u)); }
-
-function getSession() {
-    try { return JSON.parse(localStorage.getItem(SESSION_KEY)); } catch { return null; }
-}
-
-function saveSession(s) { localStorage.setItem(SESSION_KEY, JSON.stringify(s)); }
-
-function clearSession() { localStorage.removeItem(SESSION_KEY); }
-
-// ===== AUTH STATE =====
-let currentUser = getSession();
-
-function renderHeaderAuth() {
-    const box = document.getElementById('headerAuthBtn');
-    if (currentUser) {
-        const initials = currentUser.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-        box.innerHTML = `<div class="user-avatar" onclick="openTab('config',getTabBtn(5))" title="${currentUser.name}">${initials}</div>`;
+// ===== HEADER AUTH =====
+function renderHeaderAuth(){
+    const box=document.getElementById('headerAuthBtn');
+    if(currentUser){
+        const av=getAvatar(currentUser.email);
+        const initials=currentUser.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+        box.innerHTML=`<div class="user-avatar-nav" onclick="openTab('config',getTabBtn(6))" title="${currentUser.name}">${av?`<img src="${av}" alt="avatar">`:`<span>${initials}</span>`}</div>`;
     } else {
-        box.innerHTML = `<button class="btn-auth-header" onclick="openAuthModal()">Iniciar sesion</button>`;
+        box.innerHTML=`<button class="btn-auth-header" onclick="openAuthModal()">Iniciar sesion</button>`;
     }
 }
 
-function renderConfigAccount() {
-    const box = document.getElementById('configAccountContent');
-    if (!box) return;
-    if (currentUser) {
-        const initials = currentUser.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
-        const joined = new Date(currentUser.joined).toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
-        box.innerHTML = `
+// ===== CONFIG ACCOUNT =====
+function renderConfigAccount(){
+    const box=document.getElementById('configAccountContent');
+    if(!box)return;
+    if(currentUser){
+        const av=getAvatar(currentUser.email);
+        const initials=currentUser.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+        const joined=new Date(currentUser.joined).toLocaleDateString('es-MX',{year:'numeric',month:'long',day:'numeric'});
+        box.innerHTML=`
             <div class="user-info-box">
-                <div class="avatar-big">${initials}</div>
+                <div class="avatar-big-wrap" onclick="openAvatarModal()" title="Cambiar foto">
+                    <div class="avatar-big">${av?`<img src="${av}" alt="avatar">`:`<span>${initials}</span>`}</div>
+                    <div class="avatar-overlay">Cambiar<br>foto</div>
+                </div>
                 <div class="user-info-text">
                     <div class="name">${currentUser.name}</div>
                     <div class="email">${currentUser.email}</div>
-                    <span class="plan-badge">${currentUser.plan || 'Plan Gratuito'}</span>
+                    <span class="plan-badge">${currentUser.plan||'Plan Gratuito'}</span>
                 </div>
             </div>
-            <div style="font-size:0.82rem;color:var(--text-light);margin-bottom:1.25rem;">
-                Miembro desde: ${joined}
-            </div>
+            <div style="font-size:0.82rem;color:var(--text-light);margin-bottom:1.25rem;">Miembro desde: ${joined}</div>
             <div class="config-btn-row">
                 <button class="config-btn config-btn-outline" onclick="openEditProfile()">Editar perfil</button>
                 <button class="config-btn config-btn-danger" onclick="doLogout()">Cerrar sesion</button>
-            </div>
-        `;
+            </div>`;
     } else {
-        box.innerHTML = `
+        box.innerHTML=`
             <div class="login-prompt">
                 <div class="big-icon">🔐</div>
                 <h3>No has iniciado sesion</h3>
@@ -1126,340 +873,323 @@ function renderConfigAccount() {
                     <button class="config-btn config-btn-primary" onclick="openAuthModal('login')">Iniciar sesion</button>
                     <button class="config-btn config-btn-outline" onclick="openAuthModal('register')">Crear cuenta</button>
                 </div>
-            </div>
-        `;
+            </div>`;
     }
 }
 
-// ===== AUTH MODAL =====
-function openAuthModal(tab) {
+// ===== AUTH =====
+function openAuthModal(tab){
     document.getElementById('authModal').classList.add('active');
-    switchAuthTab(tab || 'login');
+    switchAuthTab(tab||'login');
     clearAuthErrors();
 }
 
-function closeAuthModal() { document.getElementById('authModal').classList.remove('active'); }
-function closeAuthOnOverlay(e) { if(e.target.id==='authModal') closeAuthModal(); }
+function closeAuthModal(){document.getElementById('authModal').classList.remove('active');}
 
-function switchAuthTab(tab) {
-    document.getElementById('tabLogin').classList.toggle('active', tab==='login');
-    document.getElementById('tabRegister').classList.toggle('active', tab==='register');
-    document.getElementById('formLogin').classList.toggle('active', tab==='login');
-    document.getElementById('formRegister').classList.toggle('active', tab==='register');
+function switchAuthTab(tab){
+    document.getElementById('tabLogin').classList.toggle('active',tab==='login');
+    document.getElementById('tabRegister').classList.toggle('active',tab==='register');
+    document.getElementById('formLogin').classList.toggle('active',tab==='login');
+    document.getElementById('formRegister').classList.toggle('active',tab==='register');
     clearAuthErrors();
 }
 
-function clearAuthErrors() {
-    ['loginEmail','loginPass','loginGeneral','regName','regEmail','regPass','regPass2','regGeneral']
-        .forEach(id => {
-            const el = document.getElementById(id+'Err') || document.getElementById(id+'GeneralErr');
-            if(el) el.textContent='';
-        });
+function clearAuthErrors(){
     ['loginEmailErr','loginPassErr','loginGeneralErr','regNameErr','regEmailErr','regPassErr','regPass2Err','regGeneralErr']
-        .forEach(id => { const el=document.getElementById(id); if(el) el.textContent=''; });
+        .forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='';});
     ['loginEmail','loginPass','regName','regEmail','regPass','regPass2']
-        .forEach(id => { const el=document.getElementById(id); if(el) el.classList.remove('input-error'); });
+        .forEach(id=>{const el=document.getElementById(id);if(el){el.classList.remove('input-error');el.value='';}});
 }
 
-function doLogin() {
+function doLogin(){
     clearAuthErrors();
-    const email = document.getElementById('loginEmail').value.trim();
-    const pass  = document.getElementById('loginPass').value;
-    let ok = true;
-
-    if (!email || !email.includes('@')) {
-        document.getElementById('loginEmail').classList.add('input-error');
-        document.getElementById('loginEmailErr').textContent = 'Ingresa un correo valido';
-        ok = false;
-    }
-    if (!pass) {
-        document.getElementById('loginPass').classList.add('input-error');
-        document.getElementById('loginPassErr').textContent = 'Ingresa tu contrasena';
-        ok = false;
-    }
-    if (!ok) return;
-
-    const users = getUsers();
-    const user = users[email.toLowerCase()];
-
-    if (!user) {
-        document.getElementById('loginGeneralErr').textContent = 'No existe una cuenta con ese correo. Registrate primero.';
-        return;
-    }
-    if (user.pass !== btoa(pass)) {
-        document.getElementById('loginPass').classList.add('input-error');
-        document.getElementById('loginPassErr').textContent = 'Contrasena incorrecta';
-        return;
-    }
-
-    currentUser = { name:user.name, email:user.email, plan:user.plan, joined:user.joined };
+    const email=document.getElementById('loginEmail').value.trim();
+    const pass=document.getElementById('loginPass').value;
+    let ok=true;
+    if(!email||!email.includes('@')){document.getElementById('loginEmail').classList.add('input-error');document.getElementById('loginEmailErr').textContent='Ingresa un correo valido';ok=false;}
+    if(!pass){document.getElementById('loginPass').classList.add('input-error');document.getElementById('loginPassErr').textContent='Ingresa tu contrasena';ok=false;}
+    if(!ok)return;
+    const users=getUsers();
+    const user=users[email.toLowerCase()];
+    if(!user){document.getElementById('loginGeneralErr').textContent='No existe una cuenta con ese correo.';return;}
+    if(user.pass!==btoa(pass)){document.getElementById('loginPass').classList.add('input-error');document.getElementById('loginPassErr').textContent='Contrasena incorrecta';return;}
+    currentUser={name:user.name,email:user.email,plan:user.plan,joined:user.joined};
     saveSession(currentUser);
     closeAuthModal();
     renderHeaderAuth();
     renderConfigAccount();
+    showToast(`Bienvenido, ${user.name.split(' ')[0]}!`,'success');
 }
 
-function doRegister() {
+function doRegister(){
     clearAuthErrors();
-    const name  = document.getElementById('regName').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const pass  = document.getElementById('regPass').value;
-    const pass2 = document.getElementById('regPass2').value;
-    let ok = true;
-
-    if (!name || name.length < 2) {
-        document.getElementById('regName').classList.add('input-error');
-        document.getElementById('regNameErr').textContent = 'Ingresa tu nombre completo';
-        ok = false;
-    }
-    if (!email || !email.includes('@') || !email.includes('.')) {
-        document.getElementById('regEmail').classList.add('input-error');
-        document.getElementById('regEmailErr').textContent = 'Ingresa un correo valido';
-        ok = false;
-    }
-    if (!pass || pass.length < 6) {
-        document.getElementById('regPass').classList.add('input-error');
-        document.getElementById('regPassErr').textContent = 'La contrasena debe tener al menos 6 caracteres';
-        ok = false;
-    }
-    if (pass !== pass2) {
-        document.getElementById('regPass2').classList.add('input-error');
-        document.getElementById('regPass2Err').textContent = 'Las contrasenas no coinciden';
-        ok = false;
-    }
-    if (!ok) return;
-
-    const users = getUsers();
-    if (users[email.toLowerCase()]) {
-        document.getElementById('regEmail').classList.add('input-error');
-        document.getElementById('regEmailErr').textContent = 'Ya existe una cuenta con este correo';
-        return;
-    }
-
-    users[email.toLowerCase()] = {
-        name, email: email.toLowerCase(),
-        pass: btoa(pass),
-        plan: 'Plan Gratuito',
-        joined: new Date().toISOString()
-    };
+    const name=document.getElementById('regName').value.trim();
+    const email=document.getElementById('regEmail').value.trim();
+    const pass=document.getElementById('regPass').value;
+    const pass2=document.getElementById('regPass2').value;
+    let ok=true;
+    if(!name||name.length<2){document.getElementById('regName').classList.add('input-error');document.getElementById('regNameErr').textContent='Ingresa tu nombre completo';ok=false;}
+    if(!email||!email.includes('@')||!email.includes('.')){document.getElementById('regEmail').classList.add('input-error');document.getElementById('regEmailErr').textContent='Ingresa un correo valido';ok=false;}
+    if(!pass||pass.length<6){document.getElementById('regPass').classList.add('input-error');document.getElementById('regPassErr').textContent='Minimo 6 caracteres';ok=false;}
+    if(pass!==pass2){document.getElementById('regPass2').classList.add('input-error');document.getElementById('regPass2Err').textContent='Las contrasenas no coinciden';ok=false;}
+    if(!ok)return;
+    const users=getUsers();
+    if(users[email.toLowerCase()]){document.getElementById('regEmail').classList.add('input-error');document.getElementById('regEmailErr').textContent='Ya existe una cuenta con este correo';return;}
+    users[email.toLowerCase()]={name,email:email.toLowerCase(),pass:btoa(pass),plan:'Plan Gratuito',joined:new Date().toISOString()};
     saveUsers(users);
-
-    currentUser = { name, email: email.toLowerCase(), plan: 'Plan Gratuito', joined: new Date().toISOString() };
+    currentUser={name,email:email.toLowerCase(),plan:'Plan Gratuito',joined:new Date().toISOString()};
     saveSession(currentUser);
     closeAuthModal();
     renderHeaderAuth();
     renderConfigAccount();
+    showToast('Cuenta creada correctamente. Bienvenido!','success');
 }
 
-function doLogout() {
-    currentUser = null;
-    clearSession();
-    renderHeaderAuth();
-    renderConfigAccount();
+function doLogout(){
+    currentUser=null;clearSession();
+    renderHeaderAuth();renderConfigAccount();
+    showToast('Sesion cerrada','info');
 }
 
-function openEditProfile() {
-    if (!currentUser) return;
-    const box = document.getElementById('configAccountContent');
-    box.innerHTML = `
-        <div class="checkout-field">
-            <label class="checkout-label">Nombre completo</label>
-            <input class="checkout-input" id="editName" value="${currentUser.name}">
-        </div>
-        <div class="checkout-field">
-            <label class="checkout-label">Correo (no se puede cambiar)</label>
-            <input class="checkout-input" value="${currentUser.email}" disabled style="opacity:0.6;cursor:not-allowed;">
-        </div>
-        <div class="checkout-field">
-            <label class="checkout-label">Nueva contrasena (dejar vacio para no cambiar)</label>
-            <input class="checkout-input" id="editPass" type="password" placeholder="Nueva contrasena">
-        </div>
-        <span class="success-msg" id="editSuccessMsg" style="display:block;margin-bottom:0.5rem;"></span>
+function openEditProfile(){
+    if(!currentUser)return;
+    const box=document.getElementById('configAccountContent');
+    box.innerHTML=`
+        <div class="checkout-field"><label class="checkout-label">Nombre completo</label><input class="checkout-input" id="editName" value="${currentUser.name}"></div>
+        <div class="checkout-field"><label class="checkout-label">Correo (no editable)</label><input class="checkout-input" value="${currentUser.email}" disabled style="opacity:0.6;cursor:not-allowed;"></div>
+        <div class="checkout-field"><label class="checkout-label">Nueva contrasena (opcional)</label><input class="checkout-input" id="editPass" type="password" placeholder="Dejar vacio para no cambiar"></div>
         <div class="config-btn-row">
             <button class="config-btn config-btn-primary" onclick="saveEditProfile()">Guardar cambios</button>
             <button class="config-btn config-btn-outline" onclick="renderConfigAccount()">Cancelar</button>
-        </div>
-    `;
+        </div>`;
 }
 
-function saveEditProfile() {
-    const name = document.getElementById('editName').value.trim();
-    const pass = document.getElementById('editPass').value;
-    if (!name) return;
-    const users = getUsers();
-    const u = users[currentUser.email];
-    if (!u) return;
-    u.name = name;
-    if (pass && pass.length >= 6) u.pass = btoa(pass);
+function saveEditProfile(){
+    const name=document.getElementById('editName').value.trim();
+    const pass=document.getElementById('editPass').value;
+    if(!name)return;
+    const users=getUsers();
+    const u=users[currentUser.email];
+    if(!u)return;
+    u.name=name;
+    if(pass&&pass.length>=6)u.pass=btoa(pass);
     saveUsers(users);
-    currentUser.name = name;
+    currentUser.name=name;
     saveSession(currentUser);
     renderHeaderAuth();
     renderConfigAccount();
+    showToast('Perfil actualizado','success');
+}
+
+// ===== AVATAR =====
+function openAvatarModal(){
+    pendingAvatarData=null;
+    document.getElementById('avatarPreviewWrap').style.display='none';
+    document.getElementById('cameraStream').style.display='none';
+    document.getElementById('cameraControls').style.display='none';
+    document.getElementById('avatarSaveRow').style.display='none';
+    document.getElementById('avatarOpts').style.display='grid';
+    document.getElementById('avatarModal').classList.add('active');
+}
+
+function closeAvatarModal(){
+    stopCamera();
+    document.getElementById('avatarModal').classList.remove('active');
+}
+
+function triggerFileInput(){
+    document.getElementById('avatarFileInput').value='';
+    document.getElementById('avatarFileInput').click();
+}
+
+function handleFileAvatar(e){
+    const file=e.target.files[0];
+    if(!file)return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+        pendingAvatarData=ev.target.result;
+        showAvatarPreview(pendingAvatarData);
+    };
+    reader.readAsDataURL(file);
+}
+
+function showAvatarPreview(src){
+    document.getElementById('avatarPreview').src=src;
+    document.getElementById('avatarPreviewWrap').style.display='block';
+    document.getElementById('avatarOpts').style.display='none';
+    document.getElementById('avatarSaveRow').style.display='block';
+    document.getElementById('cameraStream').style.display='none';
+    document.getElementById('cameraControls').style.display='none';
+}
+
+async function startCamera(){
+    try{
+        const stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user'},audio:false});
+        cameraStream=stream;
+        const vid=document.getElementById('cameraStream');
+        vid.srcObject=stream;
+        vid.style.display='block';
+        document.getElementById('avatarOpts').style.display='none';
+        document.getElementById('cameraControls').style.display='flex';
+        document.getElementById('avatarPreviewWrap').style.display='none';
+        document.getElementById('avatarSaveRow').style.display='none';
+    } catch(err){
+        showToast('No se pudo acceder a la camara','error');
+    }
+}
+
+function capturePhoto(){
+    const vid=document.getElementById('cameraStream');
+    const canvas=document.getElementById('cameraCanvas');
+    canvas.width=vid.videoWidth;
+    canvas.height=vid.videoHeight;
+    canvas.getContext('2d').drawImage(vid,0,0);
+    pendingAvatarData=canvas.toDataURL('image/jpeg',0.85);
+    stopCamera();
+    showAvatarPreview(pendingAvatarData);
+}
+
+function stopCamera(){
+    if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}
+    const vid=document.getElementById('cameraStream');
+    vid.srcObject=null;vid.style.display='none';
+    document.getElementById('cameraControls').style.display='none';
+}
+
+function saveAvatar(){
+    if(!pendingAvatarData||!currentUser)return;
+    saveAvatarStore(currentUser.email,pendingAvatarData);
+    closeAvatarModal();
+    renderHeaderAuth();
+    renderConfigAccount();
+    showToast('Foto de perfil actualizada','success');
 }
 
 // ===== DARK MODE =====
-function toggleDark() {
-    const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    document.getElementById('darkToggle').classList.toggle('on', !isDark);
-    try { localStorage.setItem('evq_theme', isDark ? 'light' : 'dark'); } catch{}
+function toggleDark(){
+    const html=document.documentElement;
+    const isDark=html.getAttribute('data-theme')==='dark';
+    html.setAttribute('data-theme',isDark?'light':'dark');
+    document.getElementById('darkToggle').classList.toggle('on',!isDark);
+    try{localStorage.setItem('evq_theme',isDark?'light':'dark');}catch{}
+    showToast(isDark?'Modo claro activado':'Modo oscuro activado','info');
 }
 
 // ===== NAV =====
-function getTabBtn(i) {
-    const isMobile = window.innerWidth <= 900;
-    const btns = isMobile
-        ? document.querySelectorAll('.mobile-menu .tab-btn')
-        : document.querySelectorAll('.tabs .tab-btn');
-    return btns[i] || null;
+function getTabBtn(i){
+    const mob=window.innerWidth<=900;
+    const btns=mob?document.querySelectorAll('.mobile-menu .tab-btn'):document.querySelectorAll('.tabs .tab-btn');
+    return btns[i]||null;
 }
 
-function openTab(tabId, btnEl) {
+function openTab(tabId,btnEl){
     document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('.skill-info.show').forEach(i=>i.classList.remove('show'));
-    const el = document.getElementById(tabId);
-    if(el) el.classList.add('active');
-    if(btnEl) btnEl.classList.add('active');
+    const el=document.getElementById(tabId);
+    if(el)el.classList.add('active');
+    if(btnEl)btnEl.classList.add('active');
     window.scrollTo({top:0,behavior:'smooth'});
-    if(tabId==='config') renderConfigAccount();
+    if(tabId==='config')renderConfigAccount();
 }
 
-function toggleMenu() {
+function toggleMenu(){
     document.getElementById('mobileMenu').classList.toggle('open');
     document.getElementById('hamburger').classList.toggle('open');
 }
 
-function closeMenu() {
+function closeMenu(){
     document.getElementById('mobileMenu').classList.remove('open');
     document.getElementById('hamburger').classList.remove('open');
 }
 
-// ===== IMAGE MODAL =====
-function openImageModal(img) {
-    document.getElementById('imageModalImg').src = img.src;
-    document.getElementById('imageModal').classList.add('active');
+// ===== CONTACT =====
+function sendContact(){
+    const name=document.getElementById('ctName').value.trim();
+    const email=document.getElementById('ctEmail').value.trim();
+    const msg=document.getElementById('ctMsg').value.trim();
+    let ok=true;
+    ['ctNameErr','ctEmailErr','ctMsgErr'].forEach(id=>document.getElementById(id).textContent='');
+    if(!name){document.getElementById('ctName').classList.add('input-error');document.getElementById('ctNameErr').textContent='Ingresa tu nombre';ok=false;}
+    else document.getElementById('ctName').classList.remove('input-error');
+    if(!email||!email.includes('@')){document.getElementById('ctEmail').classList.add('input-error');document.getElementById('ctEmailErr').textContent='Ingresa un correo valido';ok=false;}
+    else document.getElementById('ctEmail').classList.remove('input-error');
+    if(!msg||msg.length<10){document.getElementById('ctMsg').classList.add('input-error');document.getElementById('ctMsgErr').textContent='El mensaje debe tener al menos 10 caracteres';ok=false;}
+    else document.getElementById('ctMsg').classList.remove('input-error');
+    if(!ok)return;
+    document.getElementById('ctName').value='';
+    document.getElementById('ctEmail').value='';
+    document.getElementById('ctSubject').value='';
+    document.getElementById('ctMsg').value='';
+    showToast('Mensaje enviado! Eduardo lo revisara cuando recuerde revisar su correo.','success');
 }
 
-function closeImageModal() { document.getElementById('imageModal').classList.remove('active'); }
+// ===== MODALS =====
+function openImageModal(img){document.getElementById('imageModalImg').src=img.src;document.getElementById('imageModal').classList.add('active');}
+function closeImageModal(){document.getElementById('imageModal').classList.remove('active');}
 
-// ===== PROJECT MODAL =====
-const projectsData = [
-    {title:'Sistema en C#',image:'https://picsum.photos/seed/proj1/500/300',description:'Una completa aplicacion de escritorio desarrollada en C# con interfaz Windows Forms, conectada a SQL Server para la gestion eficiente de inventarios.',details:'<strong>Tecnologias:</strong> C#, .NET Framework, SQL Server, Windows Forms<br><strong>Caracteristicas:</strong> CRUD completo, reportes, validaciones avanzadas, autenticacion<br><strong>Duracion:</strong> 3 meses<br><strong>Rol:</strong> Desarrollador principal'},
-    {title:'Gestion de Base de Datos',image:'https://picsum.photos/seed/proj2/500/300',description:'Diseno e implementacion de un modelo relacional optimizado con normalizacion hasta 3FN, indices estrategicos y procedimientos almacenados.',details:'<strong>Tecnologias:</strong> SQL Server, MySQL, Database Design<br><strong>Caracteristicas:</strong> Modelo ER, triggers, vistas parametrizadas, backups<br><strong>Optimizacion:</strong> Reduccion de tiempo de queries en 70%'},
-    {title:'Experimentos en F#',image:'https://picsum.photos/seed/proj3/500/300',description:'Exploracion del paradigma funcional mediante implementacion de algoritmos complejos de procesamiento de datos y analisis matematico.',details:'<strong>Tecnologias:</strong> F#, .NET, Functional Programming<br><strong>Proyectos:</strong> Analisis estadistico, algoritmos de optimizacion<br><strong>Enfoque:</strong> Codigo limpio y mantenible'}
+const projectsData=[
+    {title:'Sistema en C#',image:'https://picsum.photos/seed/proj1/500/300',description:'Aplicacion de escritorio con C# y Windows Forms para gestion de inventarios con SQL Server.',details:'<strong>Tecnologias:</strong> C#, .NET Framework, SQL Server, Windows Forms<br><strong>Caracteristicas:</strong> CRUD completo, reportes, validaciones, autenticacion<br><strong>Duracion:</strong> 3 meses<br><strong>Rol:</strong> Desarrollador principal'},
+    {title:'Gestion de Base de Datos',image:'https://picsum.photos/seed/proj2/500/300',description:'Modelo relacional optimizado con normalizacion 3FN, indices estrategicos y procedimientos almacenados.',details:'<strong>Tecnologias:</strong> SQL Server, MySQL, Database Design<br><strong>Caracteristicas:</strong> Modelo ER, triggers, vistas, backups<br><strong>Optimizacion:</strong> Reduccion de queries en 70%'},
+    {title:'Experimentos en F#',image:'https://picsum.photos/seed/proj3/500/300',description:'Paradigma funcional aplicado a algoritmos de procesamiento de datos y analisis matematico.',details:'<strong>Tecnologias:</strong> F#, .NET, Functional Programming<br><strong>Proyectos:</strong> Analisis estadistico, algoritmos de optimizacion<br><strong>Enfoque:</strong> Codigo limpio y mantenible'}
 ];
 
-function openModal(i) {
-    const p = projectsData[i];
-    document.getElementById('modalImg').src = p.image;
-    document.getElementById('modalTitle').textContent = p.title;
-    document.getElementById('modalDescription').textContent = p.description;
-    document.getElementById('modalDetails').innerHTML = p.details;
+function openModal(i){
+    const p=projectsData[i];
+    document.getElementById('modalImg').src=p.image;
+    document.getElementById('modalTitle').textContent=p.title;
+    document.getElementById('modalDescription').textContent=p.description;
+    document.getElementById('modalDetails').innerHTML=p.details;
     document.getElementById('projectModal').classList.add('active');
 }
-
-function closeModal() { document.getElementById('projectModal').classList.remove('active'); }
+function closeModal(){document.getElementById('projectModal').classList.remove('active');}
 
 // ===== PAYMENT =====
-let currentPlan='', currentPrice='';
+let currentPlan='',currentPrice='';
 
-function openPaymentModal(plan,price) {
-    currentPlan=plan; currentPrice=price;
+function openPaymentModal(plan,price){
+    currentPlan=plan;currentPrice=price;
     document.getElementById('paymentModalTitle').textContent=`Plan ${plan} — $${price}/mes`;
     document.getElementById('paymentModal').classList.add('active');
 }
+function closePaymentModal(){document.getElementById('paymentModal').classList.remove('active');}
 
-function closePaymentModal() { document.getElementById('paymentModal').classList.remove('active'); }
-
-function openCheckoutModal(method, icon) {
+function openCheckoutModal(method,icon){
     closePaymentModal();
-    const box = document.getElementById('checkoutContent');
-    let formHtml = '';
-
-    const header = (ico, title) => `
-        <div style="text-align:center;margin-bottom:1.25rem;">
-            <div style="font-size:1.8rem;">${ico}</div>
-            <h2 style="color:var(--primary-color);font-size:1.2rem;margin-top:0.4rem;">${title}</h2>
-            <p style="color:var(--text-light);font-size:0.82rem;">Plan ${currentPlan} · $${currentPrice}/mes</p>
-        </div>`;
-
-    if(method==='Tarjeta de Credito / Debito') {
-        formHtml = header('💳','Datos de tu Tarjeta') + `
-            <div class="checkout-field"><label class="checkout-label">Nombre en la tarjeta</label><input class="checkout-input" placeholder="Ej. Juan Perez" maxlength="40"></div>
-            <div class="checkout-field"><label class="checkout-label">Numero de tarjeta</label><input class="checkout-input" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)"></div>
-            <div class="checkout-row">
-                <div class="checkout-field"><label class="checkout-label">Vencimiento</label><input class="checkout-input" placeholder="MM/AA" maxlength="5" oninput="formatExpiry(this)"></div>
-                <div class="checkout-field"><label class="checkout-label">CVV</label><input class="checkout-input" placeholder="123" maxlength="4" type="password"></div>
-            </div>
-            <div style="background:var(--bg-color);border-radius:10px;padding:0.7rem;margin-bottom:0.85rem;font-size:0.76rem;color:var(--text-light);">Tu informacion esta encriptada con SSL 256-bit.</div>`;
-    } else if(method==='PayPal') {
-        formHtml = header('🅿️','Pagar con PayPal') + `
-            <div class="checkout-field"><label class="checkout-label">Correo de PayPal</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>
-            <div class="checkout-field"><label class="checkout-label">Contrasena de PayPal</label><input class="checkout-input" placeholder="••••••••" type="password"></div>
-            <div style="background:#fff8e1;border-radius:10px;padding:0.7rem;margin-bottom:0.85rem;font-size:0.76rem;color:#92400e;">Seras redirigido a PayPal para autorizar el pago.</div>`;
-    } else if(method==='Transferencia Bancaria') {
-        formHtml = header('🏦','Transferencia Bancaria') + `
-            <div style="background:var(--bg-color);border-radius:13px;padding:1rem;margin-bottom:0.85rem;font-size:0.84rem;color:var(--text-main);line-height:1.9;">
-                <strong>Datos bancarios:</strong><br>
-                Banco: <strong>BBVA Mexico</strong><br>
-                Titular: <strong>Eduardo Velazquez Quezada</strong><br>
-                CLABE: <strong>012 345 67890123456 7</strong><br>
-                Concepto: <strong>Plan ${currentPlan} - Ayuda al pobre</strong>
-            </div>
-            <div class="checkout-field"><label class="checkout-label">Tu nombre</label><input class="checkout-input" placeholder="Para saber quien me salvo"></div>
-            <div class="checkout-field"><label class="checkout-label">Correo de confirmacion</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
-    } else if(method==='Criptomonedas') {
-        formHtml = header('🪙','Pago con Criptomonedas') + `
-            <div class="checkout-field"><label class="checkout-label">Criptomoneda</label><select class="checkout-input"><option>Bitcoin (BTC)</option><option>Ethereum (ETH)</option><option>USDT (Tether)</option><option>Dogecoin (porque por que no)</option></select></div>
-            <div style="background:var(--bg-color);border-radius:13px;padding:1rem;margin-bottom:0.85rem;font-size:0.8rem;color:var(--text-main);word-break:break-all;line-height:1.9;"><strong>Wallet Address:</strong><br><code style="color:var(--accent-color);font-size:0.75rem;">0x4E2aB3F9c1D87e60A5b2C3d4E5f6A7b8C9d0E1f2</code></div>
-            <div class="checkout-field"><label class="checkout-label">Tu correo</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
-    } else {
-        formHtml = header(icon,`Pago con ${method}`) + `
-            <div style="background:var(--bg-color);border-radius:13px;padding:1.25rem;text-align:center;margin-bottom:0.85rem;">
-                <p style="color:var(--text-light);font-size:0.87rem;">Escanea el codigo QR con tu app de pagos o toca el boton de tu dispositivo.</p>
-                <div style="width:100px;height:100px;background:var(--progress-bg);border-radius:12px;margin:0.85rem auto;display:flex;align-items:center;justify-content:center;font-size:2rem;">QR</div>
-            </div>
-            <div class="checkout-field"><label class="checkout-label">Correo de confirmacion</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
-    }
-
-    box.innerHTML = `
-        <button class="close-btn" onclick="closeCheckoutModal()">&times;</button>
-        ${formHtml}
-        <button class="btn-primary" style="width:100%;margin-top:0.4rem;" onclick="processPayment()">Confirmar pago de $${currentPrice}</button>
-        <p style="text-align:center;font-size:0.72rem;color:var(--text-light);margin-top:0.65rem;">Al confirmar aceptas los Terminos de "Eduardo necesita comer".</p>
-    `;
+    const box=document.getElementById('checkoutContent');
+    const hdr=(ico,title)=>`<div style="text-align:center;margin-bottom:1.25rem;"><div style="font-size:1.8rem;">${ico}</div><h2 style="color:var(--primary-color);font-size:1.2rem;margin-top:0.4rem;">${title}</h2><p style="color:var(--text-light);font-size:0.82rem;">Plan ${currentPlan} · $${currentPrice}/mes</p></div>`;
+    let f='';
+    if(method==='Tarjeta') f=hdr('💳','Datos de tu Tarjeta')+`<div class="checkout-field"><label class="checkout-label">Nombre en la tarjeta</label><input class="checkout-input" placeholder="Ej. Juan Perez" maxlength="40"></div><div class="checkout-field"><label class="checkout-label">Numero de tarjeta</label><input class="checkout-input" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCard(this)"></div><div class="checkout-row"><div class="checkout-field"><label class="checkout-label">Vencimiento</label><input class="checkout-input" placeholder="MM/AA" maxlength="5" oninput="formatExpiry(this)"></div><div class="checkout-field"><label class="checkout-label">CVV</label><input class="checkout-input" placeholder="123" maxlength="4" type="password"></div></div><div style="background:var(--bg-color);border-radius:10px;padding:0.7rem;margin-bottom:0.85rem;font-size:0.76rem;color:var(--text-light);">Tu informacion esta encriptada con SSL 256-bit.</div>`;
+    else if(method==='PayPal') f=hdr('🅿️','Pagar con PayPal')+`<div class="checkout-field"><label class="checkout-label">Correo de PayPal</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div><div class="checkout-field"><label class="checkout-label">Contrasena</label><input class="checkout-input" placeholder="••••••••" type="password"></div><div style="background:#fff8e1;border-radius:10px;padding:0.7rem;margin-bottom:0.85rem;font-size:0.76rem;color:#92400e;">Seras redirigido a PayPal para autorizar el pago.</div>`;
+    else if(method==='Transferencia') f=hdr('🏦','Transferencia Bancaria')+`<div style="background:var(--bg-color);border-radius:13px;padding:1rem;margin-bottom:0.85rem;font-size:0.84rem;color:var(--text-main);line-height:1.9;"><strong>Datos bancarios:</strong><br>Banco: <strong>BBVA Mexico</strong><br>Titular: <strong>Eduardo Velazquez Quezada</strong><br>CLABE: <strong>012 345 67890123456 7</strong><br>Concepto: <strong>Plan ${currentPlan}</strong></div><div class="checkout-field"><label class="checkout-label">Tu nombre</label><input class="checkout-input" placeholder="Para saber quien me salvo"></div><div class="checkout-field"><label class="checkout-label">Correo de confirmacion</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
+    else if(method==='Cripto') f=hdr('🪙','Criptomonedas')+`<div class="checkout-field"><label class="checkout-label">Criptomoneda</label><select class="checkout-input"><option>Bitcoin (BTC)</option><option>Ethereum (ETH)</option><option>USDT</option><option>Dogecoin</option></select></div><div style="background:var(--bg-color);border-radius:13px;padding:1rem;margin-bottom:0.85rem;font-size:0.8rem;color:var(--text-main);word-break:break-all;line-height:1.9;"><strong>Wallet:</strong><br><code style="color:var(--accent-color);font-size:0.75rem;">0x4E2aB3F9c1D87e60A5b2C3d4E5f6A7b8C9d0E1f2</code></div><div class="checkout-field"><label class="checkout-label">Tu correo</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
+    else f=hdr(icon,`Pago con ${method}`)+`<div style="background:var(--bg-color);border-radius:13px;padding:1.25rem;text-align:center;margin-bottom:0.85rem;"><p style="color:var(--text-light);font-size:0.87rem;">Escanea el codigo QR o usa tu dispositivo.</p><div style="width:100px;height:100px;background:var(--progress-bg);border-radius:12px;margin:0.85rem auto;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--text-light);">QR</div></div><div class="checkout-field"><label class="checkout-label">Correo de confirmacion</label><input class="checkout-input" placeholder="tucorreo@ejemplo.com" type="email"></div>`;
+    box.innerHTML=`<button class="close-btn" onclick="closeCheckoutModal()">&times;</button>${f}<button class="btn-primary" style="width:100%;margin-top:0.4rem;" onclick="processPayment()">Confirmar pago de $${currentPrice}</button><p style="text-align:center;font-size:0.72rem;color:var(--text-light);margin-top:0.65rem;">Al confirmar aceptas los Terminos de "Eduardo necesita comer".</p>`;
     document.getElementById('checkoutModal').classList.add('active');
 }
 
-function closeCheckoutModal() { document.getElementById('checkoutModal').classList.remove('active'); }
+function closeCheckoutModal(){document.getElementById('checkoutModal').classList.remove('active');}
 
-function processPayment() {
+function processPayment(){
     closeCheckoutModal();
-    if(currentUser) {
+    if(currentUser){
         const users=getUsers();
-        if(users[currentUser.email]){
-            users[currentUser.email].plan=`Plan ${currentPlan}`;
-            saveUsers(users);
-            currentUser.plan=`Plan ${currentPlan}`;
-            saveSession(currentUser);
-        }
+        if(users[currentUser.email]){users[currentUser.email].plan=`Plan ${currentPlan}`;saveUsers(users);currentUser.plan=`Plan ${currentPlan}`;saveSession(currentUser);}
     }
-    document.getElementById('successPlanInfo').textContent=`Plan ${currentPlan} activado · $${currentPrice}/mes · Gracias por salvarme!`;
+    document.getElementById('successPlanInfo').textContent=`Plan ${currentPlan} activado · $${currentPrice}/mes`;
     document.getElementById('successModal').classList.add('active');
 }
 
-function closeAllModals() {
-    ['paymentModal','checkoutModal','successModal','projectModal','imageModal','authModal']
+function closeAllModals(){
+    ['paymentModal','checkoutModal','successModal','projectModal','imageModal','authModal','avatarModal']
         .forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('active');});
+    stopCamera();
 }
 
-function formatCard(input){let v=input.value.replace(/\D/g,'').substring(0,16);input.value=v.replace(/(.{4})/g,'$1 ').trim();}
-function formatExpiry(input){let v=input.value.replace(/\D/g,'').substring(0,4);if(v.length>=2)v=v.substring(0,2)+'/'+v.substring(2);input.value=v;}
+function formatCard(i){let v=i.value.replace(/\D/g,'').substring(0,16);i.value=v.replace(/(.{4})/g,'$1 ').trim();}
+function formatExpiry(i){let v=i.value.replace(/\D/g,'').substring(0,4);if(v.length>=2)v=v.substring(0,2)+'/'+v.substring(2);i.value=v;}
 
-function toggleSkillInfo(el) {
+function toggleSkillInfo(el){
     const info=el.querySelector('.skill-info');
     const isOpen=info.classList.contains('show');
     document.querySelectorAll('.skill-info.show').forEach(i=>{i.classList.remove('show');i.closest('.skill-item').classList.remove('open');});
@@ -1470,13 +1200,10 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAllModals();});
 
 // ===== INIT =====
 (function init(){
-    try {
-        const savedTheme = localStorage.getItem('evq_theme');
-        if(savedTheme==='dark'){
-            document.documentElement.setAttribute('data-theme','dark');
-            document.getElementById('darkToggle').classList.add('on');
-        }
-    } catch{}
+    try{
+        const t=localStorage.getItem('evq_theme');
+        if(t==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('darkToggle').classList.add('on');}
+    }catch{}
     renderHeaderAuth();
 })();
 </script>
